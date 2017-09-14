@@ -52,7 +52,7 @@ public class ActivityLogin extends Activity {
         signin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showProgress(true);
+
                 emailText = (EditText) findViewById(R.id.emailText);
                 passwordText = (EditText) findViewById(R.id.passwordText);
                 checkbocremember = (CheckBox) findViewById(R.id.checkbocremember);
@@ -62,6 +62,7 @@ public class ActivityLogin extends Activity {
                     LGSnackbarManager.show(ERROR, "Vous avez laissez des champs vides!");
                 } else {
                     if (isValidEmail(emailText.getText().toString())) {
+                        showProgress(true);
                         ApiClientLoader task = new ApiClientLoader(new Callback<ApiClient>() {
                             @Override
                             public void onSuccess(ApiClient result) {

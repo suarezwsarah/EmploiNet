@@ -96,7 +96,7 @@ public class ApiClientLoader extends AsyncTask<String, String, ApiClient> {
                     reader.beginArray();
                     while (reader.hasNext()) {
                         UserSession user = gson.fromJson(reader, UserSession.class);
-                        userSession=user;
+                        userSession = user;
                     }
                     reader.endArray();
                 }

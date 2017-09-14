@@ -622,12 +622,10 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_USER_NAME, userSession.fullName);
         values.put(KEY_USER_EMAIL, userSession.Email);
         values.put(KEY_USER_PIC, userSession.Pic);
-
-
         // Inserting Row
         long id = db.insert(TABLE_USER, null, values);
         db.close(); // Closing database connection
 
-        Log.d(TAG, "New TABLE_CATEGORY inserted into sqlite: " + id);
+        Log.d(TAG, "New TABLE_USER inserted into sqlite: " + id);
     }
 }
