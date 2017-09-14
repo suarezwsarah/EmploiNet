@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+>
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/lyt_parent"
+        style="@style/RippleStyleWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey_medium">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/image"
+                android:background="@color/todays"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:paddingTop="@dimen/spacing_medium"
+                        android:layout_gravity="top|start"
+                        android:text="Sample Title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/album_title"
+                        android:textSize="16sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/username"
+                            android:layout_width="204dp"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="3dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:layout_gravity="top|start"
+                        android:text="Sample Title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/icon_drawer_color"
+                        android:textSize="12sp"
+                        android:paddingTop="@dimen/spacing_medium"
+                        android:layout_marginBottom="10dp"/>
+
+
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+</RelativeLayout>

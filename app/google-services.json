@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "711106241632",
+    "firebase_url": "https://emploinet-fc0d1.firebaseio.com",
+    "project_id": "emploinet-fc0d1",
+    "storage_bucket": "emploinet-fc0d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711106241632:android:14f1dec763dc2ea6",
+        "android_client_info": {
+          "package_name": "com.mba2dna.apps.EmploiNet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711106241632-t7j4ra83s4ov5ru33e6571tu1129p9ub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mba2dna.apps.EmploiNet",
+            "certificate_hash": "c8452f6abcd41129b057729e3d2b1739e47cb643"
+          }
+        },
+        {
+          "client_id": "711106241632-jhftjcv7g76i7mgdn31nnsvaebj3rtac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAix0bYwgC1aRHw54VVlnqnez7bDqlX10g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711106241632-jhftjcv7g76i7mgdn31nnsvaebj3rtac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

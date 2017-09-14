@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_action_share"
+        android:orderInCategory="200"
+        android:title="share"
+        app:showAsAction="always" />
+   <!-- <item
+        android:id="@+id/action_shop"
+        android:icon="@drawable/ic_action_shopping"
+        android:orderInCategory="100"
+
+        android:title="Shop"
+        app:showAsAction="never" />-->
+
+</menu>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>main_url</key>
+        <value>http://encc-dz.com/wp-admin/main/</value>
+    </entry>
+</defaultsMap>
+    <!-- END xml_defaults -->

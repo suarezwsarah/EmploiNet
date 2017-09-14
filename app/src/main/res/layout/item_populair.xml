@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/lyt_parent"
+        style="@style/RippleStyleWhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:elevation="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:background="@color/todays"
+                >
+
+                <ImageView
+                    android:id="@+id/ivSportPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/populair_height"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="@dimen/spacing_medium"/>
+
+                <TextView
+                    android:id="@+id/ReciepeTitle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ivSportPreview"
+                    android:paddingLeft="@dimen/album_title_padding"
+                    android:paddingRight="@dimen/album_title_padding"
+                    android:paddingTop="@dimen/album_title_padding"
+                    android:textColor="@color/album_title"
+                    android:textSize="16sp"
+                    android:layout_toStartOf="@+id/Views"
+                    android:layout_toEndOf="@+id/rating"/>
+
+                <TextView
+                    android:id="@+id/ReciepeCategory"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ReciepeTitle"
+                    android:paddingBottom="@dimen/spacing_large"
+                    android:paddingLeft="@dimen/album_title_padding"
+                    android:paddingRight="@dimen/album_title_padding"
+                    android:layout_toEndOf="@+id/rating"
+                    android:layout_toStartOf="@+id/Views"/>
+
+                <LinearLayout
+                    android:id="@+id/rating"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ivSportPreview"
+                    android:background="@drawable/one_border_grey"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/rating_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="-10dp"
+                        android:text="1"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:id="@+id/rating_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingBottom="@dimen/spacing_medium"
+                        android:text="المرتبة"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Views"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/one_border_grey"
+                    android:gravity="center_horizontal|center_vertical"
+
+                    android:orientation="vertical"
+                    android:layout_below="@+id/ivSportPreview"
+                    android:layout_alignParentEnd="true">
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:src="@drawable/eye"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:tint="@color/grey_hard"/>
+
+                    <TextView
+                        android:id="@+id/views_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingBottom="@dimen/spacing_medium"
+                        android:text="مشاهدة"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!--  <ImageView
+                      android:id="@+id/overflow"
+                      android:layout_width="@dimen/ic_album_overflow_width"
+                      android:layout_height="@dimen/ic_album_overflow_height"
+                      android:layout_alignParentRight="true"
+                      android:layout_below="@id/thumbnail"
+                      android:layout_marginTop="@dimen/ic_album_overflow_margin_top"
+                      android:scaleType="centerCrop"
+                      android:src="@drawable/ic_dots" />-->
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+</LinearLayout>

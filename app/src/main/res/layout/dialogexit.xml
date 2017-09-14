@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffffff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/a"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorAccent"
+        android:gravity="end|center"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/textTil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:gravity="center_vertical"
+            android:text="Quiter l\'application ?"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:layout_below="@+id/a"
+            android:layout_centerHorizontal="true" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+
+
+            android:scaleType="fitCenter"
+            android:src="@drawable/cancel" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_dialog"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/spacing_large">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/flat_selector"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:text="Annuler"
+
+            android:textColor="#ffffffff" />
+
+        <Button
+            android:id="@+id/btn_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/flat_white_selector"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:text="Oui"
+            android:textColor="#ffffffff" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:text="TEXTO"
+        android:textColor="#ff000000"
+        android:textSize="18sp"
+        android:layout_below="@+id/a"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

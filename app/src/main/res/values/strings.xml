@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">EmploiNet</string>
+    <string name="city_name">EmploiNet</string>
+    <string name="email_user">1er site de l’Emploi en Algerie</string>
+
+    <string name="about_text">عائلتي مصدر المرأة لأحدث المواضيع عن الحمل وتربية الأطفال والصحة والعناية بالمنزل والحياة الزوجية ودليلك لأشهى الوصفات‎</string>
+
+    <!-- ==================== GOOGLE API KEY STRING ============================================= -->
+    <!--Replace with your own interstitial ad unit id. -->
+    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
+    <!-- API KEY FOR MAP -->
+
+    <!-- ==================== OTHERS STRING ==================================================== -->
+    <string name="action_settings">Paramètres</string>
+    <string name="search_toolbar_hint">Rechercher des offres …</string>
+    <string name="dialog_confirm_title">Ok</string>
+    <string name="dialog_about_title">Apropos</string>
+    <string name="activity_title_settings">Paramètres</string>
+    <string name="do_not_cook">لا يطهى</string>
+    <string name="add_favorite">ajouté au favoris</string>
+    <string name="remove_favorite">supprimé du favoris</string>
+    <string name="no_internet">"No internet connection"</string>
+    <string name="tap_to_reloading">"Tap to try reloading"</string>
+
+    <string name="dialog_title_permission">Permission confirmation</string>
+    <string name="dialog_content_permission">
+        To activate all feature from this app you need to granted all required permission.
+        \nGo to app permission setting ?
+    </string>
+
+
+    <!-- ==================== Strings related to Splash Screen ================================= -->
+    <string name="splash_welcome_text">Bienvenue</string>
+    <string name="splash_desc_text">1er site de l’Emploi en Algerie</string>
+
+    <!-- ==================== Settings for Setting ============================================= -->
+    <string name="pref_category_notif">إعدادات التنبيهات</string>
+    <string name="pref_category_other">الإعدادات الأخرى</string>
+
+    <string name="pref_title_notif">التنبيهات</string>
+    <string name="pref_title_ringtone">صوت التنبيه</string>
+    <string name="pref_title_vibrate">هزاز</string>
+    <string name="pref_title_cache">تفريغ الكاش صورة</string>
+    <string name="pref_title_rate">Evaluer l\'application</string>
+    <string name="pref_title_about">Apropos</string>
+    <string name="pref_ringtone_silent">صامت</string>
+
+    <string name="pref_key_notif">key_notifications</string>
+    <string name="pref_key_ringtone">key_ringtone</string>
+    <string name="pref_key_vibrate">key_vibrate</string>
+    <string name="pref_key_reset_cache">key_reset_cache</string>
+
+    <string name="message_clear_image_cache">Are you sure want to clear image cache?</string>
+    <string name="message_after_clear_image_cache">Image cache successfully clear</string>
+    <string name="title_dialog_theme">Color Theme</string>
+
+    <!-- ==================== Strings related to Drawer Menu =================================== -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_nav_all">Consultez les offres</string>
+    <string name="title_nav_fav">Offres enregistrées</string>
+    <string name="title_nav_featured">Consulter les CVs</string>
+
+    <string name="title_nav_category">Categories</string>
+    <string name="title_nav_period">Coaching</string>
+    <string name="title_nav_fetrnit">Top Employeurs</string>
+    <string name="title_nav_hotels"></string>
+    <string name="title_nav_ent">Paramètres</string>
+    <string name="No_internet_btn">Je suis prêt à utiliser le programme sans Internet</string>
+    <string name="No_internet_Text">Votre appareil n\'est pas connecté à Internet, Ce programme vous montrera uniquement les offres enregistrés dans l\'appareil, pour afficher tous les offres, veuillez connecter a l\'internet</string>
+    <string name="please_wait_fordownl">Chargement d\'autres offres, veuillez patienter …</string>
+    <string name="loading_new_offres">Chargement des offres</string>
+    <string name="tags">كلمات ذات صلة</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="nav_advice"></string>
+    <string name="see_more">Voir plus…</string>
+    <string name="you_may_like">Autres offres</string>
+
+    <!--exit notification-->
+
+    <string name="banner_ad_unit_id">ca-app-pub-2041047395483384/2579297003</string>
+    <string name="banner_ad_unit_id_period_calculaor">ca-app-pub-2041047395483384/4822494573</string>
+    <string name="banner_ad_unit_id_futurnization">ca-app-pub-2041047395483384/5532941014</string>
+    <string name="banner_ad_unit_id_burthday">ca-app-pub-2041047395483384/6440674485</string>
+    <string name="banner_ad_unit_id_kid_grewth">ca-app-pub-2041047395483384/7179041087</string>
+
+    <string name="interstitial_ad_unit_id">ca-app-pub-2041047395483384/1920999060</string>
+    <string name="article"> Offre </string>
+    <string name="title_nav_birth">حاسبة موعد الولادة</string>
+    <string name="title_nav_grewth">حاسبة تطور نمو الطفل</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="periodDuration">حدّدي معدل طول دورتك الشهرية</string>
+    <string name="datePeriod">أَدْخلي تاريخ أول يوم من آخر دورة شهرية لك</string>
+    <string name="perioTitle">حاسبة الدورة الشهرية</string>
+    <string name="connectez_vous">Connectez-Vous</string>
+    <string name="postuler">Postuler</string>
+    <string name="detail_de_l_offre">Detail de l\'offre :</string>
+    <string name="information_sur_l_offre">Information sur l\'offre</string>
+    <string name="signup">Enregistrez vous</string>
+    <string name="tandc"><u>terms &amp; conditions</u></string>
+    <string name="signin"><u><b>Sign in</b></u></string>
+    <string name="pas_un_membre">Pas un membre?</string>
+    <string name="se_connecter">Se connecter</string>
+    <string name="mot_de_passe_oubli">mot de passe oublié?</string>
+    <string name="se_souvenir_du_mot_de_passe">Se souvenir du mot de passe?</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="connectez_avec_facebook">Connectez avec facebook</string>
+    <!-- Strings related to Settings -->
+
+
+</resources>

@@ -1,0 +1,18 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:variablePadding="false"
+    android:oneshot="false">
+
+    <item android:duration="200" android:drawable="@drawable/food_0"/>
+    <item android:duration="200" android:drawable="@drawable/food_1"/>
+    <item android:duration="200" android:drawable="@drawable/food_2"/>
+    <item android:duration="200" android:drawable="@drawable/food_3"/>
+    <item android:duration="200" android:drawable="@drawable/food_4"/>
+    <item android:duration="200" android:drawable="@drawable/food_5"/>
+    <item android:duration="200" android:drawable="@drawable/food_6"/>
+    <item android:duration="200" android:drawable="@drawable/food_7"/>
+    <item android:duration="200" android:drawable="@drawable/food_8"/>
+    <item android:duration="200" android:drawable="@drawable/food_9"/>
+    <item android:duration="200" android:drawable="@drawable/food_10"/>
+    <item android:duration="200" android:drawable="@drawable/food_11"/>
+
+</animation-list>

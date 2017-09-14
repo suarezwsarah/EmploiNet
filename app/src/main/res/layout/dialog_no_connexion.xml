@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal">
+<View
+    android:background="@color/colorPrimary"
+    android:layout_height="@dimen/spacing_small"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="@dimen/spacing_large"/>
+    <TextView
+        android:text="@string/No_internet_Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/infonoconnexion"
+        android:textAlignment="center"
+        android:textSize="13sp"
+        android:paddingEnd="@dimen/spacing_large"
+        android:paddingStart="@dimen/spacing_large"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/flat_selector"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingEnd="@dimen/spacing_mlarge"
+        android:paddingStart="@dimen/spacing_mlarge"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:text="@string/No_internet_btn"
+        android:textColor="#ffffffff"
+        android:id="@+id/Okbtn" />
+</LinearLayout>

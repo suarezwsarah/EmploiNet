@@ -1,0 +1,260 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mba2dna.apps.EmploiNet.fragment.PeriodCalculaorFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <android.support.v7.widget.CardView
+                android:id="@+id/CardCalc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:layout_marginLeft="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/elevation_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_medium">
+
+                    <TextView
+                        android:id="@+id/header"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:padding="7dp"
+                        android:text="حاسبة موعد الولادة"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/textcolor"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/line"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorPrimary"
+                        android:gravity="center_horizontal"
+                        android:padding="1dp"
+                        android:text=""
+                        android:textAlignment="gravity"
+                        android:textSize="1sp" />
+
+                    <TextView
+                        android:id="@+id/instrucion"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:padding="3dp"
+                        android:text="أَدْخلي تاريخ أول يوم من آخر دورة شهرية لك"
+                        android:textAlignment="gravity"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/album_title_padding">
+
+                        <ImageView
+                            android:id="@+id/calimg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/album_title_padding"
+                            android:background="@drawable/calendar"
+                            android:backgroundTint="@color/colorPrimary"
+
+                            />
+
+                        <Spinner
+                            android:id="@+id/days"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/months"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <Spinner
+                            android:id="@+id/years"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAlignment="gravity" />
+                    </LinearLayout>
+
+
+
+
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/CalcBtn"
+                            android:layout_width="180sp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/flat_selector"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="3sp"
+                            android:text="إحتساب موعد ولادتي"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/CardResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:layout_marginLeft="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/elevation_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_medium">
+
+                    <TextView
+                        android:id="@+id/headerResult"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:padding="7dp"
+                        android:text="حاسبة موعد الولادة"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/textcolor"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/line1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorPrimary"
+                        android:gravity="center_horizontal"
+                        android:padding="1dp"
+                        android:text=""
+                        android:textAlignment="gravity"
+                        android:textSize="1sp" />
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#fcecf3"
+                        android:padding="5sp">
+
+                        <TextView
+                            android:id="@+id/instrucion1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"
+                            android:padding="3dp"
+                            android:text="تهانينا مولودك يرى النور في"
+                            android:textAlignment="gravity"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/Result1"
+                            android:layout_below="@+id/instrucion1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"
+                            android:padding="7dp"
+                            android:text="2017/02/03"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="7sp"
+                        android:paddingTop="15sp">
+                        <TextView
+                            android:id="@+id/instrucion2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"
+                            android:padding="3dp"
+                            android:text="أنت في الأسبوع 23 من الحمل"
+                            android:textAlignment="gravity"
+                            android:textSize="18sp"
+                            android:layout_marginBottom="@dimen/album_title_padding"/>
+                        <Button
+                            android:id="@+id/BtnAgain"
+                            android:layout_width="120sp"
+                            android:layout_below="@+id/instrucion2"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/flat_selector"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="3sp"
+                            android:paddingTop="7sp"
+                            android:text="إحسبي مجدّداً ›"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/banner_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium">
+
+                <com.google.android.gms.ads.AdView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/ad_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/banner_ad_unit_id_burthday"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</FrameLayout>
+
