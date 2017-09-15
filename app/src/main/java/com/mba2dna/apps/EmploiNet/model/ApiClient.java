@@ -15,8 +15,9 @@ public class ApiClient implements Serializable {
     public ApiClient() {
     }
 
-    public ApiClient(List<Offre> offres, UserSession userSession, List<Images> images, List<Candidats> candidatsList, List<Tip> tips) {
+    public ApiClient(List<Offre> offres, UserSession userSession, List<Images> images, List<Candidats> candidatsList, List<Tip> tips,List <Category> category) {
         this.offres = offres;
+        this.reciepes_category = category;
         this.candidatsList = candidatsList;
         this.UserSessions = userSession;
         this.images = images;

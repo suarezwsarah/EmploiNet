@@ -108,6 +108,7 @@ public class ApiClientLoader extends AsyncTask<String, String, ApiClient> {
             apiClient.offres = listArticles;
             apiClient.candidatsList = listCandidats;
             apiClient.UserSessions = userSession;
+            apiClient.reciepes_category = listReciepesCategory;
             apiClient.images = listImages;
             apiClient.tips = listTips;
 
