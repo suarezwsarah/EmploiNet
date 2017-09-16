@@ -74,7 +74,7 @@ public class ActivityLogin extends Activity {
                                             db.addUser(userSession);
                                         }
 
-                                        showProgress(false);
+//                                        showProgress(false);
                                         emailText.setEnabled(false);
                                         passwordText.setEnabled(false);
                                         LGSnackbarManager.show(SUCCESS, "Everything is looking good! Awesome!");

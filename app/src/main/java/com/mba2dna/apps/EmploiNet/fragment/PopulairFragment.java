@@ -81,7 +81,7 @@ public class PopulairFragment extends Fragment {
     private void getData() {
 
         if (Tools.cekConnection(getActivity())) {
-            Snackbar snackbar = Snackbar.make(view, "تحديث البيانات...", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(view, "Mise à jour...", Snackbar.LENGTH_LONG);
             View sbView = snackbar.getView();
             sbView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
             TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);

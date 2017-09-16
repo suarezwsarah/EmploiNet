@@ -53,8 +53,8 @@ public class ApiClientLoader extends AsyncTask<String, String, ApiClient> {
             List<Images> listImages = new ArrayList<>();
             List<Tip> listTips = new ArrayList<>();
             UserSession userSession = new UserSession();
-
             reader.beginObject();
+
             while (reader.hasNext()) {
                 String name = reader.nextName();
                 if (name.equals("Offres")) {
