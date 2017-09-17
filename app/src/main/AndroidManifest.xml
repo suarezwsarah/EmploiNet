@@ -26,7 +26,6 @@
         </activity>
         <activity android:name=".activities.ActivitySetting" />
         <activity android:name=".activities.ArticleDetailActivity" />
-        <activity android:name=".activities.ActivityFullScreenImage" />
 
         <!-- Firebase Notifications -->
         <service android:name=".service.FirebaseMessagingServiceReciever">

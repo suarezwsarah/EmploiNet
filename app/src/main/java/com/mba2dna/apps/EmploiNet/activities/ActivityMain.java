@@ -40,13 +40,11 @@ import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.data.AppConfig;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
-import com.mba2dna.apps.EmploiNet.fragment.BirthFragment;
 import com.mba2dna.apps.EmploiNet.fragment.CategoryFragment;
 import com.mba2dna.apps.EmploiNet.fragment.FavorieFragment;
 import com.mba2dna.apps.EmploiNet.fragment.FertilizationFragment;
-import com.mba2dna.apps.EmploiNet.fragment.KidsGrewthFragment;
 import com.mba2dna.apps.EmploiNet.fragment.PeriodCalculaorFragment;
-import com.mba2dna.apps.EmploiNet.fragment.PopulairFragment;
+import com.mba2dna.apps.EmploiNet.fragment.CVsFragment;
 import com.mba2dna.apps.EmploiNet.fragment.AllArticlesFragment;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.CustomTypefaceSpan;
@@ -322,8 +320,8 @@ public class ActivityMain extends AppCompatActivity {
                 fragment = new FavorieFragment();
                 bundle.putInt(FavorieFragment.TAG_CATEGORY, -2);
                 break;
-            case R.id.nav_featured:
-                fragment = new PopulairFragment();
+            case R.id.nav_cvs:
+                fragment = new CVsFragment();
                 break;
             case R.id.nav_category:
                 fragment = new CategoryFragment();

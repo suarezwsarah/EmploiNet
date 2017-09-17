@@ -16,7 +16,7 @@
                 android:title="@string/title_nav_fav"
                 app:actionLayout="@layout/menu_counter" />
             <item
-                android:id="@+id/nav_featured"
+                android:id="@+id/nav_cvs"
                 android:icon="@drawable/resume"
                 android:title="@string/title_nav_featured"
                 android:visible="true"/>
