@@ -53,8 +53,6 @@ import com.mba2dna.apps.EmploiNet.utils.Tools;
 import com.mba2dna.apps.EmploiNet.widget.TagLayout;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,12 +64,12 @@ import okhttp3.RequestBody;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class ArticleDetailActivity extends AppCompatActivity {
+public class OffreDetailActivity extends AppCompatActivity {
     private static final String EXTRA_OBJ = "com.mba2dna.apps.EmploiNet.EXTRA_OBJ";
 
     // give preparation animation activity transition
     public static void navigate(AppCompatActivity activity, View transitionImage, Offre p) {
-        Intent intent = new Intent(activity, ArticleDetailActivity.class);
+        Intent intent = new Intent(activity, OffreDetailActivity.class);
         intent.putExtra(EXTRA_OBJ, p);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, transitionImage, EXTRA_OBJ);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
@@ -340,7 +338,7 @@ String da ="";
         Postuler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ArticleDetailActivity.this, ActivityLogin.class);
+                Intent intent = new Intent(OffreDetailActivity.this, ActivityLogin.class);
                 startActivity(intent);
             }
         });
@@ -403,9 +401,9 @@ String da ="";
                     ImageView imageView = (ImageView) findViewById(R.id.image);
                     Drawable res = getResources().getDrawable(imageResource);
                     imageView.setImageDrawable(res);
-                    ArticleDetailActivity.navigate(ArticleDetailActivity.this, imageView, p);
+                    OffreDetailActivity.navigate(OffreDetailActivity.this, imageView, p);
                 }else
-                ArticleDetailActivity.navigate(ArticleDetailActivity.this, view, p);
+                OffreDetailActivity.navigate(OffreDetailActivity.this, view, p);
             }
         });
     }
@@ -498,7 +496,7 @@ String da ="";
                 TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
                 CommonUtils.setRobotoThinFont(getBaseContext(), tv);
                 snackbar.show();
-                Tools.methodShare(ArticleDetailActivity.this, offres);
+                Tools.methodShare(OffreDetailActivity.this, offres);
             }
         } /*else if (id == R.id.action_shop) {
             if (!offres.isDraft()) {
@@ -515,7 +513,7 @@ String da ="";
                 ShopFragment screen = ShopFragment.newInstance(offres);
                 screen.show(fm, "ShoppingList");
 
-                // Tools.methodShare(ArticleDetailActivity.this, offres);
+                // Tools.methodShare(OffreDetailActivity.this, offres);
             }
         }*/
         return super.onOptionsItemSelected(item);

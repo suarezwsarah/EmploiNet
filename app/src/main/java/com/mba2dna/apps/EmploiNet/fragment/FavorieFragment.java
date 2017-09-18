@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.ActivityMain;
-import com.mba2dna.apps.EmploiNet.activities.ArticleDetailActivity;
+import com.mba2dna.apps.EmploiNet.activities.OffreDetailActivity;
 import com.mba2dna.apps.EmploiNet.adapter.AdapterFavoriteList;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
@@ -82,7 +82,7 @@ public class FavorieFragment extends Fragment {
         adapter.setOnItemClickListener(new AdapterFavoriteList.OnItemClickListener() {
             @Override
             public void onItemClick(View v, Offre p) {
-                ArticleDetailActivity.navigate((ActivityMain) getActivity(), v.findViewById(R.id.image), p);
+                OffreDetailActivity.navigate((ActivityMain) getActivity(), v.findViewById(R.id.image), p);
             }
         });
         recyclerView.setAdapter(adapter);
@@ -155,7 +155,7 @@ public class FavorieFragment extends Fragment {
         adapter.setOnItemClickListener(new AdapterFavoriteList.OnItemClickListener() {
             @Override
             public void onItemClick(View v, Offre p) {
-                ArticleDetailActivity.navigate((ActivityMain) getActivity(), v.findViewById(R.id.image), p);
+                OffreDetailActivity.navigate((ActivityMain) getActivity(), v.findViewById(R.id.image), p);
             }
         });
         recyclerView.setAdapter(adapter);

@@ -63,7 +63,7 @@ public class NotificationReciever extends AppCompatActivity {
                         offres.contact_info = ri.getString("contact_info");
                         offres.pub_date = ri.getString("pub_date");
                         offres.title = ri.getString("title");
-                        Intent intent = new Intent(NotificationReciever.this, ArticleDetailActivity.class);
+                        Intent intent = new Intent(NotificationReciever.this, OffreDetailActivity.class);
                         intent.putExtra(EXTRA_OBJ, offres);
                        // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

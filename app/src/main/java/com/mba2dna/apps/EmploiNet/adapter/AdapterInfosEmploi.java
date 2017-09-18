@@ -2,10 +2,10 @@ package com.mba2dna.apps.EmploiNet.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +17,8 @@ import android.widget.TextView;
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mba2dna.apps.EmploiNet.R;
-
-import com.mba2dna.apps.EmploiNet.model.Candidats;
-
+import com.mba2dna.apps.EmploiNet.model.InfoEmploi;
+import com.mba2dna.apps.EmploiNet.model.InfoEmploi;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -28,10 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by BIDA on 11/12/2016.
+ * Created by BIDA Mohamed Amine on 18,September,2017
+ * MBA2DNA Network,
+ * Boumerdes, Algeria.
  */
 
-public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterInfosEmploi extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
     private final int VIEW_ADS = 2;
@@ -39,8 +40,8 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context ctx;
 
 
-    private List<Candidats> filtered_items = new ArrayList<>();
-    private List<Candidats> itemList = new ArrayList<>();
+    private List<InfoEmploi> filtered_items = new ArrayList<>();
+    private List<InfoEmploi> itemList = new ArrayList<>();
 
 
     private LinearLayoutManager mLinearLayoutManager;
@@ -56,18 +57,18 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   * ON CLICK LISTINER
   * *
    */
-    private AdapterCvs.OnItemClickListener onItemClickListener;
+    private AdapterInfosEmploi.OnItemClickListener onItemClickListener;
 
-    public void setOnItemClickListener(AdapterCvs.OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(AdapterInfosEmploi.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public AdapterCvs.OnItemClickListener getOnItemClickListener() {
+    public AdapterInfosEmploi.OnItemClickListener getOnItemClickListener() {
         return onItemClickListener;
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View view, Candidats viewModel);
+        void onItemClick(View view, InfoEmploi viewModel);
     }
 
     /* *
@@ -75,13 +76,13 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     * ON LOAD LISTENER
     * *
      */
-    private AdapterCvs.OnLoadMoreListener onLoadMoreListener;
+    private AdapterInfosEmploi.OnLoadMoreListener onLoadMoreListener;
 
     public interface OnLoadMoreListener {
         void onLoadMore();
     }
 
-    public AdapterCvs(Context ctx, List<Candidats> items, AdapterCvs.OnLoadMoreListener onLoadMoreListener) {
+    public AdapterInfosEmploi(Context ctx, List<InfoEmploi> items, AdapterInfosEmploi.OnLoadMoreListener onLoadMoreListener) {
         this.ctx = ctx;
         itemList = items;
         filtered_items = items;
@@ -128,43 +129,38 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_ITEM) {
-            return new AdapterCvs.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_candidat, parent, false));
+            return new AdapterInfosEmploi.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_infos_emploi, parent, false));
         } else {
-            return new AdapterCvs.ProgressViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progress, parent, false));
+            return new AdapterInfosEmploi.ProgressViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progress, parent, false));
         }
 
     }
 
-    public void addAll(List<Candidats> lst) {
+    public void addAll(List<InfoEmploi> lst) {
         itemList.clear();
         itemList.addAll(lst);
         notifyDataSetChanged();
     }
 
-    public void addItemMore(List<Candidats> lst) {
+    public void addItemMore(List<InfoEmploi> lst) {
         itemList.addAll(lst);
         notifyItemRangeChanged(0, itemList.size());
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof AdapterCvs.ViewHolder) {
+        if (holder instanceof AdapterInfosEmploi.ViewHolder) {
 
-            final Candidats p = itemList.get(position);
+            final InfoEmploi p = itemList.get(position);
             if (p != null) {
-                ((ViewHolder) holder).name.setText(p.civilitee + " " + p.nom + " " + p.prenom.substring(0, 1) + "******");
-                ((ViewHolder) holder).username.setText(p.cv_title);
-                ((ViewHolder) holder).addres.setText(p.adresse);
-                ((ViewHolder) holder).exper.setText(p.experience.replace("&agrave;", "à"));
-                ((ViewHolder) holder).email.setText(p.email.substring(0, 7) + "******************");
-                ((ViewHolder) holder).tele.setText(p.mobile);
-                if (p.certified == "1") ((ViewHolder) holder).badge.setVisibility(View.VISIBLE);
-                else ((ViewHolder) holder).badge.setVisibility(View.INVISIBLE);
-                if (p.photo.length() > 0)
-                    imgloader.displayImage(p.photo, ((ViewHolder) holder).userpic, Tools.getGridOption());
-                else
-                    ((ViewHolder) holder).userpic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.noimage));
-                ((AdapterCvs.ViewHolder) holder).lyt_parent.setOnClickListener(new View.OnClickListener() {
+                ((AdapterInfosEmploi.ViewHolder) holder).name.setText(p.title );
+                ((ViewHolder) holder).littletxt.setText(Html.fromHtml(p.little_text));
+                ((ViewHolder) holder).views.setText("Nombre de vue: "+p.views);
+
+          
+                    imgloader.displayImage(p.image, ((AdapterInfosEmploi.ViewHolder) holder).userpic, Tools.getGridOption());
+
+                ((AdapterInfosEmploi.ViewHolder) holder).lyt_parent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(final View v) {
 
@@ -215,9 +211,9 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView name, username, email, tele, exper, addres;
-        public ImageView badge;
-        public RoundedImageView userpic;
+        public TextView name, littletxt, views;
+        public ImageView badge,userpic;
+
         public MaterialRippleLayout lyt_parent;
 
         public ViewHolder(View v) {
@@ -226,19 +222,13 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             name = (TextView) v.findViewById(R.id.title);
             CommonUtils.setRobotoBoldFont(ctx, name);
 
-            username = (TextView) v.findViewById(R.id.username);
-            CommonUtils.setRobotoThinFont(ctx, username);
+            littletxt = (TextView) v.findViewById(R.id.littletxt);
+            CommonUtils.setRobotoThinFont(ctx, littletxt);
 
-            email = (TextView) v.findViewById(R.id.EmailTxt);
-            CommonUtils.setRobotoThinFont(ctx, email);
-            tele = (TextView) v.findViewById(R.id.TeleTxt);
-            CommonUtils.setRobotoThinFont(ctx, tele);
-            exper = (TextView) v.findViewById(R.id.experienceTxt);
-            CommonUtils.setRobotoThinFont(ctx, exper);
+            views = (TextView) v.findViewById(R.id.views);
+            CommonUtils.setRobotoThinFont(ctx, views);
 
-            addres = (TextView) v.findViewById(R.id.timestamp);
-            CommonUtils.setRobotoThinFont(ctx, addres);
-            userpic = (RoundedImageView) v.findViewById(R.id.image);
+            userpic = (ImageView) v.findViewById(R.id.image);
             // distance = (TextView) v.findViewById(R.id.distance);
             // lyt_distance = (LinearLayout) v.findViewById(R.id.lyt_distance);
             lyt_parent = (MaterialRippleLayout) v.findViewById(R.id.lyt_parent);

@@ -15,11 +15,11 @@ import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.json.JSONStream;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
+import com.mba2dna.apps.EmploiNet.model.InfoEmploi;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.model.Category;
 import com.mba2dna.apps.EmploiNet.model.Images;
 import com.mba2dna.apps.EmploiNet.model.Candidats;
-import com.mba2dna.apps.EmploiNet.model.Tip;
 import com.mba2dna.apps.EmploiNet.model.UserSession;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 
@@ -51,7 +51,7 @@ public class ApiClientLoader extends AsyncTask<String, String, ApiClient> {
             List<Candidats> listCandidats = new ArrayList<>();
             List<Category> listReciepesCategory = new ArrayList<>();
             List<Images> listImages = new ArrayList<>();
-            List<Tip> listTips = new ArrayList<>();
+            List<InfoEmploi> listInfoEmplois = new ArrayList<>();
             UserSession userSession = new UserSession();
             reader.beginObject();
 
@@ -85,14 +85,14 @@ public class ApiClientLoader extends AsyncTask<String, String, ApiClient> {
                         listCandidats.add(candidats);
                     }
                     reader.endArray();
-                } else if (name.equals("coaching")) {
+                } else if (name.equals("infos")) {
                     reader.beginArray();
                     while (reader.hasNext()) {
-                        Tip tips = gson.fromJson(reader, Tip.class);
-                        listTips.add(tips);
+                        InfoEmploi tips = gson.fromJson(reader, InfoEmploi.class);
+                        listInfoEmplois.add(tips);
                     }
                     reader.endArray();
-                } else if (name.equals("UserSession")) {
+                } else if (name.equals("user")) {
                     reader.beginArray();
                     while (reader.hasNext()) {
                         UserSession user = gson.fromJson(reader, UserSession.class);
@@ -110,7 +110,7 @@ public class ApiClientLoader extends AsyncTask<String, String, ApiClient> {
             apiClient.UserSessions = userSession;
             apiClient.reciepes_category = listReciepesCategory;
             apiClient.images = listImages;
-            apiClient.tips = listTips;
+            apiClient.infoEmplois = listInfoEmplois;
 
             success = true;
             return apiClient;

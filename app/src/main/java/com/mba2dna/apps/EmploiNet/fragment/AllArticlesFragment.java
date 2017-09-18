@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.ActivityMain;
-import com.mba2dna.apps.EmploiNet.activities.ArticleDetailActivity;
+import com.mba2dna.apps.EmploiNet.activities.OffreDetailActivity;
 import com.mba2dna.apps.EmploiNet.adapter.AdapterOffres;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
@@ -132,7 +132,7 @@ public class AllArticlesFragment extends Fragment implements AdapterOffres.OnLoa
                 bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, p.id);
                 bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,p.title);
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-                ArticleDetailActivity.navigate((ActivityMain) getActivity(), view.findViewById(R.id.image), p);
+                OffreDetailActivity.navigate((ActivityMain) getActivity(), view.findViewById(R.id.image), p);
             }
         });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

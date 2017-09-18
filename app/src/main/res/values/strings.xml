@@ -62,7 +62,7 @@
     <string name="title_nav_featured">Consulter les CVs</string>
 
     <string name="title_nav_category">Categories</string>
-    <string name="title_nav_period">Coaching</string>
+    <string name="title_nav_period">Infos Emploi</string>
     <string name="title_nav_fetrnit">Top Employeurs</string>
     <string name="title_nav_hotels"></string>
     <string name="title_nav_ent">Paramètres</string>
@@ -108,6 +108,7 @@
     <string name="se_souvenir_du_mot_de_passe">Se souvenir du mot de passe?</string>
     <string name="mot_de_passe">Mot de passe</string>
     <string name="connectez_avec_facebook">Connectez avec facebook</string>
+    <string name="info">Info :</string>
     <!-- Strings related to Settings -->
 
 

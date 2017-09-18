@@ -15,11 +15,11 @@ import com.mba2dna.apps.EmploiNet.data.Constant;
 //import com.mba2dna.apps.EmploiNet.json.JSONStream;
 import com.mba2dna.apps.EmploiNet.json.JSONStream;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
+import com.mba2dna.apps.EmploiNet.model.InfoEmploi;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.model.Category;
 import com.mba2dna.apps.EmploiNet.model.Images;
 import com.mba2dna.apps.EmploiNet.model.Candidats;
-import com.mba2dna.apps.EmploiNet.model.Tip;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 
 import org.apache.http.NameValuePair;
@@ -60,7 +60,7 @@ protected ApiClient doInBackground(String... params) {
             List<Candidats> listCandidats = new ArrayList<>();
             List<Category> listReciepesCategory = new ArrayList<>();
             List<Images> listImages = new ArrayList<>();
-            List<Tip> listTips = new ArrayList<>();
+            List<InfoEmploi> listInfoEmplois = new ArrayList<>();
 
             reader.beginObject();
             while (reader.hasNext()) {
@@ -79,11 +79,11 @@ protected ApiClient doInBackground(String... params) {
                         listCandidats.add(candidats);
                     }
                     reader.endArray();
-                } else if (name.equals("tips")) {
+                } else if (name.equals("infoEmplois")) {
                     reader.beginArray();
                     while (reader.hasNext()) {
-                        Tip tips = gson.fromJson(reader, Tip.class);
-                        listTips.add(tips);
+                        InfoEmploi tips = gson.fromJson(reader, InfoEmploi.class);
+                        listInfoEmplois.add(tips);
                     }
                     reader.endArray();
                 }
@@ -94,7 +94,7 @@ protected ApiClient doInBackground(String... params) {
             // set attribute object ApiClient
             apiClient.offres = listArticles;
             apiClient.candidatsList = listCandidats;
-            apiClient.tips = listTips;
+            apiClient.infoEmplois = listInfoEmplois;
 
         success = true;
         return apiClient;

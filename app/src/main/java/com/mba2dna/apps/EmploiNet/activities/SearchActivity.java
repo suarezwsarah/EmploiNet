@@ -96,7 +96,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterOffres.O
                 bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, p.id);
                 bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,p.title);
                 //firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-                ArticleDetailActivity.navigate(SearchActivity.this, view.findViewById(R.id.image), p);
+                OffreDetailActivity.navigate(SearchActivity.this, view.findViewById(R.id.image), p);
             }
         });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

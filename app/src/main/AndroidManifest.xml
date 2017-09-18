@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.ActivitySetting" />
-        <activity android:name=".activities.ArticleDetailActivity" />
+        <activity android:name=".activities.OffreDetailActivity" />
 
         <!-- Firebase Notifications -->
         <service android:name=".service.FirebaseMessagingServiceReciever">
@@ -46,7 +46,8 @@
 
         <activity android:name=".activities.ActivityLogin" />
         <activity android:name=".activities.ActivityRegister" />
-        <activity android:name=".activities.ActivityPasswordLost"></activity>
+        <activity android:name=".activities.ActivityPasswordLost" />
+        <activity android:name=".activities.InfoEmploiDetailActivity"></activity>
     </application>
 
 </manifest>

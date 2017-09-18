@@ -53,8 +53,8 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.loregr:lgsnackbar:1.0.2'
-
 }
+
 
 
 

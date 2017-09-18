@@ -73,15 +73,14 @@ public class ActivityLogin extends Activity {
                                         if (checkbocremember.isChecked()) {
                                             db.addUser(userSession);
                                         }
-
-//                                        showProgress(false);
-                                        emailText.setEnabled(false);
-                                        passwordText.setEnabled(false);
-                                        LGSnackbarManager.show(SUCCESS, "Everything is looking good! Awesome!");
                                     }
 
 
                                 });
+                                showProgress(false);
+                                emailText.setEnabled(false);
+                                passwordText.setEnabled(false);
+                                LGSnackbarManager.show(SUCCESS, "Everything is looking good! Awesome!");
                             }
 
                             //moumouh206@gmail.com
@@ -94,7 +93,7 @@ public class ActivityLogin extends Activity {
                             }
                         });
 
-                        task.execute("?login=true&u=" + emailText.getText().toString() + "&n=" + passwordText.getText().toString());
+                        task.execute("?user=true&u=" + emailText.getText().toString() + "&n=" + passwordText.getText().toString());
 
                     } else {
                         showProgress(false);

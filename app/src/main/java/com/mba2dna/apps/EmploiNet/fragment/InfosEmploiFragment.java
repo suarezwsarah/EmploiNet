@@ -3,11 +3,11 @@ package com.mba2dna.apps.EmploiNet.fragment;
 
 import android.app.AlertDialog;
 import android.database.sqlite.SQLiteAccessPermException;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,30 +20,49 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.ActivityMain;
+import com.mba2dna.apps.EmploiNet.activities.InfoEmploiDetailActivity;
 import com.mba2dna.apps.EmploiNet.adapter.AdapterCvs;
+import com.mba2dna.apps.EmploiNet.adapter.AdapterInfosEmploi;
+import com.mba2dna.apps.EmploiNet.data.AppConfig;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
 import com.mba2dna.apps.EmploiNet.library.beautifulrefreshlibrary.BeautifulRefreshLayout;
 import com.mba2dna.apps.EmploiNet.loader.ApiClientLoader;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
 import com.mba2dna.apps.EmploiNet.model.Candidats;
+import com.mba2dna.apps.EmploiNet.model.InfoEmploi;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
+import com.mba2dna.apps.EmploiNet.adapter.MySpinnerAdapter;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
+import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CVsFragment extends Fragment implements AdapterCvs.OnLoadMoreListener {
+public class InfosEmploiFragment extends Fragment implements AdapterInfosEmploi.OnLoadMoreListener {
     public static String TAG_CATEGORY = "com.mba2dna.apps.EmploiNet.tagCategory";
     public static String NAME_CATEGORY = "com.mba2dna.apps.EmploiNet.nameCategory";
     private static int category_id;
@@ -56,10 +75,10 @@ public class CVsFragment extends Fragment implements AdapterCvs.OnLoadMoreListen
 
     private SQLiteHandler db;
 
-    private List<Candidats> itemList = new ArrayList<>();
+    private List<InfoEmploi> itemList = new ArrayList<>();
 
     private SharedPref sharedPref;
-    private static AdapterCvs mAdapter;
+    private static AdapterInfosEmploi mAdapter;
     private Integer page = 1;
     private BeautifulRefreshLayout mPullToRefreshView;
     AlertDialog dialog;
@@ -69,7 +88,7 @@ public class CVsFragment extends Fragment implements AdapterCvs.OnLoadMoreListen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_populair, null);
+        view = inflater.inflate(R.layout.fragment_infos_emploi, null);
         firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
         // activate fragment menu
         setHasOptionsMenu(true);
@@ -112,7 +131,7 @@ public class CVsFragment extends Fragment implements AdapterCvs.OnLoadMoreListen
         });
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new AdapterCvs(getContext(), itemList, this);
+        mAdapter = new AdapterInfosEmploi(getContext(), itemList,this);
         mAdapter.setLinearLayoutManager(layoutManager);
         mAdapter.setRecyclerView(recyclerView);
         recyclerView.setAdapter(mAdapter);
@@ -121,14 +140,14 @@ public class CVsFragment extends Fragment implements AdapterCvs.OnLoadMoreListen
             ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
         }
 
-        mAdapter.setOnItemClickListener(new AdapterCvs.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new AdapterInfosEmploi.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, Candidats p) {
+            public void onItemClick(View view, InfoEmploi p) {
                 Bundle bundle = new Bundle();
                 bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, p.id);
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,p.cv_title);
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,p.title);
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-              //  OffreDetailActivity.navigate((ActivityMain) getActivity(), view.findViewById(R.id.image), p);
+                InfoEmploiDetailActivity.navigate((ActivityMain) getActivity(), view.findViewById(R.id.image), p);
             }
         });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -260,7 +279,7 @@ public class CVsFragment extends Fragment implements AdapterCvs.OnLoadMoreListen
                     ApiClientLoader task = new ApiClientLoader(new Callback<ApiClient>() {
                         @Override
                         public void onSuccess(ApiClient result) {
-                            itemList = result.candidatsList;
+                            itemList = result.infoEmplois;
                             final List<Offre> finalListArticles = result.offres;
 
                             AsyncTask.execute(new Runnable() {
@@ -301,7 +320,7 @@ public class CVsFragment extends Fragment implements AdapterCvs.OnLoadMoreListen
                     });
                     String cat = "";
 //                    if (!category_name.equals("")) cat = "&s=" + category_id;
-                    task.execute("?candidat=true&p=" + page + "&n=" + Tools.getGridSpanCount(getActivity()) + cat);
+                    task.execute("?infos=true&p=" + page + "&n=" + Tools.getGridSpanCount(getActivity()) + cat);
                     mAdapter.setProgressMore(false);
 
 
@@ -316,14 +335,14 @@ public class CVsFragment extends Fragment implements AdapterCvs.OnLoadMoreListen
         ApiClientLoader task = new ApiClientLoader(new Callback<ApiClient>() {
             @Override
             public void onSuccess(ApiClient result) {
-                itemList = result.candidatsList;
+                itemList = result.infoEmplois;
                 Log.d("MainActivity_", "onLoad:" + result.offres.size());
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
                         //TODO your background code
-                        List<Candidats> finalListArticles = itemList;
-                      //  db.addListArticles(finalListArticles);
+                        List<InfoEmploi> finalListArticles = itemList;
+                        //  db.addListArticles(finalListArticles);
                     }
 
 
@@ -365,7 +384,7 @@ public class CVsFragment extends Fragment implements AdapterCvs.OnLoadMoreListen
         });
         String cat = "";
 //        if (!category_name.equals("")) cat = "&s=" + category_id;
-        task.execute("?candidat=true&p=1&n=" + Tools.getGridSpanCount(getActivity()) + cat);
+        task.execute("?infos=true&p=1&n=" + Tools.getGridSpanCount(getActivity()) + cat);
 
     }
 }

@@ -43,7 +43,7 @@ import com.mba2dna.apps.EmploiNet.data.SharedPref;
 import com.mba2dna.apps.EmploiNet.fragment.CategoryFragment;
 import com.mba2dna.apps.EmploiNet.fragment.FavorieFragment;
 import com.mba2dna.apps.EmploiNet.fragment.FertilizationFragment;
-import com.mba2dna.apps.EmploiNet.fragment.PeriodCalculaorFragment;
+import com.mba2dna.apps.EmploiNet.fragment.InfosEmploiFragment;
 import com.mba2dna.apps.EmploiNet.fragment.CVsFragment;
 import com.mba2dna.apps.EmploiNet.fragment.AllArticlesFragment;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
@@ -328,7 +328,7 @@ public class ActivityMain extends AppCompatActivity {
                 bundle.putInt(CategoryFragment.TAG_CATEGORY, cat[1]);
                 break;
             case R.id.nav_period:
-                fragment = new PeriodCalculaorFragment();
+                fragment = new InfosEmploiFragment();
                 break;
             case R.id.nav_fetrnit:
                 fragment = new FertilizationFragment();
