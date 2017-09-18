@@ -128,7 +128,7 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_ITEM) {
-            return new AdapterCvs.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_offre, parent, false));
+            return new AdapterCvs.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_candidat, parent, false));
         } else {
             return new AdapterCvs.ProgressViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progress, parent, false));
         }
@@ -152,9 +152,12 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             final Candidats p = itemList.get(position);
             if (p != null) {
-                ((AdapterCvs.ViewHolder) holder).name.setText(p.nom +" "+p.prenom);
-                ((AdapterCvs.ViewHolder) holder).username.setText(p.email);
-                ((AdapterCvs.ViewHolder) holder).timestamp.setText(p.entry_date);
+                ((ViewHolder) holder).name.setText(p.nom +" "+p.prenom);
+                ((ViewHolder) holder).username.setText(p.cv_title);
+                ((ViewHolder) holder).addres.setText(p.adresse);
+                ((ViewHolder) holder).exper.setText(p.experience);
+                ((ViewHolder) holder).email.setText(p.email);
+                ((ViewHolder) holder).tele.setText(p.mobile);
 
 
                 //imgloader.displayImage(p.photo, ((ViewHolder) holder).image, Tools.getGridOption());
@@ -211,7 +214,7 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView name,username,timestamp;
+        public TextView name,username,email,tele,exper,addres;
         public ImageView image;
         public RoundedImageView userpic;
         public MaterialRippleLayout lyt_parent;
@@ -224,8 +227,15 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             username = (TextView) v.findViewById(R.id.username);
             CommonUtils.setRobotoThinFont(ctx,username);
 
-            timestamp = (TextView) v.findViewById(R.id.timestamp);
-            CommonUtils.setRobotoThinFont(ctx,timestamp);
+            email = (TextView) v.findViewById(R.id.EmailTxt);
+            CommonUtils.setRobotoThinFont(ctx,email);
+            tele = (TextView) v.findViewById(R.id.TeleTxt);
+            CommonUtils.setRobotoThinFont(ctx,tele);
+            exper = (TextView) v.findViewById(R.id.experienceTxt);
+            CommonUtils.setRobotoThinFont(ctx,exper);
+
+            addres = (TextView) v.findViewById(R.id.timestamp);
+            CommonUtils.setRobotoThinFont(ctx,addres);
             image = (ImageView) v.findViewById(R.id.image);
             userpic = (RoundedImageView) v.findViewById(R.id.profilePic);
             // distance = (TextView) v.findViewById(R.id.distance);

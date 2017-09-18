@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <ImageView
+        android:id="@+id/badge"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/badge"
+        android:elevation="2dp"
+        android:layout_marginTop="85dp"
+        />
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/lyt_parent"
+        style="@style/RippleStyleWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/album_title_padding"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/image"
+                android:layout_marginTop="18dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:src="@drawable/noimage"
+                android:scaleType="fitXY"
+                app:riv_corner_radius="30dip"
+                app:riv_border_width="2dip"
+                app:riv_border_color="@color/colorAccent"
+                app:riv_mutate_background="true"
+                app:riv_oval="true"/>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/feed_item_profile_info_padd">
+
+
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/album_title_padding"
+                    android:paddingTop="10dp"
+
+                    android:text="BIDA Mohamed Amine"
+                    android:textSize="@dimen/feed_item_profile_name" />
+                <TextView
+                    android:id="@+id/EmailTxt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="bida.mohamed@gmail.com"
+                    android:textColor="@color/grey_500"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Master en systeme informatique"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/timestamp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="17 vieux village Si msuatpha"
+                    android:textColor="@color/timestamp"
+                    android:textSize="@dimen/feed_item_timestamp" />
+
+                <TextView
+                    android:id="@+id/experienceTxt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="5 ans et 6 mois"
+                    android:textColor="@color/grey_500"
+                    android:textSize="14sp" />
+
+
+                <TextView
+                    android:id="@+id/TeleTxt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="+213661413377"
+                    android:textColor="@color/grey_500"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+</RelativeLayout>
