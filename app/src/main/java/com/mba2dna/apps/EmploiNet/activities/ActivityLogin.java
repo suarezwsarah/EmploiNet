@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mba2dna.apps.EmploiNet.R;
+import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.loader.ApiClientLoader;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
@@ -25,10 +26,20 @@ import com.mba2dna.apps.EmploiNet.utils.Callback;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import greco.lorenzo.com.lgsnackbar.LGSnackbarManager;
+import okhttp3.Call;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.ERROR;
@@ -63,7 +74,60 @@ public class ActivityLogin extends Activity {
                 } else {
                     if (isValidEmail(emailText.getText().toString())) {
                         showProgress(true);
-                        ApiClientLoader task = new ApiClientLoader(new Callback<ApiClient>() {
+                        OkHttpClient client = new OkHttpClient();
+                        String URL = Constant.getURLApiClientData();
+                        HttpUrl.Builder urlBuilder = HttpUrl.parse(URL).newBuilder();
+                        urlBuilder.addQueryParameter("user", "true");
+                        urlBuilder.addQueryParameter("u", emailText.getText().toString());
+                        urlBuilder.addQueryParameter("n", passwordText.getText().toString());
+                        String url = urlBuilder.build().toString();
+
+                        Request request = new Request.Builder()
+                                .url(url)
+                                .build();
+                        try {
+                            Response response = client.newCall(request).execute();
+                            String S =response.body().string();
+                            Log.e("RESPENSE", S);
+                            JSONObject jObject = new JSONObject(S);
+
+                            JSONArray data = jObject.getJSONArray("user"); // get data object
+                            final JSONObject object = data.getJSONObject(0);
+
+
+
+                                    if (checkbocremember.isChecked()) {
+
+                                        try {
+                                            UserSession userSession = new UserSession();
+                                            userSession.setId(object.getInt("id"));
+                                            userSession.setEmail(object.getString("email"));
+                                            userSession.setFullName(object.getString("nom")+" "+object.getString("prenom"));
+                                            userSession.setPic(object.getString("photo"));
+                                            db.addUser(userSession);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+
+                            showProgress(false);
+                            emailText.setEnabled(false);
+                            passwordText.setEnabled(false);
+                            LGSnackbarManager.show(SUCCESS, "Everything is looking good! Awesome!");
+                            finish();
+
+                        } catch (IOException e) {
+                            Log.e("ERROR",e.getMessage());
+                            e.printStackTrace();
+
+                        } catch (JSONException e) {
+                            Log.e("ERROR",e.getMessage());
+                            e.printStackTrace();
+
+                        }
+
+                     /*   ApiClientLoader task = new ApiClientLoader(new Callback<ApiClient>() {
                             @Override
                             public void onSuccess(ApiClient result) {
                                 final UserSession userSession = result.UserSessions;
@@ -93,7 +157,7 @@ public class ActivityLogin extends Activity {
                             }
                         });
 
-                        task.execute("?user=true&u=" + emailText.getText().toString() + "&n=" + passwordText.getText().toString());
+                        task.execute("?user=true&u=" + emailText.getText().toString() + "&n=" + passwordText.getText().toString());*/
 
                     } else {
                         showProgress(false);

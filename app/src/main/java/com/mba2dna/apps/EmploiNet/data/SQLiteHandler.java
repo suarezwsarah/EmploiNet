@@ -141,7 +141,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE);
     }
     private void createTableUser(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + TABLE_USERS + " ("
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_USER + " ("
                 + KEY_USER_ID + " INTEGER PRIMARY KEY, "
                 + KEY_USER_NAME + " TEXT, "
                 + KEY_USER_EMAIL + " TEXT, "
@@ -626,6 +626,45 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         long id = db.insert(TABLE_USER, null, values);
         db.close(); // Closing database connection
 
-        Log.d(TAG, "New TABLE_USER inserted into sqlite: " + id);
+        Log.e(TAG, "New TABLE_USER inserted into sqlite: " + id);
+    }
+    public boolean isUserExist() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USER, null);
+        int count = cursor.getCount();
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    public UserSession getUser() {
+
+
+        UserSession offresList = new UserSession();
+        String selectQuery = "SELECT  * FROM " + TABLE_USER + "  LIMIT 1";
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                UserSession rc = new UserSession();
+                rc.id = c.getInt((c.getColumnIndex(KEY_USER_ID)));
+                rc.fullName = c.getString((c.getColumnIndex(KEY_USER_NAME)));
+                rc.Pic = c.getString((c.getColumnIndex(KEY_USER_PIC)));
+                rc.Email = c.getString((c.getColumnIndex(KEY_USER_EMAIL)));
+
+
+
+                offresList=rc;
+                Log.e("offresList:",offresList.fullName);
+            } while (c.moveToNext());
+        }
+
+        return offresList;
     }
 }

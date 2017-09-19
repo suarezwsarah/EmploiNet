@@ -94,7 +94,7 @@ public class OffreDetailActivity extends AppCompatActivity {
     private TextView articletitle;
     private TextView username, paragraph;
     private TextView published;
-    private Button BtnMore,Postuler;
+    private Button BtnMore, Postuler;
     public RoundedImageView userpic;
     private WebView paragraph2;
 
@@ -271,9 +271,10 @@ public class OffreDetailActivity extends AppCompatActivity {
         caption = (TextView) findViewById(R.id.captionTxt1);
         CommonUtils.setRobotoBoldFont(getBaseContext(), caption);
 
-String da ="";
-        if( offres.salaire.equals("0.00"))
-            da ="Non disponible"; else da =offres.salaire+" DA";
+        String da = "";
+        if (offres.salaire.equals("0.00"))
+            da = "Non disponible";
+        else da = offres.salaire + " DA";
         paragraph2 = (WebView) findViewById(R.id.paragraph1);
         pish = "<html><head><style type=\"text/css\">@font-face {font-family: MyFont;src: url(\"file:///android_asset/nexalight.ttf\")}body {font-family: MyFont;font-size: 16px ;text-align: left;line-height: 120%;} a{color:#d78401} ul {list-style-type: none;} img{width:90%}</style></head><body><table width=\"100%\">";
         pish += "  <tr><td><b>Reference :</b></td><td>" + offres.reference + "</td>";
@@ -285,12 +286,10 @@ String da ="";
         pish += "  <tr><td><b>Salaire :</b></td><td>" + da + "  </td>";
 
 
-
         pas = "</table></body></html>";
         paragraph2.loadDataWithBaseURL(null, pish + pas, "text/html", "UTF-8", null);
 
         Tools.systemBarLolipop(this);
-
 
 
     }
@@ -338,8 +337,14 @@ String da ="";
         Postuler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OffreDetailActivity.this, ActivityLogin.class);
-                startActivity(intent);
+                if (db.isUserExist()) {
+                    Log.e("LOGGED", "LOGGED");
+
+                } else {
+                    Intent intent = new Intent(OffreDetailActivity.this, ActivityLogin.class);
+                    startActivity(intent);
+                }
+
             }
         });
       /*  if(distance == -1){
@@ -392,8 +397,8 @@ String da ="";
         adapter.setOnItemClickListener(new AdapterSuggestion.OnItemClickListener() {
             @Override
             public void onItemClick(View v, Offre p) {
-                View view =v.findViewById(R.id.image);
-                if(view==null){
+                View view = v.findViewById(R.id.image);
+                if (view == null) {
                     String uri = "@drawable/detail_bg";  // where myresource (without the extension) is the file
 
                     int imageResource = getResources().getIdentifier(uri, null, getPackageName());
@@ -402,8 +407,8 @@ String da ="";
                     Drawable res = getResources().getDrawable(imageResource);
                     imageView.setImageDrawable(res);
                     OffreDetailActivity.navigate(OffreDetailActivity.this, imageView, p);
-                }else
-                OffreDetailActivity.navigate(OffreDetailActivity.this, view, p);
+                } else
+                    OffreDetailActivity.navigate(OffreDetailActivity.this, view, p);
             }
         });
     }

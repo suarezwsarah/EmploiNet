@@ -19,7 +19,8 @@
             android:layout_height="100dp"
             android:background="@color/white"
             android:scaleType="fitXY"
-            android:src="@drawable/noimage" />
+            android:src="@drawable/noimage"
+            android:layout_marginTop="15dp"/>
 
 
         <LinearLayout

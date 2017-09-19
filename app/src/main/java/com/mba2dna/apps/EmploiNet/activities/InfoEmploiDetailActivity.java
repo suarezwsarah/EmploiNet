@@ -78,8 +78,7 @@ public class InfoEmploiDetailActivity extends AppCompatActivity {
     private InfoEmploi info = null;
     private ImageLoader imgloader = ImageLoader.getInstance();
     private FloatingActionButton fab;
-    private View parent_view = null;
-    // private GoogleMap googleMap;
+    private View parent_view;
     private SQLiteHandler db;
 
     private ApiSinglePlaceLoader task_loader = null;

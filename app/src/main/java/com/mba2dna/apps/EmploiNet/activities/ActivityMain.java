@@ -46,6 +46,7 @@ import com.mba2dna.apps.EmploiNet.fragment.FertilizationFragment;
 import com.mba2dna.apps.EmploiNet.fragment.InfosEmploiFragment;
 import com.mba2dna.apps.EmploiNet.fragment.CVsFragment;
 import com.mba2dna.apps.EmploiNet.fragment.AllArticlesFragment;
+import com.mba2dna.apps.EmploiNet.model.UserSession;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.CustomTypefaceSpan;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
@@ -73,9 +74,10 @@ public class ActivityMain extends AppCompatActivity {
     private RelativeLayout nav_header_lyt;
     public static TextView mTitle;
     private BottomSheetBehavior mBottomSheetBehavior;
-
+private TextView headNom,headEmail;
     static ActivityMain activityMain;
     private View root;
+    private Button LoginBon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,12 +167,15 @@ public class ActivityMain extends AppCompatActivity {
 
     private void initDrawerMenu() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
+                updateUser();
                 updateFavoritesCounter(navigationView, R.id.nav_favorites, db.getFavoritesSize());
                 toogleSearchView(true);
                 showInterstitial();
+
                 super.onDrawerOpened(drawerView);
             }
         };
@@ -224,6 +229,10 @@ public class ActivityMain extends AppCompatActivity {
                 startActivity(i);*/
             }
         });
+        headNom=(TextView) nav_header.findViewById(R.id.headNom);
+        headEmail=(TextView) nav_header.findViewById(R.id.headEmail);
+        LoginBon=(Button) nav_header.findViewById(R.id.LoginBon);
+
     }
 
     private void applyFontToMenuItem(MenuItem mi) {
@@ -231,6 +240,12 @@ public class ActivityMain extends AppCompatActivity {
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
         mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        updateUser();
     }
 
     @Override
@@ -424,6 +439,17 @@ public class ActivityMain extends AppCompatActivity {
         view.setText(String.valueOf(count));
     }
 
+    public void updateUser() {
+        if(db.isUserExist()){
+            UserSession u =db.getUser();
+            headNom.setText(u.fullName);
+            headEmail.setText(u.Email);
+            LoginBon.setText("Deconnectez-vous");
+        }else{
+            LoginBon.setText("Connectez-vous");
+        }
+
+    }
     private void prepareAds() {
         // Create the InterstitialAd and set the adUnitId.
         mInterstitialAd = new InterstitialAd(this);
