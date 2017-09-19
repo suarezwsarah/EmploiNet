@@ -667,4 +667,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         return offresList;
     }
+
+    public void DeleteUser() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_USER); // refresh table content
+        db.close(); // Closing database connection
+        Log.e(TAG, "New TABLE_USER DELETED into sqlite: " );
+    }
 }

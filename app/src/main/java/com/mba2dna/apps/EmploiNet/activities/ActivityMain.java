@@ -232,6 +232,20 @@ private TextView headNom,headEmail;
         headNom=(TextView) nav_header.findViewById(R.id.headNom);
         headEmail=(TextView) nav_header.findViewById(R.id.headEmail);
         LoginBon=(Button) nav_header.findViewById(R.id.LoginBon);
+        LoginBon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text=LoginBon.getText().toString();
+                if(db.isUserExist()){
+                    db.DeleteUser();
+                    updateUser();
+
+                }else{
+                    Intent intent = new Intent(ActivityMain.this, ActivityLogin.class);
+                    startActivity(intent);
+                }
+            }
+        });
 
     }
 
@@ -421,6 +435,7 @@ private TextView headNom,headEmail;
     @Override
     protected void onResume() {
         if (!imgloader.isInited()) Tools.initImageLoader(this);
+        updateUser();
         updateFavoritesCounter(navigationView, R.id.nav_favorites, db.getFavoritesSize());
         if (actionBar != null) {
             Tools.setActionBarColor(this, actionBar);
@@ -447,6 +462,8 @@ private TextView headNom,headEmail;
             LoginBon.setText("Deconnectez-vous");
         }else{
             LoginBon.setText("Connectez-vous");
+            headNom.setText("EmploiNet");
+            headEmail.setText("1er site de l’Emploi en Algerie");
         }
 
     }
