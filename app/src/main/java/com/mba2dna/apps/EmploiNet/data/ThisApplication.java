@@ -36,7 +36,7 @@ public class ThisApplication extends Application {
                 .build());
         LGSnackbarManager.prepare(getApplicationContext(),
                 LGSnackBarThemeManager.LGSnackbarThemeName.SHINE);
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-2041047395483384~6358759912");
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-2041047395483384~5100683751");
         //init photo loader
         Tools.initImageLoader(getApplicationContext());
 

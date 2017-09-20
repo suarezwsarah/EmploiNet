@@ -84,8 +84,9 @@
     <string name="banner_ad_unit_id_futurnization">ca-app-pub-2041047395483384/5532941014</string>
     <string name="banner_ad_unit_id_burthday">ca-app-pub-2041047395483384/6440674485</string>
     <string name="banner_ad_unit_id_kid_grewth">ca-app-pub-2041047395483384/7179041087</string>
+    <string name="native_ad_unit_id_offre_detail">ca-app-pub-2041047395483384/7179041087</string>
 
-    <string name="interstitial_ad_unit_id">ca-app-pub-2041047395483384/1920999060</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-2041047395483384/5407148972</string>
     <string name="article"> Offre </string>
     <string name="title_nav_birth">حاسبة موعد الولادة</string>
     <string name="title_nav_grewth">حاسبة تطور نمو الطفل</string>
