@@ -17,6 +17,8 @@
             android:background="@color/white"
             android:scaleType="centerCrop" />
 
+
+
     </FrameLayout>
 
     <LinearLayout
@@ -108,6 +110,7 @@
                 android:drawablePadding="12dp"
                 android:gravity="left"
                 android:hint="Email"
+                android:inputType="textEmailAddress"
                 android:lines="1"
                 android:padding="14dp"
                 android:textColor="@color/Tex"

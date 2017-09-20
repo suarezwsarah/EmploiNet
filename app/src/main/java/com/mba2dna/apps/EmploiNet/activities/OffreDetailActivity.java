@@ -47,21 +47,31 @@ import com.mba2dna.apps.EmploiNet.data.SharedPref;
 import com.mba2dna.apps.EmploiNet.fragment.AllArticlesFragment;
 import com.mba2dna.apps.EmploiNet.loader.ApiSinglePlaceLoader;
 import com.mba2dna.apps.EmploiNet.model.Offre;
+import com.mba2dna.apps.EmploiNet.model.UserSession;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 import com.mba2dna.apps.EmploiNet.widget.TagLayout;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import greco.lorenzo.com.lgsnackbar.LGSnackbarManager;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.SUCCESS;
 
 
 public class OffreDetailActivity extends AppCompatActivity {
@@ -169,9 +179,7 @@ public class OffreDetailActivity extends AppCompatActivity {
         }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        // lyt_no_internet = findViewById(R.id.lyt_no_internet);
-        // lyt_progress = findViewById(R.id.lyt_progress);
-        //  lyt_distance = findViewById(R.id.lyt_distance);
+
         if (offres.photo != null)
             imgloader.displayImage(offres.photo, (ImageView) findViewById(R.id.image));
         else {
@@ -206,11 +214,7 @@ public class OffreDetailActivity extends AppCompatActivity {
                 tagss.add("#" + tag.replace("\n", ""));
             }
         }
-       /* TagContainerLayout mTagContainerLayout = (TagContainerLayout) findViewById(R.id.tagcontainerLayout);
-        Typeface font = Typeface.createFromAsset(getAssets(), "nexalight.ttf");
-        mTagContainerLayout.setTagTypeface("nexalight.ttf");
-        mTagContainerLayout.setGravity(Gravity.RIGHT);
-        mTagContainerLayout.setTags(tagss);*/
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,9 +227,7 @@ public class OffreDetailActivity extends AppCompatActivity {
                     TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
                     CommonUtils.setRobotoThinFont(getBaseContext(), tv);
                     snackbar.show();
-                    //Snackbar.make(parent_view, offres.title +" "+ getString(R.string.remove_favorite), Snackbar.LENGTH_SHORT).show();
-                    // analytics tracking
-                    //    ThisApplication.getInstance().trackEvent(Constant.Event.FAVORITES.name(), "REMOVE", offres.title);
+
                 } else {
                     db.addFavorites(offres.id);
                     db.addArticle(offres);
@@ -235,8 +237,7 @@ public class OffreDetailActivity extends AppCompatActivity {
                     TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
                     CommonUtils.setRobotoThinFont(getBaseContext(), tv);
                     snackbar.show();
-                    // analytics tracking
-//                    ThisApplication.getInstance().trackEvent(Constant.Event.FAVORITES.name(), "ADD", offres.title);
+
                 }
                 fabToggle();
             }
@@ -248,11 +249,8 @@ public class OffreDetailActivity extends AppCompatActivity {
         paragraph2 = (WebView) findViewById(R.id.paragraph2);
         String pish = "<html><head><style type=\"text/css\">@font-face {font-family: MyFont;src: url(\"file:///android_asset/nexalight.ttf\")}body {font-family: MyFont;font-size: 16px;text-align: left;line-height: 120%;} a{color:#d78401} ul {list-style-type: none;} img{width:90%}</style></head><body>";
         String pas = "</body></html>";
-        //  Log.e("HTML :", offres.description);
-        //  Integer start= offres.description.indexOf(" <figure>");
-        //  Integer end= offres.description.indexOf("</figure>");
+
         String html = offres.description;//.substring(end+9)
-        //    Log.e("HTML :",html);
         paragraph2.loadDataWithBaseURL(null, pish + html + pas, "text/html", "UTF-8", null);
         CommonUtils.setRobotoThinFont(getBaseContext(), paragraph);
         username = (TextView) findViewById(
@@ -300,18 +298,6 @@ public class OffreDetailActivity extends AppCompatActivity {
         articletitle = ((TextView) findViewById(R.id.reciepetags));
         CommonUtils.setRobotoThinFont(this, articletitle);
 
-
-       /* t1.setText(p.deficulty);
-        TextView t2 = ((TextView) findViewById(R.id.fra_single_recipe_prep_time));
-        CommonUtils.setRobotoThinFont(this, t2);
-        t2.setText(p.prepair);
-        TextView t3 = ((TextView) findViewById(R.id.fra_single_recipe_cook_time));
-        CommonUtils.setRobotoThinFont(this, t3);
-        t3.setText(p.cocking.contains("/") ? getString(R.string.do_not_cook) : p.cocking);
-        TextView t4 = ((TextView) findViewById(R.id.fra_single_recipe_portions));
-        CommonUtils.setRobotoThinFont(this, t4);
-        t4.setText(p.portion);*/
-        //Log.e("Cayegory :",p.type_activite);
         setSuggestionReciepes(db.getSuggestionArticles(p.type_activite));
         final String cate = p.type_activite;
         BtnMore = ((Button) findViewById(R.id.bt_more));
@@ -347,42 +333,45 @@ public class OffreDetailActivity extends AppCompatActivity {
 
             }
         });
-      /*  if(distance == -1){
-            lyt_distance.setVisibility(View.GONE);
-        }else{
-            lyt_distance.setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.distance)).setText(Tools.getFormatedDistance(distance));
-        }*/
+        if(db.isUserExist()){
+            int userId=db.getUserID();
+            OkHttpClient client = new OkHttpClient();
+            String URL = Constant.getURLApiClientData();
+            HttpUrl.Builder urlBuilder = HttpUrl.parse(URL).newBuilder();
+            urlBuilder.addQueryParameter("checkoffre", "true");
+            urlBuilder.addQueryParameter("userid", userId+"");
+            urlBuilder.addQueryParameter("offreid",p.id+"");
+            String url = urlBuilder.build().toString();
 
-        //  setSuggestionReciepes(db.getListImageByPlaceId(p.place_id));
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                String S =response.body().string();
+                Log.e("RESPENSE", userId+"");
+                Log.e("RESPENSE", p.id+"");
+                Log.e("RESPENSE", S);
+                if(S.contains("exist")){
+                    Postuler.setEnabled(false);
+                    Postuler.setClickable(false);
+                    Postuler.setText("Déja Postulé");
+                    Postuler.setBackgroundResource(R.drawable.rect_white_normal);
+                }else{
+                    Postuler.setEnabled(true);
+                    Postuler.setClickable(true);
+                }
+            } catch (IOException e) {
+                Log.e("ERROR",e.getMessage());
+                e.printStackTrace();
+            }
+        }else {
+            Postuler.setEnabled(true);
+            Postuler.setClickable(true);
+        }
     }
 
-    // this method name same with android:onClick="clickLayout" at layout xml
-    public void clickLayout(View view) {
-       /* switch (view.getId()){
-            case R.id.lyt_address:
-                if(!place.isDraft()) {
-                    Uri uri = Uri.parse("http://maps.google.com/maps?q=loc:" + place.lat + "," + place.lng);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
-                }
-                break;
-            case R.id.lyt_phone:
-                if(!place.isDraft() && !place.phone.equals("-")){
-                    Tools.dialNumber(this, place.phone);
-                }else{
-                    Snackbar.make(parent_view, R.string.fail_dial_number, Snackbar.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.lyt_website:
-                if(!place.isDraft() && !place.website.equals("-")){
-                    Tools.directUrl(this, place.website);
-                }else{
-                    Snackbar.make(parent_view, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show();
-                }
-                break;
-        }*/
-    }
+
 
     private void setSuggestionReciepes(List<Offre> articles) {
         // add optional image into list
@@ -524,44 +513,7 @@ public class OffreDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initMap() {
-      /*  if (googleMap == null) {
-            MapFragment mapFragment1 =(MapFragment) getFragmentManager().findFragmentById(R.id.mapPlaces);
-            mapFragment1.getMapAsync(new OnMapReadyCallback() {
-                @Override
-                public void onMapReady(GoogleMap gMap) {
-                    googleMap = gMap;
-                    if (googleMap == null) {
-                        Snackbar.make(parent_view, "Sorry! unable to create maps", Snackbar.LENGTH_SHORT).show();
-                    }else {
-                        // config map
-                        googleMap = Tools.configStaticMap(ActivityPlaceDetail.this, googleMap, place);
-                    }
-                }
-            });
-        }
 
-        ((Button) findViewById(R.id.bt_navigate)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(getApplicationContext(),"OPEN", Toast.LENGTH_LONG).show();
-                Intent navigation = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=" + place.lat + "," + place.lng));
-                startActivity(navigation);
-            }
-        });
-        ((Button) findViewById(R.id.bt_view)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openPlaceInMap();
-            }
-        });
-        ((LinearLayout) findViewById(R.id.map)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openPlaceInMap();
-            }
-        });*/
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -585,17 +537,12 @@ public class OffreDetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openPlaceInMap() {
-       /* Intent intent = new Intent(ActivityPlaceDetail.this, ActivityMaps.class);
-        intent.putExtra(ActivityMaps.EXTRA_OBJ, place);
-        startActivity(intent);*/
-    }
+
 
 
     @Override
     protected void onResume() {
         if (!imgloader.isInited()) Tools.initImageLoader(getApplicationContext());
-        loadReciepeData();
         super.onResume();
     }
 
@@ -605,52 +552,9 @@ public class OffreDetailActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    // places description load with lazy scheme
-    private void loadReciepeData() {
-//        offres = db.getPlace(offres.id);
-//        lyt_no_internet.setVisibility(View.GONE);
-       /* if(offres.isDraft()){
-            if(Tools.cekConnection(this)){
-                requestDetailsPlace(offres.id);
-            }else{
-                lyt_no_internet.setVisibility(View.VISIBLE);
-            }
-        }else{
-            displayData(offres);
-        }*/
-    }
 
-    private void requestDetailsPlace(int place_id) {
-        if (!onProcess) {
-            onProcess = true;
-            showProgressbar(true);
-            task_loader = new ApiSinglePlaceLoader(place_id, new Callback<Offre>() {
-                @Override
-                public void onSuccess(Offre result) {
-                    showProgressbar(false);
-                    onProcess = false;
-                    //  Offre p = db.updatePlace(result);
-                    // if (p != null) offres = p;
-                    displayData(offres);
-                }
 
-                @Override
-                public void onError(String result) {
-                    showProgressbar(false);
-                    onProcess = false;
-                    Snackbar.make(parent_view, "Failed load place data", Snackbar.LENGTH_INDEFINITE).setAction("RETRY", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            loadReciepeData();
-                        }
-                    }).show();
-                }
-            });
-            task_loader.execute("");
-        } else {
-            Snackbar.make(parent_view, "Task still running", Snackbar.LENGTH_SHORT).show();
-        }
-    }
+
 
     private void showProgressbar(boolean show) {
         lyt_progress.setVisibility(show ? View.VISIBLE : View.GONE);

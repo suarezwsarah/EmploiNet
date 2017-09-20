@@ -140,16 +140,18 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
+
     private void createTableUser(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_USER + " ("
                 + KEY_USER_ID + " INTEGER PRIMARY KEY, "
                 + KEY_USER_NAME + " TEXT, "
                 + KEY_USER_EMAIL + " TEXT, "
-                + KEY_USER_PIC+ " TEXT "
+                + KEY_USER_PIC + " TEXT "
 
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
+
     private void createTableFavorites(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_FAVORITES + "("
                 + KEY_OFFRE_ID + " INTEGER PRIMARY KEY "
@@ -628,6 +630,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         Log.e(TAG, "New TABLE_USER inserted into sqlite: " + id);
     }
+
     public boolean isUserExist() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USER, null);
@@ -639,6 +642,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         }
 
     }
+
     public UserSession getUser() {
 
 
@@ -659,9 +663,29 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 rc.Email = c.getString((c.getColumnIndex(KEY_USER_EMAIL)));
 
 
+                offresList = rc;
+                Log.e("offresList:", offresList.fullName);
+            } while (c.moveToNext());
+        }
 
-                offresList=rc;
-                Log.e("offresList:",offresList.fullName);
+        return offresList;
+    }
+
+    public int getUserID() {
+
+
+        int offresList = 0;
+        String selectQuery = "SELECT  " + KEY_USER_ID + " FROM " + TABLE_USER + "  LIMIT 1";
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                offresList = c.getInt((c.getColumnIndex(KEY_USER_ID)));
+
             } while (c.moveToNext());
         }
 
@@ -672,6 +696,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_USER); // refresh table content
         db.close(); // Closing database connection
-        Log.e(TAG, "New TABLE_USER DELETED into sqlite: " );
+        Log.e(TAG, "New TABLE_USER DELETED into sqlite: ");
     }
 }
