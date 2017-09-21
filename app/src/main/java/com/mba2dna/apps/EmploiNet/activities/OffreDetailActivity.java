@@ -45,6 +45,7 @@ import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
 import com.mba2dna.apps.EmploiNet.fragment.AllArticlesFragment;
+import com.mba2dna.apps.EmploiNet.fragment.PostuleFragment;
 import com.mba2dna.apps.EmploiNet.loader.ApiSinglePlaceLoader;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.model.UserSession;
@@ -325,7 +326,9 @@ public class OffreDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (db.isUserExist()) {
                     Log.e("LOGGED", "LOGGED");
-
+                    FragmentManager fm = getSupportFragmentManager();
+                    PostuleFragment screen = PostuleFragment.newInstance(offres);
+                    screen.show(fm, "Postule Offre");
                 } else {
                     Intent intent = new Intent(OffreDetailActivity.this, ActivityLogin.class);
                     startActivity(intent);

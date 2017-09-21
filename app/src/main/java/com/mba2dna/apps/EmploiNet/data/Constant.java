@@ -33,8 +33,8 @@ public class Constant {
 
 	/** ------------------- EDIT THIS WITH YOURS ------------------------- */
 
-	private static String HOST_URL = "";
-	private static String WEB_PATH = "";
+	private static String HOST_URL = "http://emploinet.net/";
+	private static String WEB_PATH ="cp/mob.php";
 
 	/** ------------------------------------------------------------------ */
 	// photo file url
