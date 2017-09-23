@@ -52,7 +52,7 @@ public class AdapterFavoriteList extends RecyclerView.Adapter<AdapterFavoriteLis
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView name;
-        public TextView category;
+        public TextView category,fonction;
         public ImageView image;
         public TextView distance;
         public LinearLayout lyt_distance;
@@ -66,7 +66,10 @@ public class AdapterFavoriteList extends RecyclerView.Adapter<AdapterFavoriteLis
             name.setTypeface(font);
             category = (TextView) v.findViewById(R.id.category);
             Typeface font1 = Typeface.createFromAsset(v.getContext().getAssets(), "nexalight.ttf");
+            fonction = (TextView) v.findViewById(R.id.fonction);
+
             category.setTypeface(font);
+            fonction.setTypeface(font1);
             image = (ImageView) v.findViewById(R.id.image);
            // distance = (TextView) v.findViewById(R.id.distance);
            // lyt_distance = (LinearLayout) v.findViewById(R.id.lyt_distance);
@@ -110,6 +113,7 @@ public class AdapterFavoriteList extends RecyclerView.Adapter<AdapterFavoriteLis
         final Offre p = filtered_items.get(position);
         holder.name.setText(p.title);
         holder.category.setText(p.type_activite);
+        holder.fonction.setText(p.fonction.replace("&eacute;","é"));
 
       //  imgloader.displayImage(p.photo, holder.image, Tools.getGridOption());
 

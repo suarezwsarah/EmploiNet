@@ -41,15 +41,26 @@
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
+
                         android:paddingTop="@dimen/spacing_medium"
                         android:layout_gravity="top|start"
                         android:text="Sample Title"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                         android:textColor="@color/album_title"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                     <TextView
                         android:id="@+id/category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:layout_gravity="top|start"
+                        android:text="Sample Title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/icon_drawer_color"
+                        android:textSize="12sp"
+                        android:paddingTop="@dimen/spacing_medium"/>
+                    <TextView
+                        android:id="@+id/fonction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
