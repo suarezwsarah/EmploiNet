@@ -42,7 +42,7 @@ import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
 import com.mba2dna.apps.EmploiNet.fragment.CategoryFragment;
 import com.mba2dna.apps.EmploiNet.fragment.FavorieFragment;
-import com.mba2dna.apps.EmploiNet.fragment.FertilizationFragment;
+import com.mba2dna.apps.EmploiNet.fragment.RecruteurFragment;
 import com.mba2dna.apps.EmploiNet.fragment.InfosEmploiFragment;
 import com.mba2dna.apps.EmploiNet.fragment.CVsFragment;
 import com.mba2dna.apps.EmploiNet.fragment.AllArticlesFragment;
@@ -360,7 +360,7 @@ private TextView headNom,headEmail;
                 fragment = new InfosEmploiFragment();
                 break;
             case R.id.nav_fetrnit:
-                fragment = new FertilizationFragment();
+                fragment = new RecruteurFragment();
                 break;
 
             case R.id.nav_apps:

@@ -20,6 +20,7 @@ import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.model.Category;
 import com.mba2dna.apps.EmploiNet.model.Images;
 import com.mba2dna.apps.EmploiNet.model.Candidats;
+import com.mba2dna.apps.EmploiNet.model.Recruteur;
 import com.mba2dna.apps.EmploiNet.model.UserSession;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 
@@ -50,7 +51,7 @@ public class ApiClientLoader extends AsyncTask<String, String, ApiClient> {
             List<Offre> listArticles = new ArrayList<>();
             List<Candidats> listCandidats = new ArrayList<>();
             List<Category> listReciepesCategory = new ArrayList<>();
-            List<Images> listImages = new ArrayList<>();
+            List<Recruteur> listRecruteur = new ArrayList<>();
             List<InfoEmploi> listInfoEmplois = new ArrayList<>();
             UserSession userSession = new UserSession();
             reader.beginObject();
@@ -71,11 +72,11 @@ public class ApiClientLoader extends AsyncTask<String, String, ApiClient> {
                         listReciepesCategory.add(OffresCategory);
                     }
                     reader.endArray();
-                } else if (name.equals("employeur")) {
+                } else if (name.equals("toprecruter")) {
                     reader.beginArray();
                     while (reader.hasNext()) {
-                        Images images = gson.fromJson(reader, Images.class);
-                        listImages.add(images);
+                        Recruteur recruteurs = gson.fromJson(reader, Recruteur.class);
+                        listRecruteur.add(recruteurs);
                     }
                     reader.endArray();
                 } else if (name.equals("candidats")) {
@@ -109,7 +110,7 @@ public class ApiClientLoader extends AsyncTask<String, String, ApiClient> {
             apiClient.candidatsList = listCandidats;
             apiClient.UserSessions = userSession;
             apiClient.reciepes_category = listReciepesCategory;
-            apiClient.images = listImages;
+            apiClient.recruteur = listRecruteur;
             apiClient.infoEmplois = listInfoEmplois;
 
             success = true;
