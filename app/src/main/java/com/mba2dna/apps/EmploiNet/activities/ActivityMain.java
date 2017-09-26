@@ -340,8 +340,9 @@ private TextView headNom,headEmail;
             //sub menu
             case R.id.nav_all:
                 fragment = new AllArticlesFragment();
-                bundle.putInt(AllArticlesFragment.TAG_CATEGORY, -1);
-                bundle.putString(AllArticlesFragment.NAME_CATEGORY, "");
+                bundle.putString(AllArticlesFragment.TAG_TYPE, "ALL");
+                bundle.putInt(AllArticlesFragment.TAG_ID, -1);
+                bundle.putString(AllArticlesFragment.TAG_NAME, "");
                 break;
             // favorites
             case R.id.nav_favorites:

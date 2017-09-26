@@ -165,12 +165,13 @@ public class CategoryFragment extends Fragment {
                 CommonUtils.setRobotoThinFont(getActivity(), tv);
                 snackbar.show();
                /* Intent intent = new Intent(getContext(), ActivityMain.class);
-                intent.putExtra(ActivityMain.NAME_CATEGORY, c.type_activite);
+                intent.putExtra(ActivityMain.TAG_NAME, c.type_activite);
                 startActivity(intent);*/
                 bundle = new Bundle();
                 fragment = new AllArticlesFragment();
-                bundle.putInt(AllArticlesFragment.TAG_CATEGORY, c.cat_id);
-                bundle.putString(AllArticlesFragment.NAME_CATEGORY, c.category);
+                bundle.putString(AllArticlesFragment.TAG_TYPE, "CATEGORY");
+                bundle.putInt(AllArticlesFragment.TAG_ID, c.cat_id);
+                bundle.putString(AllArticlesFragment.TAG_NAME, c.category);
                 fragment.setArguments(bundle);
 
                 ActivityMain.mTitle.setText(c.category);
@@ -226,12 +227,13 @@ public class CategoryFragment extends Fragment {
                         CommonUtils.setRobotoThinFont(getActivity(), tv);
                         snackbar.show();
                        /* Intent intent = new Intent(getContext(), ActivityMain.class);
-                        intent.putExtra(ActivityMain.NAME_CATEGORY, c.type_activite);
+                        intent.putExtra(ActivityMain.TAG_NAME, c.type_activite);
                         startActivity(intent);*/
                         bundle = new Bundle();
                         fragment = new AllArticlesFragment();
-                        bundle.putInt(AllArticlesFragment.TAG_CATEGORY, c.cat_id);
-                        bundle.putString(AllArticlesFragment.NAME_CATEGORY, c.category);
+                        bundle.putString(AllArticlesFragment.TAG_TYPE, "CATEGORY");
+                        bundle.putInt(AllArticlesFragment.TAG_ID, c.cat_id);
+                        bundle.putString(AllArticlesFragment.TAG_NAME, c.category);
                         fragment.setArguments(bundle);
 
                         ActivityMain.mTitle.setText(c.category);

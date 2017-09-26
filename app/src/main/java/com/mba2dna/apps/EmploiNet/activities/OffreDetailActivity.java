@@ -48,22 +48,15 @@ import com.mba2dna.apps.EmploiNet.fragment.AllArticlesFragment;
 import com.mba2dna.apps.EmploiNet.fragment.PostuleFragment;
 import com.mba2dna.apps.EmploiNet.loader.ApiSinglePlaceLoader;
 import com.mba2dna.apps.EmploiNet.model.Offre;
-import com.mba2dna.apps.EmploiNet.model.UserSession;
-import com.mba2dna.apps.EmploiNet.utils.Callback;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 import com.mba2dna.apps.EmploiNet.widget.TagLayout;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import greco.lorenzo.com.lgsnackbar.LGSnackbarManager;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -71,8 +64,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
-import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.SUCCESS;
 
 
 public class OffreDetailActivity extends AppCompatActivity {
@@ -308,8 +299,8 @@ public class OffreDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 bundle = new Bundle();
                 fragment = new AllArticlesFragment();
-                bundle.putInt(AllArticlesFragment.TAG_CATEGORY, -1);
-                bundle.putString(AllArticlesFragment.NAME_CATEGORY, cate);
+                bundle.putInt(AllArticlesFragment.TAG_ID, -1);
+                bundle.putString(AllArticlesFragment.TAG_NAME, cate);
                 fragment.setArguments(bundle);
 
 

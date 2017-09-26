@@ -48,10 +48,11 @@ import java.util.List;
  */
 
 public class AllArticlesFragment extends Fragment implements AdapterOffres.OnLoadMoreListener {
-    public static String TAG_CATEGORY = "com.mba2dna.apps.EmploiNet.tagCategory";
-    public static String NAME_CATEGORY = "com.mba2dna.apps.EmploiNet.nameCategory";
+    public static String TAG_TYPE = "com.mba2dna.apps.EmploiNet.type";
+    public static String TAG_ID = "com.mba2dna.apps.EmploiNet.id";
+    public static String TAG_NAME = "com.mba2dna.apps.EmploiNet.name";
     private static int category_id;
-    private static String category_name;
+    private static String category_name,type;
 
     private View view;
     private static RecyclerView recyclerView;
@@ -79,8 +80,9 @@ public class AllArticlesFragment extends Fragment implements AdapterOffres.OnLoa
         setHasOptionsMenu(true);
         db = new SQLiteHandler(getActivity());
         sharedPref = new SharedPref(getActivity());
-        category_id = getArguments().getInt(TAG_CATEGORY);
-        category_name = getArguments().getString(NAME_CATEGORY);
+        category_id = getArguments().getInt(TAG_ID);
+        category_name = getArguments().getString(TAG_NAME);
+        type = getArguments().getString(TAG_TYPE);
         lyt_progress = view.findViewById(R.id.lyt_progress);
         lyt_not_found = view.findViewById(R.id.lyt_not_found);
 
@@ -210,9 +212,12 @@ public class AllArticlesFragment extends Fragment implements AdapterOffres.OnLoa
     private void getDB() {
         onProcess = true;
         showProgress(onProcess);
-        if (!category_name.equals("")) mAdapter.addAll(db.getCategoryArticles(category_name));
-        else mAdapter.addAll(db.getAllArticles());
-
+        if(type.equals("CATEGORY")) {
+            if (!category_name.equals("")) mAdapter.addAll(db.getCategoryArticles(category_name));
+            else mAdapter.addAll(db.getAllArticles());
+        }else{
+            mAdapter.addAll(db.getAllArticles());
+        }
         mAdapter.setMoreLoading(false);
         sharedPref.setRefreshReciepes(false);
         onProcess = false;
@@ -303,9 +308,13 @@ public class AllArticlesFragment extends Fragment implements AdapterOffres.OnLoa
                             checkItems();
                         }
                     });
-                    String cat = "";
-                    if (!category_name.equals("")) cat = "&s=" + category_id;
-                    task.execute("?offres=true&p=" + page + "&n=" + Tools.getGridSpanCount(getActivity()) + cat);
+                    String var = "";
+                    if(type.equals("CATEGORY")) {
+                        if (!category_name.equals("")) var = "&s=" + category_id;
+                    }else if(type.equals("RECRUTEUR")) {
+                        if (!category_name.equals("")) var = "&r=" + category_id;
+                    }
+                    task.execute("?offres=true&p=" + page + "&n=" + Tools.getGridSpanCount(getActivity()) + var);
                     mAdapter.setProgressMore(false);
 
 
@@ -367,9 +376,13 @@ public class AllArticlesFragment extends Fragment implements AdapterOffres.OnLoa
                 checkItems();
             }
         });
-        String cat = "";
-        if (!category_name.equals("")) cat = "&s=" + category_id;
-        task.execute("?offres=true&p=1&n=" + Tools.getGridSpanCount(getActivity()) + cat);
+        String var = "";
+        if(type.equals("CATEGORY")) {
+            if (!category_name.equals("")) var = "&s=" + category_id;
+        }else if(type.equals("RECRUTEUR")) {
+            if (!category_name.equals("")) var = "&r=" + category_id;
+        }
+        task.execute("?offres=true&p=1&n=" + Tools.getGridSpanCount(getActivity()) + var);
 
     }
 

@@ -22,13 +22,11 @@ import android.widget.TextView;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.ActivityMain;
 
-import com.mba2dna.apps.EmploiNet.adapter.CategoriesAdapter;
 import com.mba2dna.apps.EmploiNet.adapter.RecruteurAdapter;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
 import com.mba2dna.apps.EmploiNet.loader.ApiClientLoader;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
-import com.mba2dna.apps.EmploiNet.model.Category;
 
 import com.mba2dna.apps.EmploiNet.model.Recruteur;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
@@ -167,12 +165,12 @@ public class RecruteurFragment extends Fragment {
                 CommonUtils.setRobotoThinFont(getActivity(), tv);
                 snackbar.show();
                /* Intent intent = new Intent(getContext(), ActivityMain.class);
-                intent.putExtra(ActivityMain.NAME_CATEGORY, c.type_activite);
+                intent.putExtra(ActivityMain.TAG_NAME, c.type_activite);
                 startActivity(intent);*/
               /*  bundle = new Bundle();
                 fragment = new AllArticlesFragment();
-                bundle.putInt(AllArticlesFragment.TAG_CATEGORY, c.cat_id);
-                bundle.putString(AllArticlesFragment.NAME_CATEGORY, c.category);
+                bundle.putInt(AllArticlesFragment.TAG_ID, c.cat_id);
+                bundle.putString(AllArticlesFragment.TAG_NAME, c.category);
                 fragment.setArguments(bundle);
 
                 ActivityMain.mTitle.setText(c.category);
@@ -228,12 +226,13 @@ public class RecruteurFragment extends Fragment {
                         CommonUtils.setRobotoThinFont(getActivity(), tv);
                         snackbar.show();
                        /* Intent intent = new Intent(getContext(), ActivityMain.class);
-                        intent.putExtra(ActivityMain.NAME_CATEGORY, c.type_activite);
+                        intent.putExtra(ActivityMain.TAG_NAME, c.type_activite);
                         startActivity(intent);*/
                         bundle = new Bundle();
                         fragment = new AllArticlesFragment();
-                        bundle.putInt(AllArticlesFragment.TAG_CATEGORY, c.rec_id);
-                        bundle.putString(AllArticlesFragment.NAME_CATEGORY, c.recruteur);
+                        bundle.putString(AllArticlesFragment.TAG_TYPE, "RECRUTEUR");
+                        bundle.putInt(AllArticlesFragment.TAG_ID, c.rec_id);
+                        bundle.putString(AllArticlesFragment.TAG_NAME, c.recruteur);
                         fragment.setArguments(bundle);
 
                         ActivityMain.mTitle.setText(c.recruteur);
