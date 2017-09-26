@@ -3,6 +3,7 @@ package com.mba2dna.apps.EmploiNet.adapter;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +77,7 @@ public class RecruteurAdapter extends RecyclerView.Adapter<RecruteurAdapter.MyVi
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_category, parent, false);
+                .inflate(R.layout.item_recruteur, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -86,9 +87,9 @@ public class RecruteurAdapter extends RecyclerView.Adapter<RecruteurAdapter.MyVi
         final Recruteur recruteur = Recruteurlist.get(position);
         holder.title.setText(recruteur.recruteur);
         holder.count.setText(recruteur.num +" "+ mContext.getString(R.string.article));
-
-        // loading type_activite cover using Glide library
-        //  imgloader.displayImage(Constant.getURLimgPlace(category.photo), holder.thumbnail, Tools.getGridOption());
+        holder.thumbnail.setVisibility(View.VISIBLE);
+if(recruteur.photo!=null)
+          imgloader.displayImage(recruteur.photo, holder.thumbnail, Tools.getGridOption());
         holder.lyt_parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
