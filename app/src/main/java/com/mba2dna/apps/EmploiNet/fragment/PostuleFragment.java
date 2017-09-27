@@ -66,7 +66,6 @@ public class PostuleFragment extends DialogFragment {
             urlBuilder.addQueryParameter("checkuser", "true");
             urlBuilder.addQueryParameter("userid", userId+"");
             String url = urlBuilder.build().toString();
-
             Request request = new Request.Builder()
                     .url(url)
                     .build();
