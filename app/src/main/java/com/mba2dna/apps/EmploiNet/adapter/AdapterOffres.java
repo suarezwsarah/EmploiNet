@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mba2dna.apps.EmploiNet.R;
-import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
@@ -116,8 +115,8 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         try {
-            Log.e("Position",position+"");
-            return (itemList.get(position) != null ) ? VIEW_ITEM : VIEW_PROG;
+            Log.e("Position", position + "");
+            return (itemList.get(position) != null) ? VIEW_ITEM : VIEW_PROG;
         } catch (java.lang.IndexOutOfBoundsException e) {
             return VIEW_PROG;
         }
@@ -155,13 +154,15 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 ((ViewHolder) holder).name.setText(p.title);
                 ((ViewHolder) holder).username.setText(p.contact_info);
                 ((ViewHolder) holder).timestamp.setText(p.pub_date);
-
-                try{
-                    imgloader.displayImage(p.photo, ((ViewHolder) holder).image, Tools.getGridOption());
-                }catch (Exception e){
-                    imgloader.displayImage("drawable://noimage", ((ViewHolder) holder).image, Tools.getGridOption());
+                if (p.photo != null) {
+                    if (!p.photo.contains("s_d3802b1dc0d80d8a3c8ccc6ccc068e7c.jpg")) {
+                        try {
+                            imgloader.displayImage(p.photo, ((ViewHolder) holder).image, Tools.getGridOption());
+                        } catch (Exception e) {
+                            imgloader.displayImage("drawable://noimage", ((ViewHolder) holder).image, Tools.getGridOption());
+                        }
+                    }
                 }
-
 
 
 //                imgloader.displayImage(Constant.getURLimgUser(p.email_candidature), ((ViewHolder) holder).email_candidature, Tools.getGridOption());
@@ -217,7 +218,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView name,username,timestamp;
+        public TextView name, username, timestamp;
         public ImageView image;
         public RoundedImageView userpic;
         public MaterialRippleLayout lyt_parent;
@@ -225,13 +226,13 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         public ViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.title);
-            CommonUtils.setRobotoBoldFont(ctx,name);
+            CommonUtils.setRobotoBoldFont(ctx, name);
 
             username = (TextView) v.findViewById(R.id.username);
-            CommonUtils.setRobotoThinFont(ctx,username);
+            CommonUtils.setRobotoThinFont(ctx, username);
 
             timestamp = (TextView) v.findViewById(R.id.timestamp);
-            CommonUtils.setRobotoThinFont(ctx,timestamp);
+            CommonUtils.setRobotoThinFont(ctx, timestamp);
             image = (ImageView) v.findViewById(R.id.image);
             userpic = (RoundedImageView) v.findViewById(R.id.profilePic);
             // distance = (TextView) v.findViewById(R.id.distance);

@@ -168,9 +168,9 @@ public class RecruteurFragment extends Fragment {
                 intent.putExtra(ActivityMain.TAG_NAME, c.type_activite);
                 startActivity(intent);*/
               /*  bundle = new Bundle();
-                fragment = new AllArticlesFragment();
-                bundle.putInt(AllArticlesFragment.TAG_ID, c.cat_id);
-                bundle.putString(AllArticlesFragment.TAG_NAME, c.category);
+                fragment = new OffresFragment();
+                bundle.putInt(OffresFragment.TAG_ID, c.cat_id);
+                bundle.putString(OffresFragment.TAG_NAME, c.category);
                 fragment.setArguments(bundle);
 
                 ActivityMain.mTitle.setText(c.category);
@@ -229,10 +229,10 @@ public class RecruteurFragment extends Fragment {
                         intent.putExtra(ActivityMain.TAG_NAME, c.type_activite);
                         startActivity(intent);*/
                         bundle = new Bundle();
-                        fragment = new AllArticlesFragment();
-                        bundle.putString(AllArticlesFragment.TAG_TYPE, "RECRUTEUR");
-                        bundle.putInt(AllArticlesFragment.TAG_ID, c.rec_id);
-                        bundle.putString(AllArticlesFragment.TAG_NAME, c.recruteur);
+                        fragment = new OffresFragment();
+                        bundle.putString(OffresFragment.TAG_TYPE, "RECRUTEUR");
+                        bundle.putInt(OffresFragment.TAG_ID, c.rec_id);
+                        bundle.putString(OffresFragment.TAG_NAME, c.recruteur);
                         fragment.setArguments(bundle);
 
                         ActivityMain.mTitle.setText(c.recruteur);

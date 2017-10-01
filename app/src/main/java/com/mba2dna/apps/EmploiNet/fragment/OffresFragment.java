@@ -47,7 +47,7 @@ import java.util.List;
  * Created by BIDA on 11/11/2016.
  */
 
-public class AllArticlesFragment extends Fragment implements AdapterOffres.OnLoadMoreListener {
+public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMoreListener {
     public static String TAG_TYPE = "com.mba2dna.apps.EmploiNet.type";
     public static String TAG_ID = "com.mba2dna.apps.EmploiNet.id";
     public static String TAG_NAME = "com.mba2dna.apps.EmploiNet.name";

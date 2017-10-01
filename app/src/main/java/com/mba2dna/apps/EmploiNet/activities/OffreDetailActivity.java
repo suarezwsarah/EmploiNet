@@ -36,7 +36,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mba2dna.apps.EmploiNet.R;
@@ -45,7 +44,7 @@ import com.mba2dna.apps.EmploiNet.data.AppConfig;
 import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
-import com.mba2dna.apps.EmploiNet.fragment.AllArticlesFragment;
+import com.mba2dna.apps.EmploiNet.fragment.OffresFragment;
 import com.mba2dna.apps.EmploiNet.fragment.PostuleFragment;
 import com.mba2dna.apps.EmploiNet.loader.ApiSinglePlaceLoader;
 import com.mba2dna.apps.EmploiNet.model.Offre;
@@ -299,9 +298,9 @@ public class OffreDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 bundle = new Bundle();
-                fragment = new AllArticlesFragment();
-                bundle.putInt(AllArticlesFragment.TAG_ID, -1);
-                bundle.putString(AllArticlesFragment.TAG_NAME, cate);
+                fragment = new OffresFragment();
+                bundle.putInt(OffresFragment.TAG_ID, -1);
+                bundle.putString(OffresFragment.TAG_NAME, cate);
                 fragment.setArguments(bundle);
 
 

@@ -42,10 +42,10 @@ import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
 import com.mba2dna.apps.EmploiNet.fragment.CategoryFragment;
 import com.mba2dna.apps.EmploiNet.fragment.FavorieFragment;
+import com.mba2dna.apps.EmploiNet.fragment.OffresFragment;
 import com.mba2dna.apps.EmploiNet.fragment.RecruteurFragment;
 import com.mba2dna.apps.EmploiNet.fragment.InfosEmploiFragment;
 import com.mba2dna.apps.EmploiNet.fragment.CVsFragment;
-import com.mba2dna.apps.EmploiNet.fragment.AllArticlesFragment;
 import com.mba2dna.apps.EmploiNet.model.UserSession;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.CustomTypefaceSpan;
@@ -306,7 +306,7 @@ private TextView headNom,headEmail;
             @Override
             public boolean onQueryTextChange(String s) {
                 try {
-                    //  AllArticlesFragment.filterAdapter(s);
+                    //  OffresFragment.filterAdapter(s);
                 } catch (Exception e) {
                 }
                 return true;
@@ -339,10 +339,10 @@ private TextView headNom,headEmail;
         switch (id) {
             //sub menu
             case R.id.nav_all:
-                fragment = new AllArticlesFragment();
-                bundle.putString(AllArticlesFragment.TAG_TYPE, "ALL");
-                bundle.putInt(AllArticlesFragment.TAG_ID, -1);
-                bundle.putString(AllArticlesFragment.TAG_NAME, "");
+                fragment = new OffresFragment();
+                bundle.putString(OffresFragment.TAG_TYPE, "ALL");
+                bundle.putInt(OffresFragment.TAG_ID, -1);
+                bundle.putString(OffresFragment.TAG_NAME, "");
                 break;
             // favorites
             case R.id.nav_favorites:
