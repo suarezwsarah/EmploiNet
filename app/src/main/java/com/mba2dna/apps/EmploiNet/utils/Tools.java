@@ -310,16 +310,16 @@ public class Tools {
     public static void methodShare(Activity act, Offre p) {
 
         // string to share
-        String shareBody = " \'" + p.title + "\' وصفة : "
-                + "\n" +  p.title + " ل" +"\n"
-                + " \'" + act.getString(R.string.app_name) + "\' بإستعمال تطبيق";
+        String shareBody = "Postuler a l\'offre : \'" + p.title + "\'"
+                + "sur l\'application android \'" + act.getString(R.string.app_name) + "\'"
+                + "telecharger sur le lien https://play.google.com/store/apps/details?id=" + act.getString(R.string.app_name) + "\'";
 
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
 
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, act.getString(R.string.app_name));
         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-        act.startActivity(Intent.createChooser(sharingIntent, "شارك بإستعمال"));
+        act.startActivity(Intent.createChooser(sharingIntent, "Partager avec :"));
     }
 
     public static Bitmap createBitmapFromView(Activity act, View view) {

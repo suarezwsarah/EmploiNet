@@ -698,4 +698,23 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
         Log.e(TAG, "New TABLE_USER DELETED into sqlite: ");
     }
+
+    public String getUserEmail() {
+        String email = "";
+        String selectQuery = "SELECT  " + KEY_USER_EMAIL + " FROM " + TABLE_USER + "  LIMIT 1";
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                email = c.getString((c.getColumnIndex(KEY_USER_EMAIL)));
+
+            } while (c.moveToNext());
+        }
+
+        return email;
+    }
 }

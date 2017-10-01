@@ -34,6 +34,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class SearchActivity extends AppCompatActivity implements AdapterOffres.OnLoadMoreListener{
     private FloatingActionButton fab;
     private SearchView searchView;
@@ -160,6 +162,10 @@ public class SearchActivity extends AppCompatActivity implements AdapterOffres.O
            // getDB();
         }
     }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
     private void loadData(final String s) {
         itemList.clear();
         Log.d("onLoad", "Search:"+s);
@@ -185,7 +191,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterOffres.O
                 mAdapter.setMoreLoading(false);
                 onProcess = false;
                 showProgress(onProcess);
-                Snackbar snackbar = Snackbar.make(view,  "لا يوجد نتائج عن : " + s, Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(view,  "Aucune offre " + s, Snackbar.LENGTH_LONG);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
                 TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);

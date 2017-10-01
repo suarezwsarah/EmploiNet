@@ -37,6 +37,7 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.NativeExpressAdView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.adapter.AdapterSuggestion;
@@ -318,7 +319,9 @@ public class OffreDetailActivity extends AppCompatActivity {
                 if (db.isUserExist()) {
                     Log.e("LOGGED", "LOGGED");
                     FragmentManager fm = getSupportFragmentManager();
+
                     PostuleFragment screen = PostuleFragment.newInstance(offres);
+
                     screen.show(fm, "Postule Offre");
                 } else {
                     Intent intent = new Intent(OffreDetailActivity.this, ActivityLogin.class);
@@ -327,14 +330,14 @@ public class OffreDetailActivity extends AppCompatActivity {
 
             }
         });
-        if(db.isUserExist()){
-            int userId=db.getUserID();
+        if (db.isUserExist()) {
+            int userId = db.getUserID();
             OkHttpClient client = new OkHttpClient();
             String URL = Constant.getURLApiClientData();
             HttpUrl.Builder urlBuilder = HttpUrl.parse(URL).newBuilder();
             urlBuilder.addQueryParameter("checkoffre", "true");
-            urlBuilder.addQueryParameter("userid", userId+"");
-            urlBuilder.addQueryParameter("offreid",p.id+"");
+            urlBuilder.addQueryParameter("userid", userId + "");
+            urlBuilder.addQueryParameter("offreid", p.id + "");
             String url = urlBuilder.build().toString();
 
             Request request = new Request.Builder()
@@ -342,29 +345,28 @@ public class OffreDetailActivity extends AppCompatActivity {
                     .build();
             try {
                 Response response = client.newCall(request).execute();
-                String S =response.body().string();
-                Log.e("RESPENSE", userId+"");
-                Log.e("RESPENSE", p.id+"");
+                String S = response.body().string();
+                Log.e("RESPENSE", userId + "");
+                Log.e("RESPENSE", p.id + "");
                 Log.e("RESPENSE", S);
-                if(S.contains("exist")){
+                if (S.contains("exist")) {
                     Postuler.setEnabled(false);
                     Postuler.setClickable(false);
                     Postuler.setText("Déja Postulé");
                     Postuler.setBackgroundResource(R.drawable.rect_white_normal);
-                }else{
+                } else {
                     Postuler.setEnabled(true);
                     Postuler.setClickable(true);
                 }
             } catch (IOException e) {
-                Log.e("ERROR",e.getMessage());
+                Log.e("ERROR", e.getMessage());
                 e.printStackTrace();
             }
-        }else {
+        } else {
             Postuler.setEnabled(true);
             Postuler.setClickable(true);
         }
     }
-
 
 
     private void setSuggestionReciepes(List<Offre> articles) {
@@ -413,13 +415,16 @@ public class OffreDetailActivity extends AppCompatActivity {
     private void prepareAds() {
         if (AppConfig.ENABLE_ADSENSE && Tools.cekConnection(this)) {
 
-
-            AdView mAdView = (AdView) findViewById(R.id.ad_view);
+            NativeExpressAdView adView = (NativeExpressAdView) findViewById(R.id.adView);
+          //  AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+            AdRequest request = new AdRequest.Builder().build();
+            adView.loadAd(request);
+          /*  AdView mAdView = (AdView) findViewById(R.id.ad_view);
             // AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
             AdRequest adRequest = new AdRequest.Builder().build();
             // Start loading the ad in the background.
-            mAdView.loadAd(adRequest);
-            mAdView.setAdListener(new AdListener() {
+            mAdView.loadAd(adRequest);*/
+            adView.setAdListener(new AdListener() {
                 @Override
                 public void onAdFailedToLoad(int i) {
                     super.onAdFailedToLoad(i);
@@ -508,7 +513,6 @@ public class OffreDetailActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
@@ -532,8 +536,6 @@ public class OffreDetailActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     protected void onResume() {
         if (!imgloader.isInited()) Tools.initImageLoader(getApplicationContext());
@@ -547,10 +549,14 @@ public class OffreDetailActivity extends AppCompatActivity {
     }
 
 
-
-
-
     private void showProgressbar(boolean show) {
         lyt_progress.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    public void onUserSelectValue(String ok) {
+        Postuler.setEnabled(false);
+        Postuler.setClickable(false);
+        Postuler.setText("Déja Postulé");
+        Postuler.setBackgroundResource(R.drawable.rect_white_normal);
     }
 }

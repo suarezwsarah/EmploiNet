@@ -34,16 +34,16 @@
     <string name="splash_desc_text">1er site de l’Emploi en Algerie</string>
 
     <!-- ==================== Settings for Setting ============================================= -->
-    <string name="pref_category_notif">إعدادات التنبيهات</string>
-    <string name="pref_category_other">الإعدادات الأخرى</string>
+    <string name="pref_category_notif">parametres de notification</string>
+    <string name="pref_category_other">autre parametres</string>
 
-    <string name="pref_title_notif">التنبيهات</string>
-    <string name="pref_title_ringtone">صوت التنبيه</string>
-    <string name="pref_title_vibrate">هزاز</string>
-    <string name="pref_title_cache">تفريغ الكاش صورة</string>
+    <string name="pref_title_notif">Notification</string>
+    <string name="pref_title_ringtone">sonnerie de notification</string>
+    <string name="pref_title_vibrate">vibreur</string>
+    <string name="pref_title_cache">vider le cache images</string>
     <string name="pref_title_rate">Evaluer l\'application</string>
     <string name="pref_title_about">Apropos</string>
-    <string name="pref_ringtone_silent">صامت</string>
+    <string name="pref_ringtone_silent">silencieux</string>
 
     <string name="pref_key_notif">key_notifications</string>
     <string name="pref_key_ringtone">key_ringtone</string>
@@ -84,7 +84,7 @@
     <string name="banner_ad_unit_id_futurnization">ca-app-pub-2041047395483384/5532941014</string>
     <string name="banner_ad_unit_id_burthday">ca-app-pub-2041047395483384/6440674485</string>
     <string name="banner_ad_unit_id_kid_grewth">ca-app-pub-2041047395483384/7179041087</string>
-    <string name="native_ad_unit_id_offre_detail">ca-app-pub-2041047395483384/7179041087</string>
+    <string name="native_ad_unit_id_offre_detail">ca-app-pub-2041047395483384/2706302746</string>
 
     <string name="interstitial_ad_unit_id">ca-app-pub-2041047395483384/5407148972</string>
     <string name="article"> Offre </string>

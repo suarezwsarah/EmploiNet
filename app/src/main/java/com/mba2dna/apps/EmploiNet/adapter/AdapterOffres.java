@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,6 +116,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         try {
+            Log.e("Position",position+"");
             return (itemList.get(position) != null ) ? VIEW_ITEM : VIEW_PROG;
         } catch (java.lang.IndexOutOfBoundsException e) {
             return VIEW_PROG;
@@ -154,8 +156,14 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 ((ViewHolder) holder).username.setText(p.contact_info);
                 ((ViewHolder) holder).timestamp.setText(p.pub_date);
 
+                try{
+                    imgloader.displayImage(p.photo, ((ViewHolder) holder).image, Tools.getGridOption());
+                }catch (Exception e){
+                    imgloader.displayImage("drawable://noimage", ((ViewHolder) holder).image, Tools.getGridOption());
+                }
 
-                //imgloader.displayImage(p.photo, ((ViewHolder) holder).image, Tools.getGridOption());
+
+
 //                imgloader.displayImage(Constant.getURLimgUser(p.email_candidature), ((ViewHolder) holder).email_candidature, Tools.getGridOption());
                 //  setAnimation(((ViewHolder) holder).lyt_parent, position);
                 ((ViewHolder) holder).lyt_parent.setOnClickListener(new View.OnClickListener() {

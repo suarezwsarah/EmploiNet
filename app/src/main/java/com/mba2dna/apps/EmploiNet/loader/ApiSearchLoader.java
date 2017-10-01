@@ -49,11 +49,11 @@ protected ApiClient doInBackground(String... params) {
 
         try {
             String s = params[0];
-            Log.e("CITY", URL + s);
+            Log.e("CITY", URL+"?offres=true&s="+s);
         Thread.sleep(300);
             List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
             urlParameters.add(new BasicNameValuePair("search", search));
-        JsonReader reader = jsonStream.getJsonResult(URL , jsonStream.METHOD_GET, urlParameters);
+        JsonReader reader = jsonStream.getJsonResult(URL+"?offres=true&s="+s , jsonStream.METHOD_GET, urlParameters);
 
             ApiClient apiClient = new ApiClient();
             List<Offre> listArticles = new ArrayList<>();

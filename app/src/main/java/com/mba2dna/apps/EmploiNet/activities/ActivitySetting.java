@@ -46,6 +46,8 @@ import com.mba2dna.apps.EmploiNet.data.SharedPref;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 import com.mba2dna.apps.EmploiNet.R;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 /**
  * ATTENTION : To see where list of setting comes is open res/xml/setting_notification.xml
  * */
@@ -56,7 +58,10 @@ public class ActivitySetting extends PreferenceActivity {
     private Toolbar toolbar;
     private SharedPref sharedPref;
     private FirebaseAnalytics mFirebaseAnalytics;
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
