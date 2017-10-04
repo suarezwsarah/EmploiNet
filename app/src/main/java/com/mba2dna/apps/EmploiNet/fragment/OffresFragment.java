@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
@@ -37,10 +38,14 @@ import com.mba2dna.apps.EmploiNet.utils.Callback;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
 
 
 /**
@@ -48,11 +53,22 @@ import java.util.List;
  */
 
 public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMoreListener {
+
+    // A Native Express ad is placed in every nth position in the RecyclerView.
+    public static final int ITEMS_Count = 0;
+    // A Native Express ad is placed in every nth position in the RecyclerView.
+    public static final int ITEMS_PER_AD = 8;
+    // The Native Express ad height.
+    private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
+    // The Native Express ad unit ID.
+    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/1072772517";
+
+
     public static String TAG_TYPE = "com.mba2dna.apps.EmploiNet.type";
     public static String TAG_ID = "com.mba2dna.apps.EmploiNet.id";
     public static String TAG_NAME = "com.mba2dna.apps.EmploiNet.name";
     private static int category_id;
-    private static String category_name,type;
+    private static String category_name, type;
 
     private View view;
     private static RecyclerView recyclerView;
@@ -61,7 +77,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
 
     private SQLiteHandler db;
 
-    private List<Offre> itemList = new ArrayList<>();
+    private List<Object> itemList = new ArrayList<>();
 
     private SharedPref sharedPref;
     private static AdapterOffres mAdapter;
@@ -86,27 +102,29 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
         lyt_progress = view.findViewById(R.id.lyt_progress);
         lyt_not_found = view.findViewById(R.id.lyt_not_found);
 
-        itemList = new ArrayList<>();
+        // itemList = new ArrayList<>();
 
-       try {
-           mPullToRefreshView = (BeautifulRefreshLayout) view.findViewById(R.id.pull_to_refresh);
-           mPullToRefreshView.setBuautifulRefreshListener(new BeautifulRefreshLayout.BuautifulRefreshListener() {
-               @Override
-               public void onRefresh(final BeautifulRefreshLayout refreshLayout) {
-                   actionRefresh();
+        try {
+            mPullToRefreshView = (BeautifulRefreshLayout) view.findViewById(R.id.pull_to_refresh);
+            mPullToRefreshView.setBuautifulRefreshListener(new BeautifulRefreshLayout.BuautifulRefreshListener() {
+                @Override
+                public void onRefresh(final BeautifulRefreshLayout refreshLayout) {
+                    actionRefresh();
                /* refreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         refreshLayout.finishRefreshing();
                     }
                 }, 5000);*/
-               }
-           });
-       }catch (Exception e){
+                }
+            });
+        } catch (Exception e) {
 
-       }
+        }
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -120,8 +138,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
 
         mAdapter = new AdapterOffres(getContext(), itemList, this);
         mAdapter.setLinearLayoutManager(layoutManager);
-        mAdapter.setRecyclerView(recyclerView);
-        recyclerView.setAdapter(mAdapter);
+
         RecyclerView.ItemAnimator animator = recyclerView.getItemAnimator();
         if (animator instanceof SimpleItemAnimator) {
             ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
@@ -132,7 +149,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
             public void onItemClick(View view, Offre p) {
                 Bundle bundle = new Bundle();
                 bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, p.id);
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,p.title);
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, p.title);
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
                 OffreDetailActivity.navigate((ActivityMain) getActivity(), view.findViewById(R.id.image), p);
             }
@@ -150,6 +167,8 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
         });
         actionRefresh();
         //  displayDataFromDatabase();
+        mAdapter.setRecyclerView(recyclerView);
+        recyclerView.setAdapter(mAdapter);
 
         return view;
     }
@@ -159,7 +178,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = new Bundle();
         bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, 1);
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME," الدخول الى كل الوصفات");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, " الدخول الى كل الوصفات");
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
@@ -168,12 +187,95 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
         if (mAdapter.getItemCount() == 0) {
             recyclerView.setVisibility(View.GONE);
             lyt_not_found.setVisibility(View.VISIBLE);
+
         } else {
             recyclerView.setVisibility(View.VISIBLE);
             lyt_not_found.setVisibility(View.GONE);
         }
 
     }
+
+    private void addNativeExpressAds() {
+        // Loop through the items array and place a new Native Express ad in every ith position in
+        // the items List.
+        for (int i = ITEMS_Count; i <= itemList.size(); i += ITEMS_PER_AD) {
+            final NativeExpressAdView adView = new NativeExpressAdView(getContext());
+            itemList.add(i, adView);
+        }
+    }
+
+    /**
+     * Sets up and loads the Native Express ads.
+     */
+    private void setUpAndLoadNativeExpressAds() {
+        // Use a Runnable to ensure that the RecyclerView has been laid out before setting the
+        // ad size for the Native Express ad. This allows us to set the Native Express ad's
+        // width to match the full width of the RecyclerView.
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                final float scale = getActivity().getResources().getDisplayMetrics().density;
+                // Set the ad size and ad unit ID for each Native Express ad in the items list.
+                if(itemList.size()>0)
+                for (int i = 0; i <= itemList.size(); i += ITEMS_PER_AD) {
+                    final NativeExpressAdView adView =
+                            (NativeExpressAdView) itemList.get(i);
+                    final CardView cardView = (CardView) view.findViewById(R.id.ad_card_view);
+                    final int adWidth = cardView.getWidth() - cardView.getPaddingLeft()
+                            - cardView.getPaddingRight();
+                    AdSize adSize = new AdSize((int) (adWidth / scale), NATIVE_EXPRESS_AD_HEIGHT);
+                    adView.setAdSize(adSize);
+                    adView.setAdUnitId(AD_UNIT_ID);
+                }
+
+                // Load the first Native Express ad in the items list.
+                loadNativeExpressAd(0);
+            }
+        });
+    }
+
+    /**
+     * Loads the Native Express ads in the items list.
+     */
+    private void loadNativeExpressAd(final int index) {
+
+        if (index >= itemList.size()) {
+            return;
+        }
+
+        Object item = itemList.get(index);
+        if (!(item instanceof NativeExpressAdView)) {
+            throw new ClassCastException("Expected item at index " + index + " to be a Native"
+                    + " Express ad.");
+        }
+
+        final NativeExpressAdView adView = (NativeExpressAdView) item;
+
+        // Set an AdListener on the NativeExpressAdView to wait for the previous Native Express ad
+        // to finish loading before loading the next ad in the items list.
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                // The previous Native Express ad loaded successfully, call this method again to
+                // load the next ad in the items list.
+                loadNativeExpressAd(index + ITEMS_PER_AD);
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // The previous Native Express ad failed to load. Call this method again to load
+                // the next ad in the items list.
+                Log.e("MainActivity", "The previous Native Express ad failed to load. Attempting to"
+                        + " load the next Native Express ad in the items list.");
+                loadNativeExpressAd(index + ITEMS_PER_AD);
+            }
+        });
+
+        // Load the Native Express ad.
+        adView.loadAd(new AdRequest.Builder().build());
+    }
+
 
     @Override
     public void onCreateOptionsMenu(final Menu menu, MenuInflater inflater) {
@@ -212,11 +314,26 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
     private void getDB() {
         onProcess = true;
         showProgress(onProcess);
-        if(type.equals("CATEGORY")) {
-            if (!category_name.equals("")) mAdapter.addAll(db.getCategoryArticles(category_name));
-            else mAdapter.addAll(db.getAllArticles());
-        }else{
-            mAdapter.addAll(db.getAllArticles());
+        if (type.equals("CATEGORY")) {
+            if (!category_name.equals("")) {
+
+                for (Offre o : db.getCategoryArticles(category_name)) {
+                    itemList.add(o);
+                }
+                mAdapter.addAll(itemList);
+            } else {
+
+                for (Offre o : db.getAllArticles()) {
+                    itemList.add(o);
+                }
+                mAdapter.addAll(itemList);
+            }
+        } else {
+
+            for (Offre o : db.getAllArticles()) {
+                itemList.add(o);
+            }
+            mAdapter.addAll(itemList);
         }
         mAdapter.setMoreLoading(false);
         sharedPref.setRefreshReciepes(false);
@@ -228,11 +345,6 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
     private boolean onProcess = false;
 
     private void showProgress(boolean show) {
-      /*  if (show) {
-            dialog.show();
-        } else {
-            dialog.dismiss();
-        }*/
         if (show) {
             lyt_progress.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
@@ -269,8 +381,12 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
                     ApiClientLoader task = new ApiClientLoader(new Callback<ApiClient>() {
                         @Override
                         public void onSuccess(ApiClient result) {
-                            itemList = result.offres;
+                            // itemList = result.offres;
                             final List<Offre> finalListArticles = result.offres;
+
+                            for (Offre o : result.offres) {
+                                itemList.add(o);
+                            }
 
                             AsyncTask.execute(new Runnable() {
                                 @Override
@@ -286,13 +402,15 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
 
 
                             });
-
+                            addNativeExpressAds();
+                            setUpAndLoadNativeExpressAds();
                             mAdapter.addItemMore(itemList);
                             mAdapter.setMoreLoading(false);
                             sharedPref.setRefreshReciepes(false);
                             onProcess = false;
                             showProgress(onProcess);
                             checkItems();
+
                         }
 
                         @Override
@@ -309,9 +427,9 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
                         }
                     });
                     String var = "";
-                    if(type.equals("CATEGORY")) {
+                    if (type.equals("CATEGORY")) {
                         if (!category_name.equals("")) var = "&s=" + category_id;
-                    }else if(type.equals("RECRUTEUR")) {
+                    } else if (type.equals("RECRUTEUR")) {
                         if (!category_name.equals("")) var = "&r=" + category_id;
                     }
                     task.execute("?offres=true&p=" + page + "&n=" + Tools.getGridSpanCount(getActivity()) + var);
@@ -328,19 +446,26 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
         Log.d("MainActivity_", "onLoad");
         ApiClientLoader task = new ApiClientLoader(new Callback<ApiClient>() {
             @Override
-            public void onSuccess(ApiClient result) {
-                itemList = result.offres;
+            public void onSuccess(final ApiClient result) {
+                // itemList = result.offres;
+                final List<Offre> finalListArticles = result.offres;
+                for (Offre o : result.offres) {
+                    itemList.add(o);
+                }
+
                 Log.d("MainActivity_", "onLoad:" + result.offres.size());
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
                         //TODO your background code
-                        List<Offre> finalListArticles = itemList;
+
                         db.addListArticles(finalListArticles);
                     }
 
 
                 });
+                addNativeExpressAds();
+                setUpAndLoadNativeExpressAds();
                 mAdapter.addAll(itemList);
                 mAdapter.setMoreLoading(false);
                 //mAdapter.notifyDataSetChanged();
@@ -352,7 +477,8 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
                     TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
                     CommonUtils.setRobotoThinFont(getActivity(), tv);
                     snackbar.show();
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
                 onProcess = false;
                 showProgress(onProcess);
 
@@ -377,9 +503,9 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
             }
         });
         String var = "";
-        if(type.equals("CATEGORY")) {
+        if (type.equals("CATEGORY")) {
             if (!category_name.equals("")) var = "&s=" + category_id;
-        }else if(type.equals("RECRUTEUR")) {
+        } else if (type.equals("RECRUTEUR")) {
             if (!category_name.equals("")) var = "&r=" + category_id;
         }
         task.execute("?offres=true&p=1&n=" + Tools.getGridSpanCount(getActivity()) + var);

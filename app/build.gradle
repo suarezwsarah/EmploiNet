@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '26.0.0'
+    buildToolsVersion '26.0.1'
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.mba2dna.apps.EmploiNet"
@@ -26,7 +26,6 @@ dependencies {
 
 
 
-    compile 'com.android.support:support-v4:25.4.0'
 
     compile 'com.android.support:support-v4:25.4.0'
     compile 'com.google.code.findbugs:jsr305:3.0.1'

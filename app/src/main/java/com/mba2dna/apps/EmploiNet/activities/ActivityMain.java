@@ -56,6 +56,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ActivityMain extends AppCompatActivity {
+    public static final int ITEMS_PER_AD = 20;
     //for ads
     // private InterstitialAd mInterstitialAd;
     public static String NAME_CATEGORY = "com.mba2dna.apps.EmploiNet.nameCategory";
