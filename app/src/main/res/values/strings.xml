@@ -110,6 +110,7 @@
     <string name="mot_de_passe">Mot de passe</string>
     <string name="connectez_avec_facebook">Connectez avec facebook</string>
     <string name="info">Info :</string>
+    <string name="refresh_failed">no data</string>
     <!-- Strings related to Settings -->
 
 

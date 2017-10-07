@@ -43,6 +43,7 @@ import com.mba2dna.apps.EmploiNet.data.SharedPref;
 import com.mba2dna.apps.EmploiNet.fragment.CategoryFragment;
 import com.mba2dna.apps.EmploiNet.fragment.FavorieFragment;
 import com.mba2dna.apps.EmploiNet.fragment.OffresFragment;
+import com.mba2dna.apps.EmploiNet.fragment.OffresLoadMoreFragment;
 import com.mba2dna.apps.EmploiNet.fragment.RecruteurFragment;
 import com.mba2dna.apps.EmploiNet.fragment.InfosEmploiFragment;
 import com.mba2dna.apps.EmploiNet.fragment.CVsFragment;
@@ -344,6 +345,10 @@ private TextView headNom,headEmail;
                 bundle.putString(OffresFragment.TAG_TYPE, "ALL");
                 bundle.putInt(OffresFragment.TAG_ID, -1);
                 bundle.putString(OffresFragment.TAG_NAME, "");
+               /* fragment = new OffresLoadMoreFragment();
+                bundle.putString(OffresLoadMoreFragment.TAG_TYPE, "ALL");
+                bundle.putInt(OffresLoadMoreFragment.TAG_ID, -1);
+                bundle.putString(OffresLoadMoreFragment.TAG_NAME, "");*/
                 break;
             // favorites
             case R.id.nav_favorites:

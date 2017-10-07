@@ -58,6 +58,7 @@ public class RecruteurAdapter extends RecyclerView.Adapter<RecruteurAdapter.MyVi
             // overflow = (ImageView) view.findViewById(R.id.overflow);
         }
     }
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
@@ -68,8 +69,8 @@ public class RecruteurAdapter extends RecyclerView.Adapter<RecruteurAdapter.MyVi
         this.Recruteurlist = Recruteurlist;
         if (!imgloader.isInited()) Tools.initImageLoader(mContext);
     }
-    public RecruteurAdapter(Header header, List<Recruteur> listItems)
-    {
+
+    public RecruteurAdapter(Header header, List<Recruteur> listItems) {
         this.header = header;
         this.Recruteurlist = listItems;
     }
@@ -86,10 +87,13 @@ public class RecruteurAdapter extends RecyclerView.Adapter<RecruteurAdapter.MyVi
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final Recruteur recruteur = Recruteurlist.get(position);
         holder.title.setText(recruteur.recruteur);
-        holder.count.setText(recruteur.num +" "+ mContext.getString(R.string.article));
+        holder.count.setText(recruteur.num + " " + mContext.getString(R.string.article));
         holder.thumbnail.setVisibility(View.VISIBLE);
-if(recruteur.photo!=null)
-          imgloader.displayImage(recruteur.photo, holder.thumbnail, Tools.getGridOption());
+
+        if (recruteur.photo != null) {
+            imgloader.displayImage(recruteur.photo, holder.thumbnail, Tools.getGridOption());
+            Log.e("Photo", recruteur.photo);
+        }
         holder.lyt_parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -109,20 +113,20 @@ if(recruteur.photo!=null)
     }
 
 
-
-
-
     @Override
     public int getItemCount() {
         return Recruteurlist.size();
     }
+
     public interface OnItemClickListener {
         void onItemClick(View view, Recruteur viewModel);
     }
+
     @Override
     public long getItemId(int position) {
         return position;
     }
+
     private void setAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition) {

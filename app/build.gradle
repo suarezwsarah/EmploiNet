@@ -27,6 +27,7 @@ dependencies {
 
 
 
+
     compile 'com.android.support:support-v4:25.4.0'
     compile 'com.google.code.findbugs:jsr305:3.0.1'
     compile 'com.android.support:appcompat-v7:25.4.0'
@@ -54,6 +55,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.loregr:lgsnackbar:1.0.2'
 }
+
 
 
 

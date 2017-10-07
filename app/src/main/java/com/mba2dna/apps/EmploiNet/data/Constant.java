@@ -6,6 +6,8 @@ public class Constant {
 
 	// for search logs Tag
 	public static final String LOG_TAG = "ARTICLE_LOG";
+    public static final int LIMIT_LOADMORE = 2;
+	public static final int LIMIT_PLACE_REQUEST = 100;
 
 	// Google analytics event type_activite
 	public enum Event {

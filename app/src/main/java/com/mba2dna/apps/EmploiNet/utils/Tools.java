@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
@@ -40,6 +41,8 @@ import com.mba2dna.apps.EmploiNet.activities.ActivitySplash;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.data.AppConfig;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
+
+import java.util.List;
 
 public class Tools {
 
@@ -362,6 +365,8 @@ public class Tools {
         Intent i = new Intent(activity, ActivitySplash.class);
         activity.startActivity(i);
     }
+
+
 
    /* private static float calculateDistance(LatLng from, LatLng to) {
         Location start = new Location("");

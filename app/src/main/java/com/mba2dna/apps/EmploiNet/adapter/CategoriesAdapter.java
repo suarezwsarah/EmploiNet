@@ -88,7 +88,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
         holder.count.setText(category.num +" "+ mContext.getString(R.string.article));
 
         // loading type_activite cover using Glide library
-      //  imgloader.displayImage(Constant.getURLimgPlace(category.photo), holder.thumbnail, Tools.getGridOption());
+        //imgloader.displayImage(category.photo, holder.thumbnail, Tools.getGridOption());
         holder.lyt_parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {

@@ -15,14 +15,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/infonoconnexion"
         android:textAlignment="center"
-        android:textSize="13sp"
+        android:textSize="14sp"
         android:paddingEnd="@dimen/spacing_large"
         android:paddingStart="@dimen/spacing_large"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/flat_selector"
         android:gravity="center_vertical|center_horizontal"
         android:paddingEnd="@dimen/spacing_mlarge"
@@ -31,5 +30,6 @@
         android:layout_marginBottom="@dimen/spacing_large"
         android:text="@string/No_internet_btn"
         android:textColor="#ffffffff"
+        android:textSize="12sp"
         android:id="@+id/Okbtn" />
 </LinearLayout>

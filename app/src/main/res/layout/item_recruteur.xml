@@ -22,54 +22,56 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/noimage"
-                android:visibility="visible"/>
+                android:visibility="visible" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/shape_overlay"
+                android:background="#902a72a1"
                 android:paddingLeft="@dimen/spacing_large"
                 android:paddingRight="@dimen/spacing_large">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical|center_horizontal" >
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:gravity="center">
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:text="Sample Title"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="vertical">
 
-        android:textColor="@color/colorPrimaryDark"
-        android:background="#90FFFFFF"
-        android:gravity="center_vertical|center_horizontal" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
-    <TextView
-        android:id="@+id/count"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:layout_below="@+id/title"
-        android:singleLine="true"
-        android:text="10 Km"
-        android:textSize="18dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="#90FFFFFF"
-        android:gravity="center_vertical|center_horizontal"
+                        <TextView
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#90FFFFFF"
+                            android:gravity="center_vertical|center_horizontal"
 
-        />
-</RelativeLayout>
+                            android:text="Sample Title"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:id="@+id/count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title"
+                            android:background="#90FFFFFF"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="10 Km"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="18dp"
+
+                            />
+                    </RelativeLayout>
 
 
                 </LinearLayout>
