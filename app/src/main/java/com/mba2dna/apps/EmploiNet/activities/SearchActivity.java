@@ -170,6 +170,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterOffres.O
                 itemList = result.offres;
                 mAdapter.addAll(result.offres);
                 mAdapter.setMoreLoading(false);
+                Log.e("onLoad", "SIZE:"+itemList.size());
                 //mAdapter.notifyDataSetChanged();
                 onProcess = false;
                 showProgress(onProcess);
@@ -177,6 +178,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterOffres.O
             }
             @Override
             public void onError(String result) {
+                Log.e("onLoad", "onError:"+result);
                 itemList.clear();
                 mAdapter.addAll(itemList);
                 mAdapter.setMoreLoading(false);

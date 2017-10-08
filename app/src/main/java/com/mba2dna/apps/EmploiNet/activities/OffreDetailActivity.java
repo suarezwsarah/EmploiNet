@@ -37,6 +37,7 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
+import com.iamhabib.easyads.EasyAds;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.adapter.AdapterSuggestion;
@@ -413,8 +414,10 @@ public class OffreDetailActivity extends AppCompatActivity {
 
     private void prepareAds() {
         if (AppConfig.ENABLE_ADSENSE && Tools.cekConnection(this)) {
-
-            NativeExpressAdView adView = (NativeExpressAdView) findViewById(R.id.adView);
+            EasyAds.forNative(this)
+                    .with((NativeExpressAdView)findViewById(R.id.adView))
+                    .show();
+           /* NativeExpressAdView adView = (NativeExpressAdView) findViewById(R.id.adView);
           //  AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
             AdRequest request = new AdRequest.Builder().build();
             adView.loadAd(request);
@@ -422,7 +425,7 @@ public class OffreDetailActivity extends AppCompatActivity {
             // AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
             AdRequest adRequest = new AdRequest.Builder().build();
             // Start loading the ad in the background.
-            mAdView.loadAd(adRequest);*/
+            mAdView.loadAd(adRequest);
             adView.setAdListener(new AdListener() {
                 @Override
                 public void onAdFailedToLoad(int i) {
@@ -435,7 +438,7 @@ public class OffreDetailActivity extends AppCompatActivity {
                     super.onAdLoaded();
                     Log.e("ADS", "Ad Loaded: ");
                 }
-            });
+            });*/
         } else {
             ((RelativeLayout) findViewById(R.id.banner_layout)).setVisibility(View.GONE);
         }

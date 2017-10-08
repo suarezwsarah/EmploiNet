@@ -46,7 +46,7 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LinearLayoutManager mLinearLayoutManager;
 
     private boolean isMoreLoading = false;
-    private int visibleThreshold = 1;
+    private int visibleThreshold = 3;
     int firstVisibleItem, visibleItemCount, totalItemCount;
     private int lastPosition = -1;
     private ImageLoader imgloader = ImageLoader.getInstance();
@@ -252,6 +252,7 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public ProgressViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.title);
+            name.setText("Chargement d\'autres candidats, veuillez patienter …");
             Typeface font = Typeface.createFromAsset(v.getContext().getAssets(), "nexalight.ttf");
             name.setTypeface(font);
             // pBar = (ProgressBar) v.findViewById(R.id.pBar);

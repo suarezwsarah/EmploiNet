@@ -310,7 +310,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
                     });
                     String var = "";
                     if(type.equals("CATEGORY")) {
-                        if (!category_name.equals("")) var = "&s=" + category_id;
+                        if (!category_name.equals("")) var = "&c=" + category_id;
                     }else if(type.equals("RECRUTEUR")) {
                         if (!category_name.equals("")) var = "&r=" + category_id;
                     }
@@ -378,7 +378,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
         });
         String var = "";
         if(type.equals("CATEGORY")) {
-            if (!category_name.equals("")) var = "&s=" + category_id;
+            if (!category_name.equals("")) var = "&c=" + category_id;
         }else if(type.equals("RECRUTEUR")) {
             if (!category_name.equals("")) var = "&r=" + category_id;
         }

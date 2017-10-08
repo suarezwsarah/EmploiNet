@@ -253,7 +253,7 @@
                 android:text="@string/see_more"
                 android:background="@drawable/rect_normal_orange"
                 android:textColor="@color/white"
-                android:visibility="visible" />
+                android:visibility="invisible" />
 
         </LinearLayout>
 

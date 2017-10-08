@@ -28,6 +28,8 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.NativeExpressAdView;
+import com.iamhabib.easyads.EasyAds;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.data.AppConfig;
 import com.mba2dna.apps.EmploiNet.data.Constant;
@@ -194,18 +196,7 @@ public class InfoEmploiDetailActivity extends AppCompatActivity {
         String html = info.text;//.substring(end+9)
         //    Log.e("HTML :",html);
         paragraph2.loadDataWithBaseURL(null, pish + html + pas, "text/html", "UTF-8", null);
-
-
-
-
-
-
-
-
         Tools.systemBarLolipop(this);
-
-
-
     }
 
 
@@ -229,8 +220,10 @@ public class InfoEmploiDetailActivity extends AppCompatActivity {
     private void prepareAds() {
         if (AppConfig.ENABLE_ADSENSE && Tools.cekConnection(this)) {
 
-
-            AdView mAdView = (AdView) findViewById(R.id.ad_view);
+            EasyAds.forNative(this)
+                    .with((NativeExpressAdView)findViewById(R.id.adView))
+                    .show();
+         /*   AdView mAdView = (AdView) findViewById(R.id.ad_view);
             // AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
             AdRequest adRequest = new AdRequest.Builder().build();
             // Start loading the ad in the background.
@@ -247,7 +240,7 @@ public class InfoEmploiDetailActivity extends AppCompatActivity {
                     super.onAdLoaded();
                     Log.e("ADS", "Ad Loaded: ");
                 }
-            });
+            });*/
         } else {
             ((RelativeLayout) findViewById(R.id.banner_layout)).setVisibility(View.GONE);
         }

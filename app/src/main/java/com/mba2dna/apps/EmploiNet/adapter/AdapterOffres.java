@@ -156,9 +156,11 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 ((OffreViewHolder) holder).name.setText(p.title);
                 ((OffreViewHolder) holder).username.setText(p.contact_info);
                 ((OffreViewHolder) holder).timestamp.setText(p.pub_date);
+                imgloader.displayImage("drawable://noimage", ((OffreViewHolder) holder).image, Tools.getGridOption());
                 if (p.photo != null) {
                     if (!p.photo.contains("s_d3802b1dc0d80d8a3c8ccc6ccc068e7c.jpg")) {
                         try {
+                            ((OffreViewHolder) holder).image.setScaleType(ImageView.ScaleType.FIT_CENTER);
                             imgloader.displayImage(p.photo, ((OffreViewHolder) holder).image, Tools.getGridOption());
                         } catch (Exception e) {
                             imgloader.displayImage("drawable://noimage", ((OffreViewHolder) holder).image, Tools.getGridOption());

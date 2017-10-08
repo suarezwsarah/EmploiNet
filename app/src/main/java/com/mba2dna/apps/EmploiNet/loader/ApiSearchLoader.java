@@ -20,6 +20,8 @@ import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.model.Category;
 import com.mba2dna.apps.EmploiNet.model.Images;
 import com.mba2dna.apps.EmploiNet.model.Candidats;
+import com.mba2dna.apps.EmploiNet.model.Recruteur;
+import com.mba2dna.apps.EmploiNet.model.UserSession;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 
 import org.apache.http.NameValuePair;
@@ -30,37 +32,38 @@ import org.apache.http.message.BasicNameValuePair;
  */
 
 public class ApiSearchLoader extends AsyncTask<String, String, ApiClient> {
-        Callback<ApiClient> callback;
+    Callback<ApiClient> callback;
 
-        JSONStream jsonStream = new JSONStream();
+    JSONStream jsonStream = new JSONStream();
     String URL = Constant.getURLApiClientData();
 
-private Gson gson = new Gson();
-        boolean success = false;
-private String search;
+    private Gson gson = new Gson();
+    boolean success = false;
+    private String search;
 
-public ApiSearchLoader(String search, Callback<ApiClient> callback) {
+    public ApiSearchLoader(String search, Callback<ApiClient> callback) {
         this.callback = callback;
         this.search = search;
-        }
+    }
 
-@Override
-protected ApiClient doInBackground(String... params) {
+    @Override
+    protected ApiClient doInBackground(String... params) {
 
         try {
             String s = params[0];
-            Log.e("CITY", URL+"?offres=true&s="+s);
-        Thread.sleep(300);
+            Log.e("CITY", URL + "?offres=true&s=" + s);
+          /*  Thread.sleep(300);
             List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-            urlParameters.add(new BasicNameValuePair("search", search));
-        JsonReader reader = jsonStream.getJsonResult(URL+"?offres=true&s="+s , jsonStream.METHOD_GET, urlParameters);
+            urlParameters.add(new BasicNameValuePair("search", search));*/
+            JsonReader reader = jsonStream.getJsonResult(URL + "?offres=true&s=" + s, jsonStream.METHOD_GET, new ArrayList<NameValuePair>());
 
             ApiClient apiClient = new ApiClient();
             List<Offre> listArticles = new ArrayList<>();
             List<Candidats> listCandidats = new ArrayList<>();
             List<Category> listReciepesCategory = new ArrayList<>();
-            List<Images> listImages = new ArrayList<>();
+            List<Recruteur> listRecruteur = new ArrayList<>();
             List<InfoEmploi> listInfoEmplois = new ArrayList<>();
+            UserSession userSession = new UserSession();
 
             reader.beginObject();
             while (reader.hasNext()) {
@@ -72,7 +75,7 @@ protected ApiClient doInBackground(String... params) {
                         listArticles.add(offres);
                     }
                     reader.endArray();
-                }  else if (name.equals("candidats")) {
+                } else if (name.equals("candidats")) {
                     reader.beginArray();
                     while (reader.hasNext()) {
                         Candidats candidats = gson.fromJson(reader, Candidats.class);
@@ -96,26 +99,26 @@ protected ApiClient doInBackground(String... params) {
             apiClient.candidatsList = listCandidats;
             apiClient.infoEmplois = listInfoEmplois;
 
-        success = true;
-        return apiClient;
+            success = true;
+            return apiClient;
         } catch (Exception e) {
-        Log.e("Error",e.getMessage());
-        e.printStackTrace();
-        success = false;
-        return null;
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+            success = false;
+            return null;
         }
-        }
+    }
 
     @Override
     protected void onPostExecute(ApiClient result) {
         // Send callback when finish
         if (success) {
             callback.onSuccess(result);
-               Log.v("RES",result.toString());
+            Log.v("RES", result.toString());
         } else {
             callback.onError("failed");
         }
         super.onPostExecute(result);
     }
 
-        }
+}
