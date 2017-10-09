@@ -12,12 +12,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
-import com.jaychang.sa.AuthCallback;
-import com.jaychang.sa.SimpleAuth;
-import com.jaychang.sa.SocialUser;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.data.Constant;
+import com.mba2dna.apps.EmploiNet.data.Credentials;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.model.UserSession;
 
@@ -26,9 +23,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
+import cafe.adriel.androidoauth.callback.OnLoginCallback;
+import cafe.adriel.androidoauth.model.SocialUser;
+import cafe.adriel.androidoauth.oauth.FacebookOAuth;
 import greco.lorenzo.com.lgsnackbar.LGSnackbarManager;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -159,39 +157,42 @@ public class ActivityLogin extends Activity {
     }
 
     void connectFacebook() {
-        List<String> scopes = Arrays.asList("user_birthday", "user_friends");
 
-        SimpleAuth.getInstance().connectFacebook(scopes, new AuthCallback() {
-            @Override
-            public void onSuccess(SocialUser socialUser) {
-                Log.d(TAG, "userId:" + socialUser.userId);
-                Log.d(TAG, "email:" + socialUser.email);
-                Log.d(TAG, "accessToken:" + socialUser.accessToken);
-                Log.d(TAG, "profilePictureUrl:" + socialUser.profilePictureUrl);
-                Log.d(TAG, "username:" + socialUser.username);
-                Log.d(TAG, "fullName:" + socialUser.fullName);
-                Log.d(TAG, "pageLink:" + socialUser.pageLink);
-                UserSession userSession = new UserSession();
-                userSession.setId(Integer.getInteger(socialUser.userId));
-                userSession.setEmail(socialUser.email);
-                userSession.setFullName(socialUser.fullName);
-                userSession.setPic(socialUser.profilePictureUrl);
-                db.addUser(userSession);
-                showProgress(false);
-                LGSnackbarManager.show(SUCCESS, "Vous avez bien connecté a votre compte");
-                finish();
-            }
 
-            @Override
-            public void onError(Throwable error) {
-                Log.d(TAG, error.getMessage());
-            }
+        FacebookOAuth.login(this)
+                .setClientId(Credentials.FACEBOOK_APP_ID)
+                .setClientSecret(Credentials.FACEBOOK_APP_SECRET)
+                .setAdditionalScopes("user_birthday")
+                .setRedirectUri(Credentials.FACEBOOK_REDIRECT_URI)
+                .setCallback(new OnLoginCallback() {
+                    @Override
+                    public void onSuccess(String token, SocialUser socialUser) {
+                        Log.d("Facebook Token", token);
+                        Log.d("Facebook User", socialUser+"");
+                        Log.d(TAG, "userId:" + socialUser.getId());
+                        Log.d(TAG, "email:" + socialUser.getEmail());
+                        Log.d(TAG, "profilePictureUrl:" + socialUser.getPictureUrl());
+                        Log.d(TAG, "username:" + socialUser.getCoverUrl());
+                        Log.d(TAG, "fullName:" + socialUser.getName());
+                        Log.d(TAG, "pageLink:" + socialUser.getBirthday());
+                        UserSession userSession = new UserSession();
+                        userSession.setId(Integer.getInteger(socialUser.getId()));
+                        userSession.setEmail(socialUser.getEmail());
+                        userSession.setFullName(socialUser.getName());
+                        userSession.setPic(socialUser.getPictureUrl());
+                        db.addUser(userSession);
+                        showProgress(false);
+                        LGSnackbarManager.show(SUCCESS, "Vous avez bien connecté a votre compte");
+                        finish();
+                    }
+                    @Override
+                    public void onError(Exception error) {
+                        error.printStackTrace();
+                    }
+                })
+                .init();
 
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "Canceled");
-            }
-        });
+
     }
 
     private void showProgress(boolean show) {

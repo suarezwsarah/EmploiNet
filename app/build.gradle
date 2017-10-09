@@ -21,15 +21,7 @@ android {
         }
     }
 }
-android.defaultConfig.manifestPlaceholders = [
-        facebookAppId        : "417225485022986",
-        googleWebClientId    : "",
-        twitterConsumerKey   : "",
-        twitterConsumerSecret: "",
-        instagramClientId    : "",
-        instagramClientSecret: "",
-        instagramRedirectUri : ""
-]
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:25.4.0'
@@ -59,7 +51,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.loregr:lgsnackbar:1.0.2'
     compile 'com.iamhabib:easy-ads:1.0.1'
-    compile 'com.github.jaychang0917:SimpleAuth:1.0.4'
+    compile 'com.github.adrielcafe:AndroidOAuth:1.1.5'
 
 }
 
