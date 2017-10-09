@@ -2,40 +2,34 @@ package com.mba2dna.apps.EmploiNet.activities;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
+import com.jaychang.sa.AuthCallback;
+import com.jaychang.sa.SimpleAuth;
+import com.jaychang.sa.SocialUser;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
-import com.mba2dna.apps.EmploiNet.loader.ApiClientLoader;
-import com.mba2dna.apps.EmploiNet.model.ApiClient;
-import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.model.UserSession;
-import com.mba2dna.apps.EmploiNet.utils.Callback;
-import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
-import com.mba2dna.apps.EmploiNet.utils.Tools;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import greco.lorenzo.com.lgsnackbar.LGSnackbarManager;
-import okhttp3.Call;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -50,15 +44,40 @@ public class ActivityLogin extends Activity {
     private TextView signin1, forgotpass, signup;
     private EditText emailText, passwordText;
     private CheckBox checkbocremember;
+    private LinearLayout fbl;
     private SQLiteHandler db;
     private View lyt_progress;
+    private static final String TAG = ActivityLogin.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         db = new SQLiteHandler(this);
+        fbl=(LinearLayout) findViewById(R.id.fbl) ;
+        fbl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                connectFacebook();
+            }
+        });
         lyt_progress = findViewById(R.id.lyt_progress);
+        forgotpass = (TextView) findViewById(R.id.forgotpass);
+        forgotpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityLogin.this, ActivityPasswordLost.class);
+                startActivity(intent);
+            }
+        });
+        signup = (TextView) findViewById(R.id.signup);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityLogin.this, ActivityRegister.class);
+                startActivity(intent);
+            }
+        });
         signin1 = (TextView) findViewById(R.id.signin1);
         signin1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +106,7 @@ public class ActivityLogin extends Activity {
                                 .build();
                         try {
                             Response response = client.newCall(request).execute();
-                            String S =response.body().string();
+                            String S = response.body().string();
                             Log.e("RESPENSE", S);
                             JSONObject jObject = new JSONObject(S);
 
@@ -95,69 +114,37 @@ public class ActivityLogin extends Activity {
                             final JSONObject object = data.getJSONObject(0);
 
 
+                            if (checkbocremember.isChecked()) {
 
-                                    if (checkbocremember.isChecked()) {
+                                try {
+                                    UserSession userSession = new UserSession();
+                                    userSession.setId(object.getInt("id"));
+                                    userSession.setEmail(object.getString("email"));
+                                    userSession.setFullName(object.getString("nom") + " " + object.getString("prenom"));
+                                    userSession.setPic(object.getString("photo"));
+                                    db.addUser(userSession);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
-                                        try {
-                                            UserSession userSession = new UserSession();
-                                            userSession.setId(object.getInt("id"));
-                                            userSession.setEmail(object.getString("email"));
-                                            userSession.setFullName(object.getString("nom")+" "+object.getString("prenom"));
-                                            userSession.setPic(object.getString("photo"));
-                                            db.addUser(userSession);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-
-                                    }
+                            }
 
                             showProgress(false);
                             emailText.setEnabled(false);
                             passwordText.setEnabled(false);
-                            LGSnackbarManager.show(SUCCESS, "Everything is looking good! Awesome!");
+                            LGSnackbarManager.show(SUCCESS, "Vous avez bien connecté a votre compte");
                             finish();
 
                         } catch (IOException e) {
-                            Log.e("ERROR",e.getMessage());
+                            Log.e("ERROR", e.getMessage());
                             e.printStackTrace();
 
                         } catch (JSONException e) {
-                            Log.e("ERROR",e.getMessage());
+                            Log.e("ERROR", e.getMessage());
                             e.printStackTrace();
 
                         }
 
-                     /*   ApiClientLoader task = new ApiClientLoader(new Callback<ApiClient>() {
-                            @Override
-                            public void onSuccess(ApiClient result) {
-                                final UserSession userSession = result.UserSessions;
-                                AsyncTask.execute(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (checkbocremember.isChecked()) {
-                                            db.addUser(userSession);
-                                        }
-                                    }
-
-
-                                });
-                                showProgress(false);
-                                emailText.setEnabled(false);
-                                passwordText.setEnabled(false);
-                                LGSnackbarManager.show(SUCCESS, "Everything is looking good! Awesome!");
-                            }
-
-                            //moumouh206@gmail.com
-                            @Override
-                            public void onError(String result) {
-                                showProgress(false);
-                                signin1.setEnabled(true);
-                                signin1.setClickable(true);
-                                LGSnackbarManager.show(ERROR, "Vous identifiants sont inccorects");
-                            }
-                        });
-
-                        task.execute("?user=true&u=" + emailText.getText().toString() + "&n=" + passwordText.getText().toString());*/
 
                     } else {
                         showProgress(false);
@@ -167,6 +154,42 @@ public class ActivityLogin extends Activity {
                     }
 
                 }
+            }
+        });
+    }
+
+    void connectFacebook() {
+        List<String> scopes = Arrays.asList("user_birthday", "user_friends");
+
+        SimpleAuth.getInstance().connectFacebook(scopes, new AuthCallback() {
+            @Override
+            public void onSuccess(SocialUser socialUser) {
+                Log.d(TAG, "userId:" + socialUser.userId);
+                Log.d(TAG, "email:" + socialUser.email);
+                Log.d(TAG, "accessToken:" + socialUser.accessToken);
+                Log.d(TAG, "profilePictureUrl:" + socialUser.profilePictureUrl);
+                Log.d(TAG, "username:" + socialUser.username);
+                Log.d(TAG, "fullName:" + socialUser.fullName);
+                Log.d(TAG, "pageLink:" + socialUser.pageLink);
+                UserSession userSession = new UserSession();
+                userSession.setId(Integer.getInteger(socialUser.userId));
+                userSession.setEmail(socialUser.email);
+                userSession.setFullName(socialUser.fullName);
+                userSession.setPic(socialUser.profilePictureUrl);
+                db.addUser(userSession);
+                showProgress(false);
+                LGSnackbarManager.show(SUCCESS, "Vous avez bien connecté a votre compte");
+                finish();
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                Log.d(TAG, error.getMessage());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d(TAG, "Canceled");
             }
         });
     }

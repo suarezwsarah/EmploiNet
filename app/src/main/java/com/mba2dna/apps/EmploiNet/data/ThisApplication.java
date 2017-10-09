@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
-
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 

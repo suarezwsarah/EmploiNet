@@ -31,43 +31,40 @@
         >
         <ImageView
             android:id="@+id/head"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/atlogo"
-            android:textColor="@color/Tex"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            /></LinearLayout>
+            android:background="@drawable/loginlogo"
+            android:textColor="@color/Tex" /></LinearLayout>
 
     <LinearLayout
         android:id="@+id/fbl"
-        android:layout_above="@+id/or"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_above="@+id/or"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
         android:background="@drawable/rect_normal_facebook"
-        android:padding="12dp"
-        android:gravity="center"
-        android:layout_marginBottom="8dp"
         android:elevation="1.5dp"
-        >
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="12dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fb"
             android:layout_marginRight="5dp"
-            />
+            android:src="@drawable/fb" />
+
         <TextView
             android:id="@+id/fb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign up with Facebook"
-            android:textSize="@dimen/text"
-            android:textColor="@color/White"
             android:layout_marginLeft="5dp"
-            />
+            android:text="@string/connectez_avec_facebook"
+            android:textColor="@color/White"
+            android:textSize="@dimen/text" />
     </LinearLayout>
 
 
@@ -75,7 +72,7 @@
         android:id="@+id/or"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="or"
+        android:text="ou"
         android:layout_above="@+id/linear"
         android:gravity="center"
 
@@ -105,7 +102,7 @@
                 android:textSize="@dimen/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="@string/nom_d_utilisateur"
                 android:layout_marginLeft="46dp"
                 android:layout_marginRight="46dp"
                 android:textColorHint="@color/textSub"
@@ -135,20 +132,22 @@
             android:textColor="@color/colortext">
 
             <EditText
-                android:textSize="@dimen/text"
+                android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
                 android:layout_marginLeft="46dp"
                 android:layout_marginRight="46dp"
-                android:textColorHint="@color/textSub"
-                android:textColor="@color/Tex"
                 android:background="#0000"
-                android:padding="14dp"
-                android:gravity="left"
-                android:lines="1"
-                android:drawableLeft="@drawable/email"
+                android:drawableLeft="@drawable/user"
                 android:drawablePadding="12dp"
+                android:gravity="left"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:lines="1"
+                android:padding="14dp"
+                android:textColor="@color/Tex"
+                android:textColorHint="@color/textSub"
+                android:textSize="@dimen/text"
                 />
 
         </android.support.design.widget.TextInputLayout>
@@ -171,21 +170,20 @@
 
 
             <EditText
-
-                android:textSize="@dimen/text"
+                android:id="@+id/passwordText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
                 android:layout_marginLeft="46dp"
                 android:layout_marginRight="46dp"
-                android:textColorHint="@color/textSub"
-                android:textColor="@color/Tex"
                 android:background="#0000"
-                android:padding="14dp"
-
-                android:inputType="textPassword"
                 android:drawableLeft="@drawable/pass"
-                android:drawablePadding="19dp"
+                android:drawablePadding="16dp"
+                android:hint="@string/mot_de_passe"
+                android:inputType="textPassword"
+                android:padding="14dp"
+                android:textColor="@color/Tex"
+                android:textColorHint="@color/textSub"
+                android:textSize="@dimen/text"
 
 
                 />
@@ -229,7 +227,7 @@
                     android:id="@+id/remember"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Agree to the"
+                    android:text="@string/conformez_vous_aux"
                     android:textColor="@color/textSub"
                     android:layout_gravity="center"
                     android:textSize="@dimen/textsub"
@@ -262,7 +260,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rect_normal"
-        android:text="Create Account"
+        android:text="@string/cr_er_un_compte"
         android:textSize="@dimen/text"
         android:textColor="#fff"
         android:gravity="center"
@@ -288,7 +286,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Have an account ?"
+            android:text="Vous avez un compte ?"
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:textColor="@color/textSub"

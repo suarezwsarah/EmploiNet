@@ -101,8 +101,8 @@
     <string name="detail_de_l_offre">Detail de l\'offre :</string>
     <string name="information_sur_l_offre">Information sur l\'offre</string>
     <string name="signup">Enregistrez vous</string>
-    <string name="tandc"><u>terms &amp; conditions</u></string>
-    <string name="signin"><u><b>Sign in</b></u></string>
+    <string name="tandc"><u>termes &amp; conditions</u></string>
+    <string name="signin"><u><b>Se connecter</b></u></string>
     <string name="pas_un_membre">Pas un membre?</string>
     <string name="se_connecter">Se connecter</string>
     <string name="mot_de_passe_oubli">mot de passe oublié?</string>
@@ -111,6 +111,10 @@
     <string name="connectez_avec_facebook">Connectez avec facebook</string>
     <string name="info">Info :</string>
     <string name="refresh_failed">no data</string>
+    <string name="nom_d_utilisateur">Nom d\'utilisateur</string>
+    <string name="conformez_vous_aux">Conformez-vous aux</string>
+    <string name="cr_er_un_compte">Créer un compte</string>
+    <string name="facebook_app_id">417225485022986</string>
     <!-- Strings related to Settings -->
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.mba2dna.apps.EmploiNet">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -48,6 +49,8 @@
         <activity android:name=".activities.ActivityRegister" />
         <activity android:name=".activities.ActivityPasswordLost" />
         <activity android:name=".activities.InfoEmploiDetailActivity"></activity>
+
+
     </application>
 
 </manifest>

@@ -15,19 +15,23 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
-
+android.defaultConfig.manifestPlaceholders = [
+        facebookAppId        : "417225485022986",
+        googleWebClientId    : "",
+        twitterConsumerKey   : "",
+        twitterConsumerSecret: "",
+        instagramClientId    : "",
+        instagramClientSecret: "",
+        instagramRedirectUri : ""
+]
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-
-
-
-
-
     compile 'com.android.support:support-v4:25.4.0'
     compile 'com.google.code.findbugs:jsr305:3.0.1'
     compile 'com.android.support:appcompat-v7:25.4.0'
@@ -55,6 +59,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.loregr:lgsnackbar:1.0.2'
     compile 'com.iamhabib:easy-ads:1.0.1'
+    compile 'com.github.jaychang0917:SimpleAuth:1.0.4'
 
 }
 
