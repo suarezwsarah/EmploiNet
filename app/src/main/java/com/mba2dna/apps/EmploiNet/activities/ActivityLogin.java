@@ -48,7 +48,7 @@ public class ActivityLogin extends Activity {
     private SQLiteHandler db;
     private View lyt_progress;
     private static final String TAG = ActivityLogin.class.getSimpleName();
-
+    String URL = Constant.getURLApiClientData();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +66,9 @@ public class ActivityLogin extends Activity {
         forgotpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityLogin.this, ActivityPasswordLost.class);
-                startActivity(intent);
+               // Intent intent = new Intent(ActivityLogin.this, ActivityPasswordLost.class);
+              //  startActivity(intent);
+                LGSnackbarManager.show(WARNING, "Désolée, cette fonction sera prochainement ajoutée");
             }
         });
         signup = (TextView) findViewById(R.id.signup);
@@ -94,7 +95,7 @@ public class ActivityLogin extends Activity {
                     if (isValidEmail(emailText.getText().toString())) {
                         showProgress(true);
                         OkHttpClient client = new OkHttpClient();
-                        String URL = Constant.getURLApiClientData();
+
                         HttpUrl.Builder urlBuilder = HttpUrl.parse(URL).newBuilder();
                         urlBuilder.addQueryParameter("user", "true");
                         urlBuilder.addQueryParameter("u", emailText.getText().toString());
@@ -172,13 +173,60 @@ public class ActivityLogin extends Activity {
                 Log.e(TAG, "username:" + socialUser.username);
                 Log.e(TAG, "fullName:" + socialUser.fullName);
                 Log.e(TAG, "pageLink:" + socialUser.pageLink);
-                UserSession userSession = new UserSession();
-                int id=Integer.parseInt(socialUser.userId);
-                userSession.setId(id);
-                userSession.setEmail(socialUser.email);
-                userSession.setFullName(socialUser.fullName);
-                userSession.setPic(socialUser.profilePictureUrl);
-                db.addUser(userSession);
+                OkHttpClient client2 = new OkHttpClient();
+                HttpUrl.Builder urlBuilder2 = HttpUrl.parse(URL).newBuilder();
+                urlBuilder2.addQueryParameter("userfacebook", "true");
+                urlBuilder2.addQueryParameter("e", socialUser.email);
+                String url2 = urlBuilder2.build().toString();
+
+                Request request2 = new Request.Builder()
+                        .url(url2)
+                        .build();
+                Log.e("RESPENSE2", url2);
+                try {
+                    Response response2 = client2.newCall(request2).execute();
+                    String S2 = response2.body().string();
+                    if(S2!=null){
+
+
+                        if(!S2.contains("notexist")){
+                            Log.e("RESPENSE2", S2);
+                            JSONObject jObject = new JSONObject(S2);
+
+                            JSONArray data = jObject.getJSONArray("userfacebook"); // get data object
+                            final JSONObject object = data.getJSONObject(0);
+
+                                try {
+                                    UserSession userSession = new UserSession();
+                                    userSession.setId(object.getInt("id"));
+                                    userSession.setEmail(socialUser.email);
+                                    userSession.setFullName(socialUser.fullName);
+                                    userSession.setPic(socialUser.profilePictureUrl);
+                                    db.addUser(userSession);
+                                } catch (JSONException e) {
+
+                                    e.printStackTrace();
+                                }
+
+
+                        }
+                    }
+
+
+                    showProgress(false);
+                    LGSnackbarManager.show(SUCCESS, "Vous avez bien connecté a votre compte");
+                    finish();
+
+                } catch (IOException e) {
+                    Log.e("ERROR", e.getMessage());
+                    e.printStackTrace();
+
+                } catch (JSONException e) {
+                    Log.e("ERROR", e.getMessage());
+                    e.printStackTrace();
+
+                }
+
                 showProgress(false);
                 LGSnackbarManager.show(SUCCESS, "Vous avez bien connecté a votre compte");
                 finish();

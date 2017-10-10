@@ -96,7 +96,7 @@ private TextView headNom,headEmail;
         activityMain = this;
 
         // Add code to print out the key hash
-        try {
+      /*  try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.mba2dna.apps.EmploiNet",
                     PackageManager.GET_SIGNATURES);
@@ -109,7 +109,7 @@ private TextView headNom,headEmail;
 
         } catch (NoSuchAlgorithmException e) {
 
-        }
+        }*/
 
         if (!imgloader.isInited()) Tools.initImageLoader(this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -374,7 +374,6 @@ private TextView headNom,headEmail;
                 break;
             // favorites
             case R.id.nav_favorites:
-
                 fragment = new FavorieFragment();
                 bundle.putInt(FavorieFragment.TAG_CATEGORY, -2);
                 break;
@@ -393,12 +392,14 @@ private TextView headNom,headEmail;
                 break;
 
             case R.id.nav_apps:
-                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+              /*  final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
                 try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.mba2dna.apps.AtyebTabkha" )));
                 } catch (android.content.ActivityNotFoundException anfe) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.mba2dna.apps.AtyebTabkha" )));
-                }
+                }*/
+                Intent i = new Intent(getApplicationContext(), ActivitySetting.class);
+                startActivity(i);
                 break;
             default:
                 break;
@@ -431,29 +432,6 @@ private TextView headNom,headEmail;
     public void doExitApp() {
         ViewDialog alert = new ViewDialog();
         alert.showDialog(this, "Voulez-vous quitter l'application?");
-      /*  AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.dialog_title_permission));
-        builder.setMessage(getString(R.string.dialog_content_permission));
-        builder.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                finish();
-            }
-        });
-        builder.setNegativeButton("لا", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        builder.show();*/
-       /* if ((System.currentTimeMillis() - exitTime) > 2000) {
-            Toast.makeText(this, R.string.press_again_exit_app, Toast.LENGTH_SHORT).show();
-            exitTime = System.currentTimeMillis();
-        } else {
-            finish();
-        }*/
     }
 
     private void prepareImageLoader() {

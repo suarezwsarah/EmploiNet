@@ -64,7 +64,8 @@
             android:layout_marginLeft="5dp"
             android:text="@string/connectez_avec_facebook"
             android:textColor="@color/White"
-            android:textSize="@dimen/text" />
+            android:textSize="@dimen/text"
+            android:enabled="false"/>
     </LinearLayout>
 
 
@@ -108,11 +109,13 @@
                 android:textColorHint="@color/textSub"
                 android:textColor="@color/Tex"
                 android:background="#0000"
+                android:focusable="false"
                 android:padding="14dp"
                 android:gravity="left"
                 android:lines="1"
                 android:drawableLeft="@drawable/user"
                 android:drawablePadding="17dp"
+                android:enabled="false"
                 />
 
         </android.support.design.widget.TextInputLayout>
@@ -144,10 +147,12 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:lines="1"
+                android:focusable="false"
                 android:padding="14dp"
                 android:textColor="@color/Tex"
                 android:textColorHint="@color/textSub"
                 android:textSize="@dimen/text"
+                android:enabled="false"
                 />
 
         </android.support.design.widget.TextInputLayout>
@@ -181,9 +186,11 @@
                 android:hint="@string/mot_de_passe"
                 android:inputType="textPassword"
                 android:padding="14dp"
+                android:focusable="false"
                 android:textColor="@color/Tex"
                 android:textColorHint="@color/textSub"
                 android:textSize="@dimen/text"
+                android:enabled="false"
 
 
                 />
@@ -220,6 +227,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
+                    android:enabled="false"
                     android:buttonTint="@color/textSub"
                     />
                 <TextView
@@ -298,6 +306,7 @@
         <TextView
 
             android:id="@+id/signin"
+            android:enabled="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/signin"
