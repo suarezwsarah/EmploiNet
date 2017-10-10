@@ -2,6 +2,9 @@ package com.mba2dna.apps.EmploiNet.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +25,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -53,6 +57,9 @@ import com.mba2dna.apps.EmploiNet.utils.CustomTypefaceSpan;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 import com.mba2dna.apps.EmploiNet.widget.ViewDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -88,6 +95,21 @@ private TextView headNom,headEmail;
         setContentView(R.layout.activity_main);
         activityMain = this;
 
+        // Add code to print out the key hash
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.mba2dna.apps.EmploiNet",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
 
         if (!imgloader.isInited()) Tools.initImageLoader(this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
