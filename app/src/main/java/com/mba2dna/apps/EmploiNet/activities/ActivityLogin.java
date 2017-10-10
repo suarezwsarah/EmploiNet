@@ -124,6 +124,7 @@ public class ActivityLogin extends Activity {
                                     userSession.setPic(object.getString("photo"));
                                     db.addUser(userSession);
                                 } catch (JSONException e) {
+
                                     e.printStackTrace();
                                 }
 
