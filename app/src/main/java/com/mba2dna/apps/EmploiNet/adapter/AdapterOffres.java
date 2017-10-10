@@ -3,6 +3,7 @@ package com.mba2dna.apps.EmploiNet.adapter;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -116,7 +117,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         try {
-          //  Log.e("Position", position + "");
+          if(position==0) return VIEW_ALAUNE;
             return (itemList.get(position) != null) ? VIEW_ITEM : VIEW_PROG;
         } catch (java.lang.IndexOutOfBoundsException e) {
             return VIEW_PROG;
@@ -128,10 +129,13 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         if (viewType == VIEW_ITEM) {
             return new OffreViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_offre, parent, false));
-        } else {
+        }else if(viewType == VIEW_PROG){
             return new ProgressViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progress, parent, false));
+        }else{
+            return new ALAuneViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article_featured, parent, false));
         }
 
     }
@@ -151,42 +155,85 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof OffreViewHolder) {
+       int Type=getItemViewType(position);
+        if(Type==VIEW_ALAUNE){
+            if (holder instanceof ALAuneViewHolder) {
+                final Offre p = itemList.get(0);
+                if (p != null) {
+                    ((ALAuneViewHolder) holder).tv_title.setText(p.getTitle());
+                    ((ALAuneViewHolder) holder).tv_category.setText("Activitie: "+p.getType_activite());
+                    ((ALAuneViewHolder) holder).tv_time.setText(p.getPostes() + " Offres en ligne");
+                    imgloader.displayImage("drawable://noimage", ((ALAuneViewHolder) holder).image, Tools.getGridOption());
+                    if (p.photo != null) {
 
-            final Offre p = itemList.get(position);
-            if (p != null) {
-                ((OffreViewHolder) holder).name.setText(p.title);
-                ((OffreViewHolder) holder).username.setText(p.contact_info);
-                ((OffreViewHolder) holder).timestamp.setText(p.pub_date);
-                imgloader.displayImage("drawable://noimage", ((OffreViewHolder) holder).image, Tools.getGridOption());
-                if (p.photo != null) {
-                    if (!p.photo.contains("s_d3802b1dc0d80d8a3c8ccc6ccc068e7c.jpg")) {
-                        try {
-                            ((OffreViewHolder) holder).image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                            imgloader.displayImage(p.photo, ((OffreViewHolder) holder).image, Tools.getGridOption());
-                        } catch (Exception e) {
-                            imgloader.displayImage("drawable://noimage", ((OffreViewHolder) holder).image, Tools.getGridOption());
-                        }
+                            try {
+                                ((ALAuneViewHolder) holder).image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                                imgloader.displayImage(p.photo, ((ALAuneViewHolder) holder).image, Tools.getGridOption());
+                            } catch (Exception e) {
+                                imgloader.displayImage("drawable://noimage", ((ALAuneViewHolder) holder).image, Tools.getGridOption());
+                            }
+
                     }
-                }
 
 
 //                imgloader.displayImage(Constant.getURLimgUser(p.email_candidature), ((ViewHolder) holder).email_candidature, Tools.getGridOption());
-                //  setAnimation(((ViewHolder) holder).lyt_parent, position);
-                ((OffreViewHolder) holder).lyt_parent.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(final View v) {
+                    //  setAnimation(((ViewHolder) holder).lyt_parent, position);
+                    ((ALAuneViewHolder) holder).lyt_parent.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(final View v) {
 
-                        if (onItemClickListener != null) {
+                            if (onItemClickListener != null) {
 
-                            onItemClickListener.onItemClick(v, p);
+                                onItemClickListener.onItemClick(v, p);
+                            }
+
                         }
+                    });
+                }
 
-                    }
-                });
             }
+        }
+        if(Type==VIEW_ITEM){
+            if (holder instanceof OffreViewHolder) {
+                final Offre p = itemList.get(position);
+                if (p != null) {
+                    ((OffreViewHolder) holder).name.setText(p.title);
+                    ((OffreViewHolder) holder).username.setText(p.contact_info);
+                    ((OffreViewHolder) holder).timestamp.setText(p.pub_date);
+                    imgloader.displayImage("drawable://noimage", ((OffreViewHolder) holder).image, Tools.getGridOption());
+                    if (p.photo != null) {
+                        if (!p.photo.contains("s_d3802b1dc0d80d8a3c8ccc6ccc068e7c.jpg")) {
+                            try {
+                                ((OffreViewHolder) holder).image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                                imgloader.displayImage(p.photo, ((OffreViewHolder) holder).image, Tools.getGridOption());
+                            } catch (Exception e) {
+                                imgloader.displayImage("drawable://noimage", ((OffreViewHolder) holder).image, Tools.getGridOption());
+                            }
+                        }
+                    }
+
+
+//                imgloader.displayImage(Constant.getURLimgUser(p.email_candidature), ((ViewHolder) holder).email_candidature, Tools.getGridOption());
+                    //  setAnimation(((ViewHolder) holder).lyt_parent, position);
+                    ((OffreViewHolder) holder).lyt_parent.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(final View v) {
+
+                            if (onItemClickListener != null) {
+
+                                onItemClickListener.onItemClick(v, p);
+                            }
+
+                        }
+                    });
+                }
+
+            }
+        }
+        if(Type==VIEW_PROG){
 
         }
+
     }
 
     public void setMoreLoading(boolean isMoreLoading) {
@@ -246,7 +293,28 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             lyt_parent = (MaterialRippleLayout) v.findViewById(R.id.lyt_parent);
         }
     }
+    public class ALAuneViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView tv_title, tv_category, tv_time;
+        public ImageView image;
 
+        public ConstraintLayout lyt_parent;
+
+        public ALAuneViewHolder(View v) {
+            super(v);
+            tv_title = (TextView) v.findViewById(R.id.tv_title);
+            CommonUtils.setRobotoBoldFont(ctx, tv_title);
+
+            tv_category = (TextView) v.findViewById(R.id.tv_category);
+            CommonUtils.setRobotoThinFont(ctx, tv_category);
+
+            tv_time = (TextView) v.findViewById(R.id.tv_time);
+            CommonUtils.setRobotoThinFont(ctx, tv_time);
+            image = (ImageView) v.findViewById(R.id.iv_cover);
+            lyt_parent=(ConstraintLayout) v.findViewById(R.id.lyt_parent);
+
+        }
+    }
     static class ProgressViewHolder extends RecyclerView.ViewHolder {
         // public ProgressBar pBar;
         public TextView name;

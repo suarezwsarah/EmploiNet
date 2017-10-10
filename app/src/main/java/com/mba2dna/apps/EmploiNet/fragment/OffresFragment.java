@@ -26,6 +26,7 @@ import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.ActivityMain;
 import com.mba2dna.apps.EmploiNet.activities.OffreDetailActivity;
 import com.mba2dna.apps.EmploiNet.adapter.AdapterOffres;
+import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
 import com.mba2dna.apps.EmploiNet.library.beautifulrefreshlibrary.BeautifulRefreshLayout;
@@ -33,14 +34,27 @@ import com.mba2dna.apps.EmploiNet.library.beautifulrefreshlibrary.BeautifulRefre
 import com.mba2dna.apps.EmploiNet.loader.ApiClientLoader;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
 import com.mba2dna.apps.EmploiNet.model.Offre;
+import com.mba2dna.apps.EmploiNet.model.UserSession;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import greco.lorenzo.com.lgsnackbar.LGSnackbarManager;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.SUCCESS;
 
 
 /**
@@ -52,7 +66,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
     public static String TAG_ID = "com.mba2dna.apps.EmploiNet.id";
     public static String TAG_NAME = "com.mba2dna.apps.EmploiNet.name";
     private static int category_id;
-    private static String category_name,type;
+    private static String category_name, type;
 
     private View view;
     private static RecyclerView recyclerView;
@@ -69,7 +83,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
     private BeautifulRefreshLayout mPullToRefreshView;
     AlertDialog dialog;
     private FirebaseAnalytics firebaseAnalytics;
-
+    private Offre feature;
 
     @Nullable
     @Override
@@ -88,23 +102,24 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
 
         itemList = new ArrayList<>();
 
-       try {
-           mPullToRefreshView = (BeautifulRefreshLayout) view.findViewById(R.id.pull_to_refresh);
-           mPullToRefreshView.setBuautifulRefreshListener(new BeautifulRefreshLayout.BuautifulRefreshListener() {
-               @Override
-               public void onRefresh(final BeautifulRefreshLayout refreshLayout) {
-                   actionRefresh();
+
+        try {
+            mPullToRefreshView = (BeautifulRefreshLayout) view.findViewById(R.id.pull_to_refresh);
+            mPullToRefreshView.setBuautifulRefreshListener(new BeautifulRefreshLayout.BuautifulRefreshListener() {
+                @Override
+                public void onRefresh(final BeautifulRefreshLayout refreshLayout) {
+                    actionRefresh();
                /* refreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         refreshLayout.finishRefreshing();
                     }
                 }, 5000);*/
-               }
-           });
-       }catch (Exception e){
+                }
+            });
+        } catch (Exception e) {
 
-       }
+        }
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
@@ -132,7 +147,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
             public void onItemClick(View view, Offre p) {
                 Bundle bundle = new Bundle();
                 bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, p.id);
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,p.title);
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, p.title);
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
                 OffreDetailActivity.navigate((ActivityMain) getActivity(), view.findViewById(R.id.image), p);
             }
@@ -148,7 +163,10 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
                 }
             }
         });
+      //  feature = LoadFeature();
         actionRefresh();
+
+
         //  displayDataFromDatabase();
 
         return view;
@@ -159,7 +177,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = new Bundle();
         bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, 1);
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME," الدخول الى كل الوصفات");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, " الدخول الى كل الوصفات");
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
@@ -212,10 +230,10 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
     private void getDB() {
         onProcess = true;
         showProgress(onProcess);
-        if(type.equals("CATEGORY")) {
+        if (type.equals("CATEGORY")) {
             if (!category_name.equals("")) mAdapter.addAll(db.getCategoryArticles(category_name));
             else mAdapter.addAll(db.getAllArticles());
-        }else{
+        } else {
             mAdapter.addAll(db.getAllArticles());
         }
         mAdapter.setMoreLoading(false);
@@ -309,9 +327,9 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
                         }
                     });
                     String var = "";
-                    if(type.equals("CATEGORY")) {
+                    if (type.equals("CATEGORY")) {
                         if (!category_name.equals("")) var = "&c=" + category_id;
-                    }else if(type.equals("RECRUTEUR")) {
+                    } else if (type.equals("RECRUTEUR")) {
                         if (!category_name.equals("")) var = "&r=" + category_id;
                     }
                     task.execute("?offres=true&p=" + page + "&n=" + Tools.getGridSpanCount(getActivity()) + var);
@@ -323,8 +341,55 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
         }
     }
 
+    private Offre LoadFeature() {
+        String URL = Constant.getURLApiClientData();
+        OkHttpClient client = new OkHttpClient();
+        Offre o = new Offre();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(URL).newBuilder();
+        urlBuilder.addQueryParameter("alaune", "true");
+        String url = urlBuilder.build().toString();
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Log.e("RESPENSE", url);
+        try {
+            Response response = client.newCall(request).execute();
+            String S = response.body().string();
+            Log.e("RESPENSE", S);
+            JSONObject jObject = new JSONObject(S);
+
+            JSONArray data = jObject.getJSONArray("alaune"); // get data object
+            final JSONObject object = data.getJSONObject(0);
+            try {
+
+                o.setId(object.getInt("rec_id"));
+                o.setTitle(object.getString("recruteur"));
+                o.setType_activite(object.getString("type_activite"));
+                o.setPostes(object.getString("num"));
+                o.setPhoto(object.getString("photo"));
+                // itemList.add(0,o);
+
+            } catch (JSONException e) {
+
+                e.printStackTrace();
+            }
+
+
+        } catch (IOException e) {
+            Log.e("ERROR", e.getMessage());
+            e.printStackTrace();
+
+        } catch (JSONException e) {
+            Log.e("ERROR", e.getMessage());
+            e.printStackTrace();
+
+        }
+        return o;
+    }
+
     private void loadData() {
         itemList.clear();
+
         Log.d("MainActivity_", "onLoad");
         ApiClientLoader task = new ApiClientLoader(new Callback<ApiClient>() {
             @Override
@@ -341,10 +406,13 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
 
 
                 });
+               // itemList.add(0, feature);
                 mAdapter.addAll(itemList);
                 mAdapter.setMoreLoading(false);
-                //mAdapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
                 sharedPref.setRefreshReciepes(false);
+
+
                 try {
                     Snackbar snackbar = Snackbar.make(view, "Mise à jour réussie", Snackbar.LENGTH_LONG);
                     View sbView = snackbar.getView();
@@ -352,7 +420,8 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
                     TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
                     CommonUtils.setRobotoThinFont(getActivity(), tv);
                     snackbar.show();
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
                 onProcess = false;
                 showProgress(onProcess);
 
@@ -377,9 +446,9 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
             }
         });
         String var = "";
-        if(type.equals("CATEGORY")) {
+        if (type.equals("CATEGORY")) {
             if (!category_name.equals("")) var = "&c=" + category_id;
-        }else if(type.equals("RECRUTEUR")) {
+        } else if (type.equals("RECRUTEUR")) {
             if (!category_name.equals("")) var = "&r=" + category_id;
         }
         task.execute("?offres=true&p=1&n=" + Tools.getGridSpanCount(getActivity()) + var);
