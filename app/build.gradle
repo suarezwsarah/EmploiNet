@@ -61,6 +61,7 @@ dependencies {
     compile 'com.iamhabib:easy-ads:1.0.1'
     compile 'com.github.jaychang0917:SimpleAuth:1.0.4'
 
+
 }
 
 

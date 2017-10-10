@@ -164,15 +164,16 @@ public class ActivityLogin extends Activity {
         SimpleAuth.getInstance().connectFacebook(scopes, new AuthCallback() {
             @Override
             public void onSuccess(SocialUser socialUser) {
-                Log.d(TAG, "userId:" + socialUser.userId);
-                Log.d(TAG, "email:" + socialUser.email);
-                Log.d(TAG, "accessToken:" + socialUser.accessToken);
-                Log.d(TAG, "profilePictureUrl:" + socialUser.profilePictureUrl);
-                Log.d(TAG, "username:" + socialUser.username);
-                Log.d(TAG, "fullName:" + socialUser.fullName);
-                Log.d(TAG, "pageLink:" + socialUser.pageLink);
+                Log.e(TAG, "userId:" + socialUser.userId);
+                Log.e(TAG, "email:" + socialUser.email);
+                Log.e(TAG, "accessToken:" + socialUser.accessToken);
+                Log.e(TAG, "profilePictureUrl:" + socialUser.profilePictureUrl);
+                Log.e(TAG, "username:" + socialUser.username);
+                Log.e(TAG, "fullName:" + socialUser.fullName);
+                Log.e(TAG, "pageLink:" + socialUser.pageLink);
                 UserSession userSession = new UserSession();
-                userSession.setId(Integer.getInteger(socialUser.userId));
+                int id=Integer.parseInt(socialUser.userId);
+                userSession.setId(id);
                 userSession.setEmail(socialUser.email);
                 userSession.setFullName(socialUser.fullName);
                 userSession.setPic(socialUser.profilePictureUrl);
