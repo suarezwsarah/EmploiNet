@@ -118,4 +118,8 @@
     <color name="actionWarningShine">#FF7200</color>
     <color name="actionErrorShine">#890916</color>
     <color name="actionInfoShine">#235379</color>
+    <color name="white_background_txt">#777777</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="translucent">#09000000</color>
 </resources>

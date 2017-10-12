@@ -2,11 +2,7 @@ package com.mba2dna.apps.EmploiNet.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -26,7 +22,6 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -38,7 +33,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.brouding.simpledialog.SimpleDialog;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -46,22 +41,18 @@ import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.data.AppConfig;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.data.SharedPref;
+import com.mba2dna.apps.EmploiNet.fragment.CVsFragment;
 import com.mba2dna.apps.EmploiNet.fragment.CategoryFragment;
 import com.mba2dna.apps.EmploiNet.fragment.FavorieFragment;
-import com.mba2dna.apps.EmploiNet.fragment.OffresFragment;
-import com.mba2dna.apps.EmploiNet.fragment.OffresLoadMoreFragment;
-import com.mba2dna.apps.EmploiNet.fragment.RecruteurFragment;
 import com.mba2dna.apps.EmploiNet.fragment.InfosEmploiFragment;
-import com.mba2dna.apps.EmploiNet.fragment.CVsFragment;
+import com.mba2dna.apps.EmploiNet.fragment.OffresFragment;
+import com.mba2dna.apps.EmploiNet.fragment.RecruteurFragment;
+import com.mba2dna.apps.EmploiNet.library.simpledialog.SimpleDialog;
 import com.mba2dna.apps.EmploiNet.model.UserSession;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.CustomTypefaceSpan;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
-import com.mba2dna.apps.EmploiNet.widget.ViewDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -457,8 +448,31 @@ private TextView headNom,headEmail;
     private long exitTime = 0;
 
     public void doExitApp() {
-        ViewDialog alert = new ViewDialog();
-        alert.showDialog(this, "Voulez-vous quitter l'application?");
+        new SimpleDialog.Builder(ActivityMain.this)
+                .setTitle("Quiter l'application")
+                .setContent("Voulez vous vraiment quiter l'application ?", 3)
+
+                // Customizing (You can find more in Wiki)
+
+                .setBtnConfirmText("Quiter")
+                .setBtnConfirmTextColor("#d78401")
+                .setBtnCancelText("Annuler")
+                .setBtnCancelTextColor("#96989A")
+                .setCancelable(true)          // Default value is false
+                .onConfirm(new SimpleDialog.BtnCallback() {
+                    @Override
+                    public void onClick(@NonNull SimpleDialog dialog, @NonNull SimpleDialog.BtnAction which) {
+                        finish();
+                    }
+                })
+
+                .onCancel(new SimpleDialog.BtnCallback() {
+                    @Override
+                    public void onClick(@NonNull SimpleDialog dialog, @NonNull SimpleDialog.BtnAction which) {
+                        // Do something
+                    }
+                })
+                .show();    // Must be called at the en
     }
 
     private void prepareImageLoader() {

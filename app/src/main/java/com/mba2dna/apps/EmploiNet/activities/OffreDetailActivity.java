@@ -23,7 +23,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,8 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.iamhabib.easyads.EasyAds;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -51,7 +48,6 @@ import com.mba2dna.apps.EmploiNet.loader.ApiSinglePlaceLoader;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
-import com.mba2dna.apps.EmploiNet.widget.TagLayout;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.IOException;
@@ -173,9 +169,11 @@ public class OffreDetailActivity extends AppCompatActivity {
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        if (offres.photo != null)
-            imgloader.displayImage(offres.photo, (ImageView) findViewById(R.id.image));
-        else {
+        if (offres.photo != null) {
+            ImageView image = (ImageView) findViewById(R.id.image);
+            image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imgloader.displayImage(offres.photo, image);
+        }else {
             String uri = "@drawable/detail_bg";  // where myresource (without the extension) is the file
 
             int imageResource = getResources().getIdentifier(uri, null, getPackageName());
@@ -191,22 +189,7 @@ public class OffreDetailActivity extends AppCompatActivity {
         setupToolbar(offres.title);
         displayData(offres);
         // initMap();
-        TagLayout tagLayout = (TagLayout) findViewById(R.id.tagLayout);
-        LayoutInflater layoutInflater = getLayoutInflater();
-        String tags[] = offres.fonction.split("#");
-        List<String> tagss = new ArrayList<String>();
-        for (String tag : tags
-                ) {
-            if (!tag.equals("")) {
-                View tagView = layoutInflater.inflate(R.layout.item_tags, null, false);
 
-                TextView tagTextView = (TextView) tagView.findViewById(R.id.tagTextView);
-                tagTextView.setText("#" + tag.replace("\n", ""));
-                CommonUtils.setRobotoThinFont(this, tagTextView);
-                tagLayout.addView(tagView);
-                tagss.add("#" + tag.replace("\n", ""));
-            }
-        }
 
 
         fab.setOnClickListener(new View.OnClickListener() {
