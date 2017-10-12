@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -75,7 +77,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
     private SQLiteHandler db;
 
     private List<Offre> itemList = new ArrayList<>();
-
+    Fragment fragment = null;
     private SharedPref sharedPref;
     private static AdapterOffres mAdapter;
     private Integer page = 1;
@@ -144,11 +146,27 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
         mAdapter.setOnItemClickListener(new AdapterOffres.OnItemClickListener() {
             @Override
             public void onItemClick(View view, Offre p) {
-                Bundle bundle = new Bundle();
-                bundle.putInt(FirebaseAnalytics.Param.ITEM_ID, p.id);
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, p.title);
-                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-                OffreDetailActivity.navigate((ActivityMain) getActivity(), view.findViewById(R.id.image), p);
+
+
+
+                if(p.contrat.contains("alanune")){
+                    Bundle bundle = new Bundle();
+                    bundle = new Bundle();
+                    fragment = new OffresFragment();
+                    bundle.putString(OffresFragment.TAG_TYPE, "RECRUTEUR");
+                    bundle.putInt(OffresFragment.TAG_ID, p.recruteur_id);
+                    bundle.putString(OffresFragment.TAG_NAME, p.title);
+                    fragment.setArguments(bundle);
+
+                    ActivityMain.mTitle.setText(p.title);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_content, fragment);
+                    fragmentTransaction.commit();
+                }else{
+                    OffreDetailActivity.navigate((ActivityMain) getActivity(), view.findViewById(R.id.image), p);
+                }
+
             }
         });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

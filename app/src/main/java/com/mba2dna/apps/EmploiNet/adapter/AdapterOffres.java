@@ -19,6 +19,7 @@ import com.balysv.materialripple.MaterialRippleLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.model.Offre;
+import com.mba2dna.apps.EmploiNet.model.Recruteur;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -39,7 +40,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context ctx;
 
 
-    private List<Offre> filtered_items = new ArrayList<>();
+
     private List<Offre> itemList = new ArrayList<>();
 
 
@@ -84,7 +85,6 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public AdapterOffres(Context ctx, List<Offre> items, OnLoadMoreListener onLoadMoreListener) {
         this.ctx = ctx;
         itemList = items;
-        filtered_items = items;
         this.onLoadMoreListener = onLoadMoreListener;
         if (!imgloader.isInited()) Tools.initImageLoader(ctx);
     }
@@ -216,9 +216,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         }
                     }
 
-
-//                imgloader.displayImage(Constant.getURLimgUser(p.email_candidature), ((ViewHolder) holder).email_candidature, Tools.getGridOption());
-                    //  setAnimation(((ViewHolder) holder).lyt_parent, position);
+                     setAnimation(((OffreViewHolder) holder).lyt_parent, position);
                     ((OffreViewHolder) holder).lyt_parent.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(final View v) {

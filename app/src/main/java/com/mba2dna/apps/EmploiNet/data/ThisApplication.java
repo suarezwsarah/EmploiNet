@@ -35,7 +35,7 @@ public class ThisApplication extends Application {
                 .setFontAttrId(R.attr.fontPath)
                 .build());
         LGSnackbarManager.prepare(getApplicationContext(),
-                LGSnackBarThemeManager.LGSnackbarThemeName.SHINE);
+                LGSnackBarThemeManager.LGSnackbarThemeName.RETRO);
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-2041047395483384~5100683751");
         //init photo loader
         Tools.initImageLoader(getApplicationContext());

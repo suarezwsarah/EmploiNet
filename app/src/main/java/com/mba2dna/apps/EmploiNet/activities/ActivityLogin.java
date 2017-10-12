@@ -169,13 +169,13 @@ public class ActivityLogin extends Activity {
         SimpleAuth.getInstance().connectFacebook(scopes, new AuthCallback() {
             @Override
             public void onSuccess(SocialUser socialUser) {
-                Log.e(TAG, "userId:" + socialUser.userId);
+              /*  Log.e(TAG, "userId:" + socialUser.userId);
                 Log.e(TAG, "email:" + socialUser.email);
                 Log.e(TAG, "accessToken:" + socialUser.accessToken);
                 Log.e(TAG, "profilePictureUrl:" + socialUser.profilePictureUrl);
                 Log.e(TAG, "username:" + socialUser.username);
                 Log.e(TAG, "fullName:" + socialUser.fullName);
-                Log.e(TAG, "pageLink:" + socialUser.pageLink);
+                Log.e(TAG, "pageLink:" + socialUser.pageLink);*/
                 OkHttpClient client2 = new OkHttpClient();
                 HttpUrl.Builder urlBuilder2 = HttpUrl.parse(URL).newBuilder();
                 urlBuilder2.addQueryParameter("userfacebook", "true");
