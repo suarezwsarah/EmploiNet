@@ -220,27 +220,9 @@ public class InfoEmploiDetailActivity extends AppCompatActivity {
     private void prepareAds() {
         if (AppConfig.ENABLE_ADSENSE && Tools.cekConnection(this)) {
 
-            EasyAds.forNative(this)
-                    .with((NativeExpressAdView)findViewById(R.id.adView))
+            EasyAds.forBanner(this)
+                    .with((AdView)findViewById(R.id.ad_view))
                     .show();
-         /*   AdView mAdView = (AdView) findViewById(R.id.ad_view);
-            // AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-            AdRequest adRequest = new AdRequest.Builder().build();
-            // Start loading the ad in the background.
-            mAdView.loadAd(adRequest);
-            mAdView.setAdListener(new AdListener() {
-                @Override
-                public void onAdFailedToLoad(int i) {
-                    super.onAdFailedToLoad(i);
-                    Log.e("ADS", "Ad failed: " + i);
-                }
-
-                @Override
-                public void onAdLoaded() {
-                    super.onAdLoaded();
-                    Log.e("ADS", "Ad Loaded: ");
-                }
-            });*/
         } else {
             ((RelativeLayout) findViewById(R.id.banner_layout)).setVisibility(View.GONE);
         }

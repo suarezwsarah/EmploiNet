@@ -33,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.iamhabib.easyads.EasyAds;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -397,8 +398,8 @@ public class OffreDetailActivity extends AppCompatActivity {
 
     private void prepareAds() {
         if (AppConfig.ENABLE_ADSENSE && Tools.cekConnection(this)) {
-            EasyAds.forNative(this)
-                    .with((NativeExpressAdView)findViewById(R.id.adView))
+            EasyAds.forBanner(this)
+                    .with((AdView)findViewById(R.id.ad_view))
                     .show();
            /* NativeExpressAdView adView = (NativeExpressAdView) findViewById(R.id.adView);
           //  AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();

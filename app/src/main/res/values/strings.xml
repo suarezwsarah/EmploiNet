@@ -79,12 +79,8 @@
 
     <!--exit notification-->
 
-    <string name="banner_ad_unit_id">ca-app-pub-2041047395483384/2579297003</string>
-    <string name="banner_ad_unit_id_period_calculaor">ca-app-pub-2041047395483384/4822494573</string>
-    <string name="banner_ad_unit_id_futurnization">ca-app-pub-2041047395483384/5532941014</string>
-    <string name="banner_ad_unit_id_burthday">ca-app-pub-2041047395483384/6440674485</string>
-    <string name="banner_ad_unit_id_kid_grewth">ca-app-pub-2041047395483384/7179041087</string>
-    <string name="native_ad_unit_id_offre_detail">ca-app-pub-2041047395483384/2706302746</string>
+    <string name="banner_ad_unit_id">ca-app-pub-2041047395483384/9583130882</string>
+    <string name="native_ad_unit_id_offre_detail">ca-app-pub-2041047395483384/7855471468</string>
 
     <string name="interstitial_ad_unit_id">ca-app-pub-2041047395483384/5407148972</string>
     <string name="article"> Offre </string>

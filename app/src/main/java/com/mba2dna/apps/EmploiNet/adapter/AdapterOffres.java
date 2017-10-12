@@ -181,7 +181,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
 //                imgloader.displayImage(Constant.getURLimgUser(p.email_candidature), ((ViewHolder) holder).email_candidature, Tools.getGridOption());
-                    //  setAnimation(((ViewHolder) holder).lyt_parent, position);
+                      setAnimation(((ALAuneViewHolder) holder).lyt_parent, position);
                     ((ALAuneViewHolder) holder).lyt_parent.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(final View v) {
@@ -204,6 +204,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     ((OffreViewHolder) holder).name.setText(p.title);
                     ((OffreViewHolder) holder).username.setText(p.contact_info);
                     ((OffreViewHolder) holder).timestamp.setText(p.pub_date);
+                    ((OffreViewHolder) holder).willaya.setText(p.willaya);
                     imgloader.displayImage("drawable://noimage", ((OffreViewHolder) holder).image, Tools.getGridOption());
                     if (p.photo != null) {
                         if (!p.photo.contains("s_d3802b1dc0d80d8a3c8ccc6ccc068e7c.jpg")) {
@@ -273,7 +274,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public class OffreViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView name, username, timestamp;
+        public TextView name, username, timestamp,willaya;
         public ImageView image;
         public RoundedImageView userpic;
         public MaterialRippleLayout lyt_parent;
@@ -288,6 +289,10 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             timestamp = (TextView) v.findViewById(R.id.timestamp);
             CommonUtils.setRobotoThinFont(ctx, timestamp);
+
+            willaya = (TextView) v.findViewById(R.id.willaya);
+            CommonUtils.setRobotoBoldFont(ctx, willaya);
+
             image = (ImageView) v.findViewById(R.id.image);
             userpic = (RoundedImageView) v.findViewById(R.id.profilePic);
             // distance = (TextView) v.findViewById(R.id.distance);
