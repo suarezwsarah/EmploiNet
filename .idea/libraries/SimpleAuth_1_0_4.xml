@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="SimpleAuth-1.0.4">
     <CLASSES>
-      <root url="file://$USER_HOME$/.android/build-cache/2b1582b5c625ef0d2e3e194a14f9113423e71e3c/output/res" />
-      <root url="jar://$USER_HOME$/.android/build-cache/2b1582b5c625ef0d2e3e194a14f9113423e71e3c/output/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/d366c8de20a2d136c8cafeeb8bb7747749f67d6d/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/d366c8de20a2d136c8cafeeb8bb7747749f67d6d/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

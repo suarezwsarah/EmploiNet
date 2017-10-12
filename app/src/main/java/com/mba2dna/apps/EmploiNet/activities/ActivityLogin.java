@@ -19,6 +19,7 @@ import com.jaychang.sa.SocialUser;
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
+import com.mba2dna.apps.EmploiNet.library.lgsnackbar.LGSnackbarManager;
 import com.mba2dna.apps.EmploiNet.model.UserSession;
 
 import org.json.JSONArray;
@@ -29,16 +30,16 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import greco.lorenzo.com.lgsnackbar.LGSnackbarManager;
+
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.ERROR;
-import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.SUCCESS;
-import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.WARNING;
+import static com.mba2dna.apps.EmploiNet.library.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.ERROR;
+import static com.mba2dna.apps.EmploiNet.library.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.SUCCESS;
+import static com.mba2dna.apps.EmploiNet.library.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.WARNING;
 
 public class ActivityLogin extends Activity {
     private TextView signin1, forgotpass, signup;
@@ -91,6 +92,8 @@ public class ActivityLogin extends Activity {
                 signin1.setClickable(false);
                 if (emailText.getText().toString().equals("") || passwordText.getText().toString().equals("")) {
                     LGSnackbarManager.show(ERROR, "Vous avez laissez des champs vides!");
+                    signin1.setEnabled(true);
+                    signin1.setClickable(true);
                 } else {
                     if (isValidEmail(emailText.getText().toString())) {
                         showProgress(true);

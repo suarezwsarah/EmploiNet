@@ -8,13 +8,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mba2dna.apps.EmploiNet.R;
+import com.mba2dna.apps.EmploiNet.library.lgsnackbar.LGSnackbarManager;
 
-import greco.lorenzo.com.lgsnackbar.LGSnackbarManager;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.ERROR;
-import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.INFO;
-import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.WARNING;
+import static com.mba2dna.apps.EmploiNet.library.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.WARNING;
+
 
 public class ActivityRegister extends Activity {
     private TextView signin1;

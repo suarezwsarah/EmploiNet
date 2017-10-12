@@ -17,6 +17,7 @@ import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.OffreDetailActivity;
 import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
+import com.mba2dna.apps.EmploiNet.library.lgsnackbar.LGSnackbarManager;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 
 import org.json.JSONArray;
@@ -27,13 +28,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import greco.lorenzo.com.lgsnackbar.LGSnackbarManager;
+
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static greco.lorenzo.com.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.SUCCESS;
+import static com.mba2dna.apps.EmploiNet.library.lgsnackbar.style.LGSnackBarTheme.SnackbarStyle.SUCCESS;
+
 
 /**
  * A simple {@link Fragment} subclass.

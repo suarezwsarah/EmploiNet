@@ -7,10 +7,11 @@ import android.util.Log;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mba2dna.apps.EmploiNet.R;
+import com.mba2dna.apps.EmploiNet.library.lgsnackbar.LGSnackbarManager;
+import com.mba2dna.apps.EmploiNet.library.lgsnackbar.style.LGSnackBarThemeManager;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 
-import greco.lorenzo.com.lgsnackbar.LGSnackbarManager;
-import greco.lorenzo.com.lgsnackbar.style.LGSnackBarThemeManager;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 

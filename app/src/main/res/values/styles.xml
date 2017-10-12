@@ -16,5 +16,7 @@
         <item name="mrl_rippleHover">true</item>
         <item name="mrl_rippleAlpha">0.2</item>
     </style>
-
+    <style name="SnackbarWrapperTheme" parent="@style/Theme.AppCompat">
+        <!--Insert customization here-->
+    </style>
 </resources>

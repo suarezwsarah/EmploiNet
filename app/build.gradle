@@ -6,7 +6,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.mba2dna.apps.EmploiNet"
-        minSdkVersion 19
+        minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -57,7 +57,7 @@ dependencies {
     compile 'co.infinum:materialdatetimepicker-support:3.2.2'
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.github.loregr:lgsnackbar:1.0.2'
+    compile 'com.brouding:android-simple-dialog:0.3.0'
     compile 'com.iamhabib:easy-ads:1.0.1'
     compile 'com.github.jaychang0917:SimpleAuth:1.0.4'
 

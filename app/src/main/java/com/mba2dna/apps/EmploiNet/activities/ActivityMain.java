@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
@@ -37,6 +38,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.brouding.simpledialog.SimpleDialog;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -261,8 +263,33 @@ private TextView headNom,headEmail;
             public void onClick(View v) {
                 String text=LoginBon.getText().toString();
                 if(db.isUserExist()){
-                    db.DeleteUser();
-                    updateUser();
+                    new SimpleDialog.Builder(ActivityMain.this)
+                            .setTitle("Confirmation de déconnexion")
+                            .setContent("Voulez vous vraiment vous déconnecter ?", 3)
+
+                            // Customizing (You can find more in Wiki)
+
+                            .setBtnConfirmText("Deconnecter")
+                            .setBtnConfirmTextColor("#d78401")
+                            .setBtnCancelText("Annuler")
+                            .setBtnCancelTextColor("#96989A")
+                            .setCancelable(true)          // Default value is false
+                            .onConfirm(new SimpleDialog.BtnCallback() {
+                               @Override
+                                public void onClick(@NonNull SimpleDialog dialog, @NonNull SimpleDialog.BtnAction which) {
+                                   db.DeleteUser();
+                                   updateUser();
+                                }
+                            })
+
+                            .onCancel(new SimpleDialog.BtnCallback() {
+                                @Override
+                                public void onClick(@NonNull SimpleDialog dialog, @NonNull SimpleDialog.BtnAction which) {
+                                    // Do something
+                                }
+                            })
+                            .show();    // Must be called at the en
+
 
                 }else{
                     Intent intent = new Intent(ActivityMain.this, ActivityLogin.class);

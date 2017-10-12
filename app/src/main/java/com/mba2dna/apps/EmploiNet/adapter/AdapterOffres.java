@@ -117,7 +117,11 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         try {
-          if(position==0) return VIEW_ALAUNE;
+          if(position==0){
+              if(itemList.get(position).contrat!=null)
+              if(itemList.get(position).contrat.contains("alanune"))
+              return VIEW_ALAUNE;
+          }
             return (itemList.get(position) != null) ? VIEW_ITEM : VIEW_PROG;
         } catch (java.lang.IndexOutOfBoundsException e) {
             return VIEW_PROG;
