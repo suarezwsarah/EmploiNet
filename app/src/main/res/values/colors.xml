@@ -122,4 +122,36 @@
 
     <color name="transparent">#00000000</color>
     <color name="translucent">#09000000</color>
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#2980b9</color>
+    <color name="bg_screen2">#2a72a1</color>
+    <color name="bg_screen3">#2980b9</color>
+    <color name="bg_screen4">#2a72a1</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#368dc6</color>
+    <color name="dot_dark_screen2">#24638c</color>
+    <color name="dot_dark_screen3">#368dc6</color>
+    <color name="dot_dark_screen4">#24638c</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#468ec3</color>
+    <color name="dot_light_screen2">#247eb9</color>
+    <color name="dot_light_screen3">#468ec3</color>
+    <color name="dot_light_screen4">#247eb9</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
 </resources>

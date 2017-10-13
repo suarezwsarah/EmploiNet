@@ -48,9 +48,8 @@
         <activity android:name=".activities.ActivityLogin" />
         <activity android:name=".activities.ActivityRegister" />
         <activity android:name=".activities.ActivityPasswordLost" />
-        <activity android:name=".activities.InfoEmploiDetailActivity"></activity>
-
-
+        <activity android:name=".activities.InfoEmploiDetailActivity" />
+        <activity android:name=".activities.WelcomeActivity"></activity>
     </application>
 
 </manifest>

@@ -44,5 +44,12 @@
     <dimen name="default_sb_height">48dp</dimen>
     <dimen name="default_margin">16dp</dimen>
     <dimen name="layout_button_views_height">42dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="dots_height">30dp</dimen>
+    <dimen name="dots_margin_bottom">20dp</dimen>
+    <dimen name="img_width_height">320dp</dimen>
+    <dimen name="slide_title">30dp</dimen>
+    <dimen name="slide_desc">16dp</dimen>
+    <dimen name="desc_padding">40dp</dimen>
 
 </resources>

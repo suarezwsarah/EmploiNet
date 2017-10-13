@@ -11,12 +11,19 @@ import com.mba2dna.apps.EmploiNet.R;
 public class SharedPref {
     private Context context;
     private SharedPreferences sharedPreferences;
-    private SharedPreferences prefs;
+    private SharedPreferences prefs,prefs2;
+    SharedPreferences.Editor editor;
+
 
     public static final String GCM_PREF_KEY = "com.mba2dna.apps.EmploiNet.config.GCM_PREF_KEY";
     public static final String SERVER_FLAG_KEY = "com.mba2dna.apps.EmploiNet.config.SERVER_FLAG_KEY";
     public static final String THEME_COLOR_KEY = "com.mba2dna.apps.EmploiNet.config.THEME_COLOR_KEY";
+    // shared pref mode
+    int PRIVATE_MODE = 0;
+    // Shared preferences file name
+    private static final String PREF_NAME = "walkthrough";
 
+    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
     // need refresh
     public static final String REFRESH_RECIEPES = "com.mba2dna.apps.EmploiNet.config.REFRESH_RECIEPES";
 
@@ -24,6 +31,8 @@ public class SharedPref {
         this.context = context;
         sharedPreferences = context.getSharedPreferences("MAIN_PREF", Context.MODE_PRIVATE);
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs2 = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        editor = prefs2.edit();
     }
 
     public void setGCMRegId(String gcmRegId){
@@ -95,6 +104,14 @@ public class SharedPref {
            return context.getResources().getColor(R.color.colorPrimary);
         }
         return Color.parseColor(getThemeColor());
+    }
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return prefs2.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
 

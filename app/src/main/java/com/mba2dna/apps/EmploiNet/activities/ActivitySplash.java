@@ -102,7 +102,7 @@ public class ActivitySplash extends AppCompatActivity {
 
                 // Start MainActivity.class
                 Intent myIntent = new Intent(ActivitySplash.this,
-                        ActivityMain.class);
+                        WelcomeActivity.class);
                 myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(myIntent);
             }
@@ -190,23 +190,5 @@ public class ActivitySplash extends AppCompatActivity {
         super.onResume();
     }
 
-    private void showDialogPermission(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.dialog_title_permission));
-        builder.setMessage(getString(R.string.dialog_content_permission));
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                PermissionUtil.goToPermissionSettingScreen(ActivitySplash.this);
-            }
-        });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                new Timer().schedule(task, 1000);
-            }
-        });
-        builder.show();
-    }
+
 }

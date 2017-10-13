@@ -84,14 +84,8 @@
 
     <string name="interstitial_ad_unit_id">ca-app-pub-2041047395483384/5407148972</string>
     <string name="article"> Offre </string>
-    <string name="title_nav_birth">حاسبة موعد الولادة</string>
-    <string name="title_nav_grewth">حاسبة تطور نمو الطفل</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="periodDuration">حدّدي معدل طول دورتك الشهرية</string>
-    <string name="datePeriod">أَدْخلي تاريخ أول يوم من آخر دورة شهرية لك</string>
-    <string name="perioTitle">حاسبة الدورة الشهرية</string>
+
     <string name="connectez_vous">Connectez-Vous</string>
     <string name="postuler">Postuler</string>
     <string name="detail_de_l_offre">Detail de l\'offre :</string>
@@ -114,6 +108,23 @@
     <string name="la_une">À la une</string>
     <string name="installer">Installer</string>
     <!-- Strings related to Settings -->
+    <string name="next">SUIVANT</string>
+    <string name="skip">PASSER</string>
+    <string name="start">J\'AI COMPRIS</string>
 
+    <string name="slide_1_title">Soyez visible</string>
+    <string name="slide_1_desc">Soyez visible par les recruteur a tout le temps</string>
+
+    <string name="slide_2_title">Soyez notifié</string>
+    <string name="slide_2_desc">Soyez notifié l\'hors de publication de toutes nouvelles annonces</string>
+
+    <string name="slide_3_title">Augmentez votre chance</string>
+    <string name="slide_3_desc">Vous pouvez postuler à tout moment n\'importe où</string>
+
+    <string name="slide_4_title">Choisissez ce qu\'il vous plait</string>
+    <string name="slide_4_desc">Vous povez gerer votre temps a l\'aide de cette application</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
 
 </resources>
