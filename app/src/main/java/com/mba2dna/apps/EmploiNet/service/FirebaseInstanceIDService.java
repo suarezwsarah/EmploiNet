@@ -12,8 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.mba2dna.apps.EmploiNet.data.AppConfig;
-import com.mba2dna.apps.EmploiNet.data.SharedPref;
+import com.mba2dna.apps.EmploiNet.config.AppConfig;
+import com.mba2dna.apps.EmploiNet.config.SharedPref;
 
 public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
     private static final String TAG = FirebaseInstanceIDService.class.getSimpleName();

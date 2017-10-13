@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.OffreDetailActivity;
-import com.mba2dna.apps.EmploiNet.data.Constant;
-import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
+import com.mba2dna.apps.EmploiNet.config.Constant;
+import com.mba2dna.apps.EmploiNet.config.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.library.lgsnackbar.LGSnackbarManager;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 
@@ -178,7 +178,7 @@ public class PostuleFragment extends DialogFragment {
                 postulerBtn.setClickable(true);
                 JSONObject jObject = new JSONObject(S);
 
-                JSONArray cvs = jObject.getJSONArray("cvs"); // get data object
+                JSONArray cvs = jObject.getJSONArray("cvs"); // get config object
                 JSONObject cv = cvs.getJSONObject(0);
                 if (!cv.getString("cv_word").equals(""))
                     cv_word.add(cv.getString("cv_word"));
@@ -196,7 +196,7 @@ public class PostuleFragment extends DialogFragment {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 cvsSpn.setAdapter(adapter);
 
-                JSONArray lettres = jObject.getJSONArray("lettres"); // get data object
+                JSONArray lettres = jObject.getJSONArray("lettres"); // get config object
                 for (int n = 0; n < lettres.length(); n++) {
                     JSONObject lettre = lettres.getJSONObject(n);
                     if (!lettre.getString("title").equals("")) {

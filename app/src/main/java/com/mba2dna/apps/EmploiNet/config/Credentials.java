@@ -1,4 +1,4 @@
-package com.mba2dna.apps.EmploiNet.data;
+package com.mba2dna.apps.EmploiNet.config;
 
 /**
  * Created by BIDA Mohamed Amine on 09,October,2017

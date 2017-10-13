@@ -11,7 +11,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
@@ -39,10 +38,8 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.mba2dna.apps.EmploiNet.activities.ActivityMain;
 import com.mba2dna.apps.EmploiNet.activities.ActivitySplash;
 import com.mba2dna.apps.EmploiNet.R;
-import com.mba2dna.apps.EmploiNet.data.AppConfig;
-import com.mba2dna.apps.EmploiNet.data.SharedPref;
-
-import java.util.List;
+import com.mba2dna.apps.EmploiNet.config.AppConfig;
+import com.mba2dna.apps.EmploiNet.config.SharedPref;
 
 public class Tools {
 

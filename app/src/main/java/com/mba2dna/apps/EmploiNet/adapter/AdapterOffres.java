@@ -1,11 +1,15 @@
 package com.mba2dna.apps.EmploiNet.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +31,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.text.Html.FROM_HTML_MODE_COMPACT;
+
 /**
  * Created by BIDA on 11/11/2016.
  */
@@ -35,7 +41,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
     private final int VIEW_ALAUNE = 2;
-    private final int VIEW_ADS = 2;
+    private final int VIEW_ADS = 3;
 
     private Context ctx;
 
@@ -122,6 +128,16 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
               if(itemList.get(position).contrat.contains("alanune"))
               return VIEW_ALAUNE;
           }
+            if(itemList.get(position) != null){
+                if(itemList.get(position).contrat!=null)
+                    if(itemList.get(position).contrat.contains("ads")){
+                        return VIEW_ADS;
+                    }else{
+                        return VIEW_ITEM;
+                    }
+            }else{
+                return VIEW_PROG;
+            }
             return (itemList.get(position) != null) ? VIEW_ITEM : VIEW_PROG;
         } catch (java.lang.IndexOutOfBoundsException e) {
             return VIEW_PROG;
@@ -138,6 +154,8 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             return new OffreViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_offre, parent, false));
         }else if(viewType == VIEW_PROG){
             return new ProgressViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progress, parent, false));
+        }else if(viewType == VIEW_ADS){
+            return new AdsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ads_recyclerview, parent, false));
         }else{
             return new ALAuneViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article_featured, parent, false));
         }
@@ -217,7 +235,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         }
                     }
 
-                     setAnimation(((OffreViewHolder) holder).lyt_parent, position);
+                    setAnimation(((OffreViewHolder) holder).lyt_parent, position);
                     ((OffreViewHolder) holder).lyt_parent.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(final View v) {
@@ -229,6 +247,43 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                         }
                     });
+                }
+
+            }
+        }
+        if(Type==VIEW_ADS){
+            if (holder instanceof AdsViewHolder) {
+                final Offre p = itemList.get(position);
+                if (p != null) {
+                    ((AdsViewHolder) holder).title.setText(p.title);
+                    if (Build.VERSION.SDK_INT >= 24) {
+                        ((AdsViewHolder) holder).discription.setText(Html.fromHtml(p.description,FROM_HTML_MODE_COMPACT));
+                    } else {
+                        ((AdsViewHolder) holder).discription.setText(Html.fromHtml(p.description));
+                    }
+
+
+                    ((AdsViewHolder) holder).installer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (onItemClickListener != null) {
+                                onItemClickListener.onItemClick(v, p);
+                            }
+                        }
+                    });
+                    imgloader.displayImage("drawable://noimage", ((AdsViewHolder) holder).image, Tools.getGridOption());
+                    if (p.photo != null) {
+
+                            try {
+                                //((AdsViewHolder) holder).image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                                imgloader.displayImage(p.photo, ((AdsViewHolder) holder).image, Tools.getGridOption());
+                            } catch (Exception e) {
+                                imgloader.displayImage("drawable://noimage", ((OffreViewHolder) holder).image, Tools.getGridOption());
+                            }
+
+                    }
+
+
                 }
 
             }
@@ -273,7 +328,7 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public class OffreViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        // each config item is just a string in this case
         public TextView name, username, timestamp,willaya;
         public ImageView image;
         public RoundedImageView userpic;
@@ -300,8 +355,31 @@ public class AdapterOffres extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             lyt_parent = (MaterialRippleLayout) v.findViewById(R.id.lyt_parent);
         }
     }
+    public class AdsViewHolder extends RecyclerView.ViewHolder {
+        // each config item is just a string in this case
+        public TextView title, discription, installer;
+        public ImageView image;
+
+        public AdsViewHolder(View v) {
+            super(v);
+            title = (TextView) v.findViewById(R.id.title);
+            CommonUtils.setRobotoBoldFont(ctx, title);
+
+            discription = (TextView) v.findViewById(R.id.discription);
+            CommonUtils.setRobotoThinFont(ctx, discription);
+
+            installer = (TextView) v.findViewById(R.id.installer);
+            CommonUtils.setRobotoBoldFont(ctx, installer);
+
+
+
+            image = (ImageView) v.findViewById(R.id.image);
+
+
+        }
+    }
     public class ALAuneViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        // each config item is just a string in this case
         public TextView tv_title, tv_category, tv_time;
         public ImageView image;
 

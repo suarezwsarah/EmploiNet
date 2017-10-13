@@ -23,8 +23,8 @@ import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.ActivityMain;
 
 import com.mba2dna.apps.EmploiNet.adapter.RecruteurAdapter;
-import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
-import com.mba2dna.apps.EmploiNet.data.SharedPref;
+import com.mba2dna.apps.EmploiNet.config.SQLiteHandler;
+import com.mba2dna.apps.EmploiNet.config.SharedPref;
 import com.mba2dna.apps.EmploiNet.loader.ApiClientLoader;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
 
@@ -138,7 +138,7 @@ public class RecruteurFragment extends Fragment {
                 onRefresh();
             } else {
                 // Snackbar.make(view, "Task still running", Snackbar.LENGTH_SHORT).show();
-                Snackbar snackbar = Snackbar.make(view, "التحديث مازال قائما", Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(view, "mise a jour en progrès", Snackbar.LENGTH_LONG);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
                 TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);

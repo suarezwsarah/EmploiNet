@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.mba2dna.apps.EmploiNet.R;
-import com.mba2dna.apps.EmploiNet.data.Constant;
+import com.mba2dna.apps.EmploiNet.config.Constant;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 
 import org.json.JSONObject;

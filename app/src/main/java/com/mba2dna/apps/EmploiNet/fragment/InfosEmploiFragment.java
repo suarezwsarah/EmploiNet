@@ -27,8 +27,8 @@ import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.ActivityMain;
 import com.mba2dna.apps.EmploiNet.activities.InfoEmploiDetailActivity;
 import com.mba2dna.apps.EmploiNet.adapter.AdapterInfosEmploi;
-import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
-import com.mba2dna.apps.EmploiNet.data.SharedPref;
+import com.mba2dna.apps.EmploiNet.config.SQLiteHandler;
+import com.mba2dna.apps.EmploiNet.config.SharedPref;
 import com.mba2dna.apps.EmploiNet.library.beautifulrefreshlibrary.BeautifulRefreshLayout;
 import com.mba2dna.apps.EmploiNet.loader.ApiClientLoader;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
@@ -192,7 +192,7 @@ public class InfosEmploiFragment extends Fragment implements AdapterInfosEmploi.
                 showProgress(onProcess);
                 loadData();
             } else {
-                Snackbar snackbar = Snackbar.make(view, "التحديث مازال قائما", Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(view, "mise a jour en progrès", Snackbar.LENGTH_LONG);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
                 TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);

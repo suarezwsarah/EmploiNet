@@ -210,7 +210,7 @@ public class AdapterInfosEmploi extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        // each config item is just a string in this case
         public TextView name, littletxt, views;
         public ImageView badge,userpic;
 

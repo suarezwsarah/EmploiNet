@@ -214,7 +214,7 @@ public class AdapterCvs extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        // each config item is just a string in this case
         public TextView name, username, email, tele, exper, addres;
         public ImageView badge;
         public RoundedImageView userpic;

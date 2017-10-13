@@ -1,4 +1,4 @@
-package com.mba2dna.apps.EmploiNet.data;
+package com.mba2dna.apps.EmploiNet.config;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,12 +13,12 @@ public class SharedPref {
     private SharedPreferences sharedPreferences;
     private SharedPreferences prefs;
 
-    public static final String GCM_PREF_KEY = "com.mba2dna.apps.EmploiNet.data.GCM_PREF_KEY";
-    public static final String SERVER_FLAG_KEY = "com.mba2dna.apps.EmploiNet.data.SERVER_FLAG_KEY";
-    public static final String THEME_COLOR_KEY = "com.mba2dna.apps.EmploiNet.data.THEME_COLOR_KEY";
+    public static final String GCM_PREF_KEY = "com.mba2dna.apps.EmploiNet.config.GCM_PREF_KEY";
+    public static final String SERVER_FLAG_KEY = "com.mba2dna.apps.EmploiNet.config.SERVER_FLAG_KEY";
+    public static final String THEME_COLOR_KEY = "com.mba2dna.apps.EmploiNet.config.THEME_COLOR_KEY";
 
     // need refresh
-    public static final String REFRESH_RECIEPES = "com.mba2dna.apps.EmploiNet.data.REFRESH_RECIEPES";
+    public static final String REFRESH_RECIEPES = "com.mba2dna.apps.EmploiNet.config.REFRESH_RECIEPES";
 
     public SharedPref(Context context){
         this.context = context;
@@ -66,9 +66,9 @@ public class SharedPref {
     }
 
     /**
-     * Refresh UserSession data
+     * Refresh UserSession config
      * When phone receive GCM notification this flag will be enable.
-     * so when UserSession open the app all data will be refresh
+     * so when UserSession open the app all config will be refresh
      */
     public boolean isRefreshReciepes(){
         return sharedPreferences.getBoolean(REFRESH_RECIEPES, false);

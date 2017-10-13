@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.balysv.materialripple.MaterialRippleLayout;
 
 import com.mba2dna.apps.EmploiNet.R;
-import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.model.Category;
 import com.mba2dna.apps.EmploiNet.model.Header;
 import com.mba2dna.apps.EmploiNet.utils.Tools;

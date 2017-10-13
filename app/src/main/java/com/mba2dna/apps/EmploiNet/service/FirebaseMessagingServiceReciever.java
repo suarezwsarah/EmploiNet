@@ -12,7 +12,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.mba2dna.apps.EmploiNet.activities.NotificationReciever;
-import com.mba2dna.apps.EmploiNet.data.AppConfig;
+import com.mba2dna.apps.EmploiNet.config.AppConfig;
 import com.mba2dna.apps.EmploiNet.utils.NotificationUtils;
 
 import org.json.JSONException;
@@ -38,7 +38,7 @@ public class FirebaseMessagingServiceReciever extends FirebaseMessagingService {
             handleNotification(remoteMessage.getNotification().getBody());
         }
 
-        // Check if message contains a data payload.
+        // Check if message contains a config payload.
         if (remoteMessage.getData().size() > 0) {
             Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
 
@@ -70,7 +70,7 @@ public class FirebaseMessagingServiceReciever extends FirebaseMessagingService {
         Log.e(TAG, "push json: " + json.toString());
 
         try {
-            JSONObject data = json.getJSONObject("data");
+            JSONObject data = json.getJSONObject("config");
 
             String title = data.getString("title");
             String message = data.getString("message");

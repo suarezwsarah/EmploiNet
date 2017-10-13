@@ -10,7 +10,7 @@ import com.google.gson.stream.JsonReader;
 
 import java.util.ArrayList;
 
-import com.mba2dna.apps.EmploiNet.data.Constant;
+import com.mba2dna.apps.EmploiNet.config.Constant;
 //import com.mba2dna.apps.EmploiNet.json.JSONStream;
 import com.mba2dna.apps.EmploiNet.json.JSONStream;
 import com.mba2dna.apps.EmploiNet.model.Offre;

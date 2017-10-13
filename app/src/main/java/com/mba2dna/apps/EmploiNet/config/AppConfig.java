@@ -1,4 +1,4 @@
-package com.mba2dna.apps.EmploiNet.data;
+package com.mba2dna.apps.EmploiNet.config;
 
 public class AppConfig {
 
@@ -6,7 +6,7 @@ public class AppConfig {
     public static final boolean ENABLE_ADSENSE = true;
     // flag for save photo offline
     public static final boolean IMAGE_CACHE = true;
-    // if you place data more than 200 items please set TRUE
+    // if you place config more than 200 items please set TRUE
     public static final boolean LAZY_LOAD = false;
     // global topic to receive app wide push notifications
     public static final String TOPIC_GLOBAL = "global";

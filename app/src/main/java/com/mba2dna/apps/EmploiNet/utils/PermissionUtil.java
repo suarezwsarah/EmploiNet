@@ -9,7 +9,7 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 
-import com.mba2dna.apps.EmploiNet.data.Constant;
+import com.mba2dna.apps.EmploiNet.config.Constant;
 
 public abstract class PermissionUtil {
 

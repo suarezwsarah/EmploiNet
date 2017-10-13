@@ -11,14 +11,13 @@ import org.apache.http.NameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mba2dna.apps.EmploiNet.data.Constant;
-import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
+import com.mba2dna.apps.EmploiNet.config.Constant;
+import com.mba2dna.apps.EmploiNet.config.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.json.JSONStream;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
 import com.mba2dna.apps.EmploiNet.model.InfoEmploi;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.model.Category;
-import com.mba2dna.apps.EmploiNet.model.Images;
 import com.mba2dna.apps.EmploiNet.model.Candidats;
 import com.mba2dna.apps.EmploiNet.model.Recruteur;
 import com.mba2dna.apps.EmploiNet.model.UserSession;

@@ -11,21 +11,19 @@ import com.google.gson.stream.JsonReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mba2dna.apps.EmploiNet.data.Constant;
+import com.mba2dna.apps.EmploiNet.config.Constant;
 //import com.mba2dna.apps.EmploiNet.json.JSONStream;
 import com.mba2dna.apps.EmploiNet.json.JSONStream;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
 import com.mba2dna.apps.EmploiNet.model.InfoEmploi;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.model.Category;
-import com.mba2dna.apps.EmploiNet.model.Images;
 import com.mba2dna.apps.EmploiNet.model.Candidats;
 import com.mba2dna.apps.EmploiNet.model.Recruteur;
 import com.mba2dna.apps.EmploiNet.model.UserSession;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 
 /**
  * Created by UserSession on 01/12/2016.

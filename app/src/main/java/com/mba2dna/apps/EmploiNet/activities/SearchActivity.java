@@ -145,7 +145,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterOffres.O
                 Log.d("onLoad", "actionRefresh2:"+s);
                 loadData(s);
             } else {
-              /*  Snackbar snackbar = Snackbar.make(view, "التحديث مازال قائما", Snackbar.LENGTH_LONG);
+              /*  Snackbar snackbar = Snackbar.make(view, "mise a jour en progrès", Snackbar.LENGTH_LONG);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
                 TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);

@@ -14,11 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.balysv.materialripple.MaterialRippleLayout;
-import com.google.android.gms.ads.NativeExpressAdView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mba2dna.apps.EmploiNet.R;
-import com.mba2dna.apps.EmploiNet.data.Constant;
-import com.mba2dna.apps.EmploiNet.fragment.OffresFragment;
+import com.mba2dna.apps.EmploiNet.config.Constant;
 import com.mba2dna.apps.EmploiNet.fragment.OffresLoadMoreFragment;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
@@ -61,7 +59,7 @@ public class OffreLoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        // each config item is just a string in this case
         public TextView title;
         public ImageView image;
         public MaterialRippleLayout lyt_parent;
@@ -94,7 +92,7 @@ public class OffreLoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class OffreViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        // each config item is just a string in this case
         public TextView name, username, timestamp;
         public ImageView image;
         public RoundedImageView userpic;

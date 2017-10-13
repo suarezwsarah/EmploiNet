@@ -42,7 +42,7 @@ import android.widget.TextView;
 //import com.nostra13.universalimageloader.core.ImageLoader;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mba2dna.apps.EmploiNet.data.SharedPref;
+import com.mba2dna.apps.EmploiNet.config.SharedPref;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 import com.mba2dna.apps.EmploiNet.R;
 

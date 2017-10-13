@@ -1,4 +1,4 @@
-package com.mba2dna.apps.EmploiNet.data;
+package com.mba2dna.apps.EmploiNet.config;
 
 import android.app.Application;
 import android.os.Bundle;

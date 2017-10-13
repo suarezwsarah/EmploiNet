@@ -17,8 +17,8 @@ import com.jaychang.sa.AuthCallback;
 import com.jaychang.sa.SimpleAuth;
 import com.jaychang.sa.SocialUser;
 import com.mba2dna.apps.EmploiNet.R;
-import com.mba2dna.apps.EmploiNet.data.Constant;
-import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
+import com.mba2dna.apps.EmploiNet.config.Constant;
+import com.mba2dna.apps.EmploiNet.config.SQLiteHandler;
 import com.mba2dna.apps.EmploiNet.library.lgsnackbar.LGSnackbarManager;
 import com.mba2dna.apps.EmploiNet.model.UserSession;
 
@@ -114,7 +114,7 @@ public class ActivityLogin extends Activity {
                             Log.e("RESPENSE", S);
                             JSONObject jObject = new JSONObject(S);
 
-                            JSONArray data = jObject.getJSONArray("user"); // get data object
+                            JSONArray data = jObject.getJSONArray("user"); // get config object
                             final JSONObject object = data.getJSONObject(0);
 
 
@@ -196,7 +196,7 @@ public class ActivityLogin extends Activity {
                             Log.e("RESPENSE2", S2);
                             JSONObject jObject = new JSONObject(S2);
 
-                            JSONArray data = jObject.getJSONArray("userfacebook"); // get data object
+                            JSONArray data = jObject.getJSONArray("userfacebook"); // get config object
                             final JSONObject object = data.getJSONObject(0);
 
                                 try {

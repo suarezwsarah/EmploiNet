@@ -16,8 +16,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import com.mba2dna.apps.EmploiNet.data.Constant;
-import com.mba2dna.apps.EmploiNet.data.SharedPref;
+import com.mba2dna.apps.EmploiNet.config.Constant;
+import com.mba2dna.apps.EmploiNet.config.SharedPref;
 import com.mba2dna.apps.EmploiNet.model.DeviceInfo;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 import com.mba2dna.apps.EmploiNet.utils.Tools;

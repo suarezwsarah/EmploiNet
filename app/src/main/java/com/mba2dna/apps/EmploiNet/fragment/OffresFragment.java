@@ -1,7 +1,9 @@
 package com.mba2dna.apps.EmploiNet.fragment;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.database.sqlite.SQLiteAccessPermException;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,19 +30,16 @@ import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.ActivityMain;
 import com.mba2dna.apps.EmploiNet.activities.OffreDetailActivity;
 import com.mba2dna.apps.EmploiNet.adapter.AdapterOffres;
-import com.mba2dna.apps.EmploiNet.data.Constant;
-import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
-import com.mba2dna.apps.EmploiNet.data.SharedPref;
+import com.mba2dna.apps.EmploiNet.config.Constant;
+import com.mba2dna.apps.EmploiNet.config.SQLiteHandler;
+import com.mba2dna.apps.EmploiNet.config.SharedPref;
 import com.mba2dna.apps.EmploiNet.library.beautifulrefreshlibrary.BeautifulRefreshLayout;
-
 import com.mba2dna.apps.EmploiNet.loader.ApiClientLoader;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
 import com.mba2dna.apps.EmploiNet.model.Offre;
-import com.mba2dna.apps.EmploiNet.model.UserSession;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,12 +49,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
 
 
 /**
@@ -148,8 +145,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
             public void onItemClick(View view, Offre p) {
 
 
-
-                if(p.contrat.contains("alanune")){
+                if (p.contrat.contains("alanune")) {
                     Bundle bundle = new Bundle();
                     bundle = new Bundle();
                     fragment = new OffresFragment();
@@ -163,7 +159,14 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frame_content, fragment);
                     fragmentTransaction.commit();
-                }else{
+                } else if (p.contrat.contains("ads")) {
+                    final String appPackageName = p.getReference(); // getPackageName() from Context or Activity object
+                    try {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id="+appPackageName)));
+                    } catch (android.content.ActivityNotFoundException anfe) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id="+appPackageName)));
+                    }
+                } else {
                     OffreDetailActivity.navigate((ActivityMain) getActivity(), view.findViewById(R.id.image), p);
                 }
 
@@ -180,7 +183,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
                 }
             }
         });
-      //  feature = LoadFeature();
+        //  feature = LoadFeature();
         actionRefresh();
 
 
@@ -232,7 +235,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
                 showProgress(onProcess);
                 loadData();
             } else {
-                Snackbar snackbar = Snackbar.make(view, "التحديث مازال قائما", Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(view, "mise a jour en progrès", Snackbar.LENGTH_LONG);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
                 TextView tv = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
@@ -375,7 +378,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
             Log.e("RESPENSE", S);
             JSONObject jObject = new JSONObject(S);
 
-            JSONArray data = jObject.getJSONArray("alaune"); // get data object
+            JSONArray data = jObject.getJSONArray("alaune"); // get config object
             final JSONObject object = data.getJSONObject(0);
             try {
 
@@ -406,7 +409,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
 
     private void loadData() {
         itemList.clear();
-
+        page = 1;
         Log.d("MainActivity_", "onLoad");
         ApiClientLoader task = new ApiClientLoader(new Callback<ApiClient>() {
             @Override
@@ -423,7 +426,7 @@ public class OffresFragment extends Fragment implements AdapterOffres.OnLoadMore
 
 
                 });
-               // itemList.add(0, feature);
+                // itemList.add(0, feature);
                 mAdapter.addAll(itemList);
                 mAdapter.setMoreLoading(false);
                 mAdapter.notifyDataSetChanged();

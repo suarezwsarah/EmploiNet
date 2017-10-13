@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Random;
 
 import com.mba2dna.apps.EmploiNet.R;
-import com.mba2dna.apps.EmploiNet.data.Constant;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 
 public class AdapterFavoriteList extends RecyclerView.Adapter<AdapterFavoriteList.ViewHolder> implements Filterable{
@@ -50,7 +49,7 @@ public class AdapterFavoriteList extends RecyclerView.Adapter<AdapterFavoriteLis
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        // each config item is just a string in this case
         public TextView name;
         public TextView category,fonction;
         public ImageView image;

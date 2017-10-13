@@ -14,14 +14,12 @@ import android.widget.TextView;
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mba2dna.apps.EmploiNet.model.Offre;
-import com.mba2dna.apps.EmploiNet.utils.Tools;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mba2dna.apps.EmploiNet.R;
-import com.mba2dna.apps.EmploiNet.data.Constant;
 
 public class AdapterSuggestion extends RecyclerView.Adapter<AdapterSuggestion.ViewHolder> {
 
@@ -33,7 +31,7 @@ public class AdapterSuggestion extends RecyclerView.Adapter<AdapterSuggestion.Vi
     private int lastPosition = -1;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        // each config item is just a string in this case
         public ImageView image;
         public RoundedImageView userpic;
         public MaterialRippleLayout lyt_parent;

@@ -1,7 +1,6 @@
 package com.mba2dna.apps.EmploiNet.fragment;
 
 
-import android.database.sqlite.SQLiteAccessPermException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,21 +17,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mba2dna.apps.EmploiNet.R;
 import com.mba2dna.apps.EmploiNet.activities.ActivityMain;
-import com.mba2dna.apps.EmploiNet.activities.OffreDetailActivity;
 import com.mba2dna.apps.EmploiNet.adapter.OffreLoadMoreAdapter;
-import com.mba2dna.apps.EmploiNet.data.Constant;
-import com.mba2dna.apps.EmploiNet.data.SQLiteHandler;
-import com.mba2dna.apps.EmploiNet.data.SharedPref;
+import com.mba2dna.apps.EmploiNet.config.Constant;
+import com.mba2dna.apps.EmploiNet.config.SQLiteHandler;
+import com.mba2dna.apps.EmploiNet.config.SharedPref;
 import com.mba2dna.apps.EmploiNet.loader.ApiClientLoader;
 import com.mba2dna.apps.EmploiNet.model.ApiClient;
 import com.mba2dna.apps.EmploiNet.model.Offre;
 import com.mba2dna.apps.EmploiNet.utils.Callback;
 import com.mba2dna.apps.EmploiNet.utils.CommonUtils;
-import com.mba2dna.apps.EmploiNet.utils.OnLoadMoreListener;
 import com.mba2dna.apps.EmploiNet.utils.Tools;
 
 import java.util.ArrayList;
@@ -84,7 +79,7 @@ public class OffresLoadMoreFragment extends Fragment {
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
 
-        //set data and list adapter
+        //set config and list adapter
         adapter = new OffreLoadMoreAdapter(getActivity(), recyclerView, new ArrayList<Offre>());
         recyclerView.setAdapter(adapter);
 
@@ -187,7 +182,7 @@ public class OffresLoadMoreFragment extends Fragment {
         }, 500);
     }
 
-    // checking some condition before perform refresh data
+    // checking some condition before perform refresh config
     private void actionRefresh(int page_no) {
         boolean conn = Tools.cekConnection(getActivity());
         if (conn) {
@@ -316,7 +311,7 @@ public class OffresLoadMoreFragment extends Fragment {
             onFailureRetry(page_no, getString(R.string.refresh_failed));
             return;
         }
-        if ((page_no * Constant.LIMIT_PLACE_REQUEST) > count_total) { // when all data loaded
+        if ((page_no * Constant.LIMIT_PLACE_REQUEST) > count_total) { // when all config loaded
             onProcess = false;
             showProgress(onProcess);
             startLoadMoreAdapter();

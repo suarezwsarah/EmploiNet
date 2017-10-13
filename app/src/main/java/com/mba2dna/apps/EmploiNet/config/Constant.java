@@ -1,4 +1,4 @@
-package com.mba2dna.apps.EmploiNet.data;
+package com.mba2dna.apps.EmploiNet.config;
 
 import android.Manifest;
 
@@ -66,7 +66,7 @@ public class Constant {
 		return URL;
 	}
 
-	// All in one API data url
+	// All in one API config url
 	public static String getURLApiClientData(){
 		String URL = HOST_URL + WEB_PATH ;//+ API_CLIENT_DATA
 		return URL;

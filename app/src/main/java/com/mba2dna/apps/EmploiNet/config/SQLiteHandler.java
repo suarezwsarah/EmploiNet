@@ -1,4 +1,4 @@
-package com.mba2dna.apps.EmploiNet.data;
+package com.mba2dna.apps.EmploiNet.config;
 
 /**
  * Created by BIDA on 11/5/2016.
@@ -240,7 +240,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
 
     /**
-     * Getting UserSession data from database
+     * Getting UserSession config from database
      */
     public HashMap<String, String> getUserDetails() {
         HashMap<String, String> user = new HashMap<String, String>();
